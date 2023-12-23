@@ -1,4 +1,3 @@
-import Logo from "../../images/Logo.png";
 import {useState} from "react";
 
 export const NavBar = () => {
@@ -11,7 +10,7 @@ export const NavBar = () => {
     return (
         <div className={`pt-5 pb-5 flex items-center justify-between`} style={{ backgroundColor: '#3d3d3d' }}>
             <div className={`pl-0 md:pl-14`}>
-                <img src={Logo} className={`w-24 h-12 object-contain`} alt={''}/>
+                <img src={'/icons/Logo.svg'} className={`w-24 h-12 object-contain`} alt={''}/>
             </div>
             <div className={`flex flex-col justify-end items-end`}>
                 <button onClick={toggleMenu} className={`text-white focus:outline-none md:hidden mr-2`}>
@@ -22,8 +21,8 @@ export const NavBar = () => {
                         </svg>
                     ) : (
                         // Иконка бургера при закрытом меню
-                        <svg style={{color: "white"}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        <svg style={{color: "white"}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
                     )}
                 </button>

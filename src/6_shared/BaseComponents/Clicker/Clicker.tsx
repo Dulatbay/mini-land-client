@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface props {
     time: string
@@ -19,7 +19,6 @@ export const Clicker = ({time} : props) => {
     return (
         <div className={`w-full flex justify-between items-center`}>
             <p className={`text-white mr-3`}>{time}:</p>
-
             <div className={`flex items-center justify-center`}>
                 <button
                     onClick={decrement}
@@ -29,11 +28,11 @@ export const Clicker = ({time} : props) => {
                     -
                 </button>
 
-                <span className={`text-xs text-white`}>{count}</span>
+                <span className={`text-xs text-white w-5 text-center mr-3`}>{count}</span>
 
                 <button
                     onClick={increment}
-                    className={`w-2 h-2 flex justify-center items-center p-2 rounded-full ml-3`}
+                    className={`w-2 h-2 flex justify-center items-center p-2 rounded-full`}
                     style={{border: "1px solid #1FD680", color: "#1FD680"}}
                 >
                     +

@@ -11,14 +11,12 @@ export const InputCustomer = ({customer, type} : props) => {
 
             <div className={`w-full 2xl:w-4/6 h-full flex flex-col justify-between items-start`}>
                 <input className={styles} type="tel" placeholder="ФИО"/>
-
                 {type == 'tel' && (
-                    <InputMask className={styles} placeholder="Номер телефона" mask="+7 (999) 999-99-99"/>
+                    <InputMask className={styles} placeholder="+7 (___) ___-__-__" mask="+7 (999) 999-99-99"/>
                 )}
                 {type == 'age' && (
                     <input className={styles} type="number" placeholder="Возраст"/>
                 )}
-
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
-import {NavBar} from "../../Components/NavBar/NavBar.tsx";
-import {ButtonBack} from "../../Components/ButtonBack/ButtonBack.tsx";
-import {OrderForm} from "../../Components/OrderForm/OrderForm.tsx";
+import {OrderForm} from "../../3_widgets/OrderForm/OrderForm.tsx";
+import {NavBar} from "@/3_widgets/NavBar/NavBar.tsx";
+import {ButtonBack} from "@/6_shared/BaseComponents/ButtonBack/ButtonBack.tsx";
 
 export const CreateOrderPage = () => {
     const title = 'Создать заказ';

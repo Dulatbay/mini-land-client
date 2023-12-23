@@ -6,7 +6,7 @@ interface props {
     age: number,
     color: string
 }
-export const ListItem = ({fullname, status, madeBy, entered, age, color}: props) => {
+export const OrderCard = ({fullname, status, madeBy, entered, age, color}: props) => {
     return (
         <div className={`w-80 2xl:w-3/12 h-40 lg:h-60 rounded-2xl m-2 p-5 flex flex-col items-center justify-between`} style={{backgroundColor: color, color: 'white'}}>
             <div className={`w-full flex justify-between`}>
