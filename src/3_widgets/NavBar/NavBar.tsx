@@ -1,6 +1,10 @@
 import {useState} from "react";
 
-export const NavBar = () => {
+interface props{
+    isDirector: boolean
+}
+
+export const NavBar = ({isDirector} : props) => {
 
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -26,9 +30,22 @@ export const NavBar = () => {
                         </svg>
                     )}
                 </button>
-                <div className={`${isMenuOpen ? 'block' : 'hidden'} md:flex md:items-stretch md:w-auto md:flex-row md:flex-no-wrap pr-0 md:pr-10`}>
-                    <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Управлять</a>
-                    <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Username ↓</a>
+                <div className={`${isMenuOpen ? 'block' : 'hidden'} md:flex md:items-stretch md:w-auto md:flex-row md:flex-no-wrap pr-0 md:pr-10 gap-10`}>
+                    {!isDirector ? (
+                        <>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Управлять</a>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Username ↓</a>
+                        </>
+                    ) : (
+                        <>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Главная</a>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Отчет</a>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Статистика</a>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Цены</a>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Акции</a>
+                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Username ↓</a>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

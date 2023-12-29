@@ -11,10 +11,11 @@ export const ManagerMainPage = () => {
     const age = 17;
     const color = '#1FD680';
 
+    const isDirector = false
 
     return (
         <div>
-            <NavBar/>
+            <NavBar isDirector={isDirector}/>
 
             <div className={`w- flex justify-between items-center md:pr-24 md:pl-24 pt-7`}>
                 <ButtonAll/>

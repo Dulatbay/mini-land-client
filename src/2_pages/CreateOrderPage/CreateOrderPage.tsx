@@ -4,9 +4,11 @@ import {ButtonBack} from "@/6_shared/BaseComponents/ButtonBack/ButtonBack.tsx";
 
 export const CreateOrderPage = () => {
     const title = 'Создать заказ';
+    const isDirector = false
+
     return (
         <div>
-          <NavBar/>
+          <NavBar isDirector={isDirector}/>
           <ButtonBack/>
           <OrderForm title={title}/>
         </div>
