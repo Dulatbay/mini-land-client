@@ -16,7 +16,6 @@ export const ManagerMainPage = () => {
     return (
         <div>
             <NavBar isDirector={isDirector}/>
-
             <div className={`w- flex justify-between items-center md:pr-24 md:pl-24 pt-7`}>
                 <ButtonAll/>
                 <ButtonAddItem/>
