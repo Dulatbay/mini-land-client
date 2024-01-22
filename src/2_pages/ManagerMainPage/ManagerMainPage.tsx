@@ -13,13 +13,15 @@ export const ManagerMainPage = () => {
 
     const isDirector = false
 
+    const type = 'заказ'
+
     return (
         <div>
             <NavBar isDirector={isDirector}/>
 
-            <div className={`w- flex justify-between items-center md:pr-24 md:pl-24 pt-7`}>
+            <div className={`w-full flex justify-between items-center md:pr-24 md:pl-24 pt-7`}>
                 <ButtonAll/>
-                <ButtonAddItem/>
+                <ButtonAddItem type={type}/>
             </div>
 
             <div className={`w-full lg:w-10/12 m-auto pt-10 flex flex-wrap justify-center items-center`}>
