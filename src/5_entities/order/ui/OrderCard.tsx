@@ -1,28 +1,24 @@
 import {OrderCardModel} from "../model/types.ts";
-
-
-const getColor = (isFinished: boolean, remainTime: number) => {
-    if (isFinished)
-        return "#1FD680"
-    else if (remainTime >= 0)
-        return "#FFA733"
-    else if (remainTime < 0)
-        return "#FF3333"
-}
-
-const getTime = (remainTime: number) => {
-    if (remainTime < 0) remainTime *= -1;
-    const min = Math.round(remainTime / 60)
-    console.log(remainTime, remainTime / 60, min)
-    if (min < 0) return Math.round(remainTime) + "c."
-    return min + "m."
-}
+import {getOrderColor} from "@/6_shared/lib/getOrderColor.ts";
+import {getOrderRemainTime} from "@/6_shared/lib/getOrderRemainTime.ts";
+import {useNavigate} from "react-router-dom";
 
 
 export const OrderCard = (childRecord: OrderCardModel) => {
+    const navigate = useNavigate()
+
+    const cardClickHandler = (id:number) => {
+        navigate(`/orders/${id}`)
+    }
+
     return (
-        <div className={`w-80 2xl:w-3/12 h-40 lg:h-60 rounded-2xl m-2 p-5 flex flex-col items-center justify-between`}
-             style={{backgroundColor: getColor(childRecord.is_finished, childRecord.remain_time), color: 'white'}}>
+        <div
+            className={`w-80 2xl:w-3/12 h-40 lg:h-60 rounded-2xl m-2 p-5 flex flex-col items-center justify-between cursor-pointer`}
+            style={{backgroundColor: getOrderColor(childRecord.is_finished, childRecord.remain_time), color: 'white'}}
+            onClick={() => {
+                cardClickHandler(childRecord.id)
+            }}
+        >
             <div className={`w-full flex justify-between`}>
                 <h5>{childRecord.child_name}</h5>
                 <p>
@@ -30,7 +26,7 @@ export const OrderCard = (childRecord: OrderCardModel) => {
                         childRecord.remain_time < 0 ? "Прошло: " : "Осталось: "
                     }
                     {
-                        getTime(childRecord.remain_time)
+                        getOrderRemainTime(childRecord.remain_time)
                     }
                 </p>
             </div>

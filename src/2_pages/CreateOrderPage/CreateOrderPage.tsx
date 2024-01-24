@@ -1,16 +1,21 @@
-import {OrderForm} from "../../3_widgets/OrderForm/OrderForm.tsx";
-import {NavBar} from "@/3_widgets/NavBar/NavBar.tsx";
+import {NavBar} from "@/3_widgets/NavBar/ui/NavBar.tsx";
 import {ButtonBack} from "@/6_shared/BaseComponents/ButtonBack/ButtonBack.tsx";
+import {OrderFormCreate} from "3_widgets/OrderFormCreate";
+import {useAppDispatch} from "@/1_app/hooks@deprecated.ts";
+import {clearAll} from "@/5_entities/orderForm";
 
 export const CreateOrderPage = () => {
-    const title = 'Создать заказ';
-    const isDirector = false
+    const dispatch = useAppDispatch()
 
     return (
         <div>
-          <NavBar isDirector={isDirector}/>
-          <ButtonBack/>
-          <OrderForm title={title}/>
+            <NavBar/>
+            <div onClick={()=>{
+                dispatch(clearAll())
+            }}>
+                <ButtonBack/>
+            </div>
+            <OrderFormCreate/>
         </div>
     );
 };

@@ -6,11 +6,13 @@ import {DirectorReportPage} from "@/2_pages/DirectorReportPage/DirectorReportPag
 // import {LoginPage} from "@/2_pages/LoginPage/LoginPage.tsx";
 import {useKeycloak} from "@react-keycloak/web";
 import {ReactNode} from "react";
+import DetailCardPage from "@/2_pages/DetailCardPage/DetailCardPage.tsx";
 
 const PrivateRoute = ({children}: { children: ReactNode }) => {
-    const {keycloak} = useKeycloak();
+    const {keycloak, initialized} = useKeycloak();
+    if (!initialized)
+        return "keycloak is not init"
     const isLoggedIn = keycloak.authenticated;
-    console.log(keycloak.authenticated)
     return isLoggedIn ? children : <button onClick={() => keycloak.login()}>Login</button>;
 };
 
@@ -28,6 +30,14 @@ function App() {
                         <ManagerMainPage/>
                     </PrivateRoute>
                 }/>
+                <Route path={'/orders/:id'}
+                       element={
+                           <PrivateRoute>
+                               <DetailCardPage/>
+                           </PrivateRoute>
+                       }
+                />
+
                 <Route path={'/create-order'} element={
                     <PrivateRoute>
                         <CreateOrderPage/>

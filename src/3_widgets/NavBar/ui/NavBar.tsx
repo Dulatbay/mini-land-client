@@ -1,16 +1,23 @@
 import {useState} from "react";
+import {useKeycloak} from "@react-keycloak/web";
 
-interface props{
-    isDirector: boolean
-}
 
-export const NavBar = ({isDirector} : props) => {
+
+export const NavBar = () => {
 
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const {keycloak, initialized} = useKeycloak()
+
+    if(!initialized)
+        return "keycloak is not init"
+
+    const isDirector = keycloak.hasRealmRole("admin")
+    // const isDirector = false
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
     };
+
     return (
         <div className={`pt-5 pb-5 flex items-center justify-between`} style={{ backgroundColor: '#3d3d3d' }}>
             <div className={`pl-0 md:pl-14`}>
