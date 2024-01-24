@@ -1,15 +1,12 @@
-import {useState} from "react";
-import {useKeycloak} from "@react-keycloak/web";
+import {useContext, useState} from "react";
+import KeycloakContext from "@/1_app/KeycloakContext.ts";
 
 
 
 export const NavBar = () => {
 
     const [isMenuOpen, setMenuOpen] = useState(false);
-    const {keycloak, initialized} = useKeycloak()
-
-    if(!initialized)
-        return "keycloak is not init"
+    const keycloak = useContext(KeycloakContext)
 
     const isDirector = keycloak.hasRealmRole("admin")
     // const isDirector = false

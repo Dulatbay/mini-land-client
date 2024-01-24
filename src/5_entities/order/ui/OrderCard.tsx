@@ -1,13 +1,13 @@
 import {OrderCardModel} from "../model/types.ts";
 import {getOrderColor} from "@/6_shared/lib/getOrderColor.ts";
-import {getOrderRemainTime} from "@/6_shared/lib/getOrderRemainTime.ts";
 import {useNavigate} from "react-router-dom";
+import {getTime} from "@/6_shared/lib/getTime.ts";
 
 
 export const OrderCard = (childRecord: OrderCardModel) => {
     const navigate = useNavigate()
 
-    const cardClickHandler = (id:number) => {
+    const cardClickHandler = (id: number) => {
         navigate(`/orders/${id}`)
     }
 
@@ -26,7 +26,7 @@ export const OrderCard = (childRecord: OrderCardModel) => {
                         childRecord.remain_time < 0 ? "Прошло: " : "Осталось: "
                     }
                     {
-                        getOrderRemainTime(childRecord.remain_time)
+                        getTime(childRecord.remain_time < 0 ? childRecord.remain_time * -1 : childRecord.remain_time)
                     }
                 </p>
             </div>

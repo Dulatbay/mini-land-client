@@ -35,3 +35,14 @@ interface ResponseSaleDto {
     full_price: number;
     enabled: boolean;
 }
+
+
+export interface RequestCreateOrderDto {
+    parent_name: string;
+    parent_phone_number: string;
+    child_name: string;
+    child_age: number;
+    sale_id?: number;
+    extra_time?: number;
+    is_paid?: boolean;
+}

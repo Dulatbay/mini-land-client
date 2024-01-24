@@ -1,18 +1,19 @@
 import ReactDOM from 'react-dom/client'
 import App from "./App.tsx";
 import './main.css'
-import {BrowserRouter} from "react-router-dom";
-import {ReactKeycloakProvider} from "@react-keycloak/web";
+import MainProvider from "@/1_app/MainProvider.tsx";
 import kc from "@/1_app/kc-config.ts";
-import {Provider as ReduxProvider} from 'react-redux'
-import {appStore} from "@/1_app/appStore.ts";
+import KeycloakContext from "@/1_app/KeycloakContext.ts";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <ReactKeycloakProvider authClient={kc}>
-        <ReduxProvider store={appStore}>
-                <BrowserRouter>
+
+kc
+    .init({onLoad: "check-sso", checkLoginIframe: false})
+    .then(() => {
+        ReactDOM.createRoot(document.getElementById('root')!).render(
+            <KeycloakContext.Provider value={kc}>
+                <MainProvider>
                     <App/>
-                </BrowserRouter>
-        </ReduxProvider>
-    </ReactKeycloakProvider>
-);
+                </MainProvider>
+            </KeycloakContext.Provider>
+        );
+    });

@@ -6,6 +6,9 @@ import {OrderInfoCreate} from "@/4_features/OrderInfo/ui/OrderInfoCreate.tsx";
 import {useAppDispatch, useAppSelector} from "@/1_app/hooks@deprecated.ts";
 import {RequestOrder, selectRequestOrder, setRequestOrder} from "@/5_entities/orderForm";
 import {MouseEvent} from "react";
+import {RequestCreateOrderDto, useCreateOrderMutation} from "@/5_entities/order";
+import {getFullTime} from "@/6_shared/lib/getFullTime.ts";
+import {useNavigate} from "react-router-dom";
 
 const customer = "Клиент";
 const child = 'Ребенок';
@@ -54,7 +57,8 @@ export const OrderFormCreate = () => {
     const requestOrder = useAppSelector(selectRequestOrder)
     const prices = useAppSelector(selectAllPrices)
     const dispatch = useAppDispatch()
-
+    const [createOrder] = useCreateOrderMutation()
+    const navigate= useNavigate()
 
     useAllPricesQuery(true)
 
@@ -63,6 +67,26 @@ export const OrderFormCreate = () => {
         const request = {...requestOrder} ?? {} as RequestOrder
         request.is_paid = event.currentTarget.checked
         dispatch(setRequestOrder(request as RequestOrder))
+    }
+
+    const sendButtonHandler = () => {
+        if(!requestOrder) {
+            console.log('error, request order is null')
+            return;
+        }
+        const body : RequestCreateOrderDto = {
+            child_age: requestOrder.child_age!,
+            child_name: requestOrder.child_name!,
+            parent_name: requestOrder.parent_name!,
+            parent_phone_number: requestOrder.parent_phone_number!,
+            extra_time: getFullTime(requestOrder.extra_time_hour ?? 0, requestOrder.extra_time_minute ?? 0),
+            is_paid: requestOrder.is_paid ?? false,
+            sale_id: requestOrder.sale?.id,
+        }
+
+        createOrder(body).then(()=>{
+            navigate('/')
+        })
     }
 
 
@@ -87,7 +111,11 @@ export const OrderFormCreate = () => {
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
             <Button content={"ОЧИСТИТЬ"} backgroundColor={"#FF3333"}/>
-                <Button disabled={!isAvailableToSend(requestOrder)} backgroundColor={"#8C61FF"} content={"ОТПРАВИТЬ"}/>
+                <Button disabled={!isAvailableToSend(requestOrder)}
+                        backgroundColor={"#8C61FF"}
+                        content={"ОТПРАВИТЬ"}
+                        onClick={sendButtonHandler}
+                />
             </div>
         </form>
     );

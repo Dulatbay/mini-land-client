@@ -5,7 +5,7 @@ export const getTime = (seconds : number) => {
         result += `${h}ч.`
         seconds %= 3600;
     }
-    const m = seconds / 60
+    const m =  Math.round(seconds/ 60)
     if(m != 0) {
         if(h != 0) result += " "
         result += `${m}м. `
