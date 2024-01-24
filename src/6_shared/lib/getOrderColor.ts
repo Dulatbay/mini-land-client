@@ -1,8 +1,8 @@
 export const getOrderColor = (isFinished: boolean, remainTime: number) => {
     if (isFinished)
-        return "#1FD680"
+        return "green-500"
     else if (remainTime >= 0)
-        return "#FFA733"
+        return "yellow-500"
     else if (remainTime < 0)
-        return "#FF3333"
+        return "red-500"
 }

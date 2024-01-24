@@ -43,7 +43,10 @@ export const InputCustomer = ({customer, type, requestOrder}: Props) => {
                         className={styles}
                         type="number"
                         placeholder="Возраст"
-                        onChange={(e) => handleInputChange("child_age", Number(e.target.value))}
+                        onChange={(e) =>
+                            handleInputChange("child_age", Number(e.target.value))}
+                        min={1}
+                        max={15}
                     />
                 )}
             </div>

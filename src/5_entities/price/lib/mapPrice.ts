@@ -2,6 +2,7 @@ import {PriceModel} from "../model/types.ts";
 import {ResponsePriceDto} from "../api/types.ts";
 
 export const mapPrice = (dto: ResponsePriceDto): PriceModel => {
+    console.log(dto)
     return {
         id: dto.id,
         enabled: dto.enabled,

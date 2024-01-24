@@ -18,8 +18,8 @@ export const OrderInfoCreate = ({requestOrder, prices}: props) => {
                 <p>Тотал
                     время: {getTime(getFullTime(requestOrder?.extra_time_hour ?? 0, requestOrder?.extra_time_minute ?? 0) + (requestOrder?.sale ? requestOrder?.sale?.full_time : 0))}</p>
                 <p>Штрафное время: 15м.</p>
-                <p>Общая
-                    стоимость: {getFullPrice(getFullTime(requestOrder?.extra_time_hour ?? 0, requestOrder?.extra_time_minute ?? 0), prices) + (requestOrder?.sale ? requestOrder?.sale?.full_price : 0)}тг</p>
+                <p>Общая стоимость: {getFullPrice(getFullTime(requestOrder?.extra_time_hour ?? 0, requestOrder?.extra_time_minute ?? 0), prices) + (requestOrder?.sale ? requestOrder?.sale?.full_price : 0)}тг
+                </p>
             </div>
 
         </>

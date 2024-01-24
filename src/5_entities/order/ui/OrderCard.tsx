@@ -13,8 +13,9 @@ export const OrderCard = (childRecord: OrderCardModel) => {
 
     return (
         <div
-            className={`w-80 2xl:w-3/12 h-40 lg:h-60 rounded-2xl m-2 p-5 flex flex-col items-center justify-between cursor-pointer`}
-            style={{backgroundColor: getOrderColor(childRecord.is_finished, childRecord.remain_time), color: 'white'}}
+            className={`bg-${getOrderColor(childRecord.is_finished, childRecord.remain_time)}  
+            text-white w-80 2xl:w-3/12 h-40 lg:h-60 rounded-2xl m-2 p-5 flex flex-col items-center justify-between 
+            cursor-pointer hover:drop-shadow-2xl transition ease-in-out duration-500 hover:bg-gray-600`}
             onClick={() => {
                 cardClickHandler(childRecord.id)
             }}

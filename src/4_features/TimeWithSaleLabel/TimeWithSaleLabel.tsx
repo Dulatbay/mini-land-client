@@ -7,10 +7,11 @@ interface Props {
     enteredTime: string,
     remainTime: number,
     fullTime: number,
-    fullPrice: number
+    fullPrice: number,
+    authorName: string
 }
 
-function TimeWithSaleLabel({sale, extraTime, enteredTime, remainTime, fullTime, fullPrice}: Props) {
+function TimeWithSaleLabel({sale, extraTime, enteredTime, remainTime, fullTime, fullPrice, authorName}: Props) {
     return (
         <div className={`h-full 2xl:h-32 md:flex border border-gray-500 rounded-lg p-3 mt-3`}>
             <p className={`w-full md:w-2/6 lg:w-3/6 2xl:w-2/6 text-center md:text-left text-white`}>Заказ</p>
@@ -18,7 +19,7 @@ function TimeWithSaleLabel({sale, extraTime, enteredTime, remainTime, fullTime, 
                 {
                     sale ?
                         <>
-                            <select className={`w-full p-3 rounded-lg`}
+                            <select className={`w-full p-3 rounded-lg mb-3.5`}
                                     defaultValue={0}
                                     disabled={true}
                             >
@@ -49,6 +50,7 @@ function TimeWithSaleLabel({sale, extraTime, enteredTime, remainTime, fullTime, 
                 }
                 <span className={`text-white`}>Общее время: {getTime(fullTime)}</span>
                 <span className={'text-white'}>Общая стоимость: {fullPrice}</span>
+                <span className={'text-white'}>Заказ принял: {authorName}</span>
             </div>
         </div>
     );

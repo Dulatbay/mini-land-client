@@ -50,8 +50,8 @@ export const OrderDetailInfo = () => {
     }
 
     return (
-        <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-8 m-auto rounded-3xl`}
-              style={{backgroundColor: '#3D3D3D', borderColor: getOrderColor(data.is_finished, data.remain_time)}}>
+        <form
+            className={`border-${getOrderColor(data.is_finished, data.remain_time)} w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-8 m-auto rounded-3xl bg-gray-700`}>
             <div className={`w-full md:w-9/12 pb-3 flex flex-col md:flex-row md:justify-between items-center`}>
                 <img src={'/icons/Logo.svg'} className={`w-32 object-contain`} style={{backgroundPosition: "center"}}
                      alt={''}/>
@@ -61,7 +61,7 @@ export const OrderDetailInfo = () => {
             <InfoChildDetail childName={data.child_name} childAge={data.child_age}/>
             <TimeWithSaleLabel extraTime={data.extra_time} sale={data.sale} fullTime={data.full_time}
                                fullPrice={data.full_price} enteredTime={data.entered_time}
-                               remainTime={data.remain_time}/>
+                               remainTime={data.remain_time} authorName={data.author_name}/>
             <label className={"text-white"}>
                 <span className={"ml-1"}>
                     Заказ оплачен:

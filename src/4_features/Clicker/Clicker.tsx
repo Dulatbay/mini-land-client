@@ -18,17 +18,17 @@ export const Clicker = ({time, type, requestOrder}: props) => {
 
     useEffect(() => {
         let request = {...requestOrder} ?? {} as RequestOrder
-        if (type == 'hour'){
+        if (type == 'hour') {
             request.extra_time_hour = count;
-        }
-        else{
+        } else {
             request.extra_time_minute = count
         }
         dispatch(setRequestOrder(request as RequestOrder))
     }, [count])
 
 
-    const clickHandler = (payload : number) => {
+    const clickHandler = (payload: number) => {
+        if(payload + count < 0) return;
         setCount(count + payload);
     };
 

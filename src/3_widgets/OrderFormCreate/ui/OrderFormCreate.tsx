@@ -43,6 +43,10 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
         return false
     }
 
+    if(order["child_age"]! < 1 || order["child_age"]! > 15){
+        return false;
+    }
+
     if(((saleTime + extraTime) < 30)){
         return false
     }
@@ -110,9 +114,9 @@ export const OrderFormCreate = () => {
                        onClick={isPaidCheckBoxHandler}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
-            <Button content={"ОЧИСТИТЬ"} backgroundColor={"#FF3333"}/>
+            <Button content={"ОЧИСТИТЬ"} backgroundColor={"red-500"}/>
                 <Button disabled={!isAvailableToSend(requestOrder)}
-                        backgroundColor={"#8C61FF"}
+                        backgroundColor={"purple-700"}
                         content={"ОТПРАВИТЬ"}
                         onClick={sendButtonHandler}
                 />
