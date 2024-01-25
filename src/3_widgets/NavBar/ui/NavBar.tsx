@@ -8,8 +8,7 @@ export const NavBar = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const keycloak = useContext(KeycloakContext)
 
-    const isDirector = keycloak.hasRealmRole("admin")
-    // const isDirector = false
+    const isDirector = keycloak.hasResourceRole("admin")
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
@@ -51,11 +50,11 @@ export const NavBar = () => {
                         </>
                     ) : (
                         <>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Главная</a>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Отчет</a>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Статистика</a>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Цены</a>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Акции</a>
+                            <a href="/" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Главная</a>
+                            <a href="/report" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Отчет</a>
+                            <a href="/statistic" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Статистика</a>
+                            <a href="/prices" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Цены</a>
+                            <a href="/sales" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Акции</a>
                             <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`} onClick={() => {
                                 keycloak.logout()
                             }}>Выйти</a>

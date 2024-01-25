@@ -67,7 +67,7 @@ export const OrderDetailInfo = () => {
                 <span className={"ml-1"}>
                     Заказ оплачен:
                 </span>
-                <input type="checkbox" onChange={isPaidCheckBoxHandler} checked={data.is_paid} disabled={data.is_finished || data.is_paid}/>
+                <input type="checkbox" onChange={isPaidCheckBoxHandler} defaultChecked={data.is_paid} disabled={data.is_paid}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6`}>
                 {

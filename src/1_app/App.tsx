@@ -6,6 +6,9 @@ import {DirectorReportPage} from "@/2_pages/DirectorReportPage/DirectorReportPag
 import {ReactNode, useContext, useEffect} from "react";
 import DetailCardPage from "@/2_pages/DetailCardPage/DetailCardPage.tsx";
 import KeycloakContext from "@/1_app/KeycloakContext.ts";
+import {DirectorSalesPage} from "@/2_pages/DirectorSalesPage/DirectorSalesPage.tsx";
+import {DirectorPricesPage} from "@/2_pages/DirectorPricesPage/DirectorPricesPage.tsx";
+import {NavBar} from "@/3_widgets/NavBar";
 
 const PrivateRoute = ({children}: { children: ReactNode }) => {
     const keycloak = useContext(KeycloakContext);
@@ -31,12 +34,40 @@ function App() {
         }
     }, [])
 
-    const isAdmin = keycloak.hasRealmRole("admin")
-
+    const isAdmin = keycloak.hasResourceRole("admin")
     return (
         <Routes>
             {isAdmin ?
-                <Route path={"/"} element={<DirectorMainPage/>}/>
+                <>
+                    <Route path={"/"} element={<DirectorMainPage/>}/>
+                    <Route path={'/report'} element={
+                        <PrivateRoute>
+                            <DirectorReportPage/>
+                        </PrivateRoute>
+                    }/>
+                    <Route path={'/sales'} element={
+                        <PrivateRoute>
+                            <DirectorSalesPage/>
+                        </PrivateRoute>
+                    }/>
+                    <Route path={'/statistic'} element={
+                        <PrivateRoute>
+                            <>
+                                <NavBar/>
+                            </>
+                        </PrivateRoute>
+                    }/>
+                    <Route path={'/prices'} element={
+                        <PrivateRoute>
+                            <DirectorPricesPage/>
+                        </PrivateRoute>
+                    }/>
+                    <Route path={'/sales'} element={
+                        <PrivateRoute>
+                            <DirectorSalesPage/>
+                        </PrivateRoute>
+                    }/>
+                </>
                 :
                 <>
                     <Route path={'/'} element={
