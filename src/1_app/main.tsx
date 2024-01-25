@@ -7,7 +7,7 @@ import KeycloakContext from "@/1_app/KeycloakContext.ts";
 
 
 kc
-    .init({onLoad: "login-required", checkLoginIframe: falseqqddddd                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ddddddddd})
+    .init({onLoad: "login-required", checkLoginIframe: false, flow: "standard"})
     .then(() => {
         ReactDOM.createRoot(document.getElementById('root')!).render(
             <KeycloakContext.Provider value={kc}>

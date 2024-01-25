@@ -3,9 +3,10 @@ import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import InfoParentDetail from "@/4_features/InfoParentDetail/InfoParentDetail.tsx";
 import InfoChildDetail from "@/4_features/InfoChildDetail/InfoChildDetail.tsx";
 import TimeWithSaleLabel from "@/4_features/TimeWithSaleLabel/TimeWithSaleLabel.tsx";
-import {getOrderColor} from "@/6_shared/lib/getOrderColor.ts";
+import {getBackgroundColorByOrderInfo} from "@/6_shared/lib/getBackgroundColorByOrderInfo.ts";
 import {useEffect, useState} from "react";
 import {useFinishOrderByIdMutation, useLazyGetOrderByIdQuery} from "@/5_entities/order";
+import {getBorderColorByOrderInfo} from "@/6_shared/lib/getBorderColorByOrderInfo.ts";
 
 
 export const OrderDetailInfo = () => {
@@ -51,7 +52,7 @@ export const OrderDetailInfo = () => {
 
     return (
         <form
-            className={`border-${getOrderColor(data.is_finished, data.remain_time)} w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-8 m-auto rounded-3xl bg-gray-700`}>
+            className={`${getBorderColorByOrderInfo(data.is_finished, data.remain_time)} w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-8 m-auto rounded-3xl bg-gray-700`}>
             <div className={`w-full md:w-9/12 pb-3 flex flex-col md:flex-row md:justify-between items-center`}>
                 <img src={'/icons/Logo.svg'} className={`w-32 object-contain`} style={{backgroundPosition: "center"}}
                      alt={''}/>
@@ -72,13 +73,13 @@ export const OrderDetailInfo = () => {
                 {
                     data.is_finished ?
                         <Button content={"ЗАВЕРШЕН"}
-                                backgroundColor={getOrderColor(data.is_finished, data.remain_time)}
+                                backgroundColor={getBackgroundColorByOrderInfo(data.is_finished, data.remain_time)}
                                 disabled={true}
 
                         />
                         :
                         <Button content={"ЗАВЕРШИТЬ"}
-                                backgroundColor={getOrderColor(data.is_finished, data.remain_time)}
+                                backgroundColor={getBackgroundColorByOrderInfo(data.is_finished, data.remain_time)}
                                 disabled={!isPaid}
                                 onClick={endButtonHandler}
 

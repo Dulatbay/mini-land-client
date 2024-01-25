@@ -19,9 +19,9 @@ function TimeWithSaleLabel({sale, extraTime, enteredTime, remainTime, fullTime, 
                 {
                     sale ?
                         <>
-                            <select className={`w-full p-3 rounded-lg mb-3.5`}
+                            <select className={`w-full p-3 rounded-lg mb-3.5 disabled:opacity-100`}
                                     defaultValue={0}
-                                    disabled={true}
+                                    disabled
                             >
                                 {
                                     <option key={sale.id} value={0}>

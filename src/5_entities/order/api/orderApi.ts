@@ -5,7 +5,7 @@ import {DetailOrderModel, OrderCardModel} from "../model/types.ts";
 import {ORDER_TAG, ORDERS_TAG} from "@/6_shared/api/tags.ts";
 import {mapDetailOrder} from "@/5_entities/order/lib/mapDetailOrder.ts";
 
-export const productApi = baseApi.injectEndpoints({
+export const orderApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         allOrders: build.query<OrderCardModel[], void>({
             query: () => ({
@@ -39,4 +39,4 @@ export const productApi = baseApi.injectEndpoints({
     })
 })
 
-export const {useAllOrdersQuery, useCreateOrderMutation, useLazyGetOrderByIdQuery, useFinishOrderByIdMutation} = productApi
+export const {useAllOrdersQuery, useCreateOrderMutation, useLazyGetOrderByIdQuery, useFinishOrderByIdMutation} = orderApi

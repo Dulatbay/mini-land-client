@@ -114,9 +114,9 @@ export const OrderFormCreate = () => {
                        onClick={isPaidCheckBoxHandler}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
-            <Button content={"ОЧИСТИТЬ"} backgroundColor={"red-500"}/>
+            <Button content={"ОЧИСТИТЬ"} backgroundColor={"bg-red-500"}/>
                 <Button disabled={!isAvailableToSend(requestOrder)}
-                        backgroundColor={"purple-700"}
+                        backgroundColor={"bg-purple-700"}
                         content={"ОТПРАВИТЬ"}
                         onClick={sendButtonHandler}
                 />

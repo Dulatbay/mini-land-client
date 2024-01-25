@@ -1,7 +1,8 @@
 import {OrderCardModel} from "../model/types.ts";
-import {getOrderColor} from "@/6_shared/lib/getOrderColor.ts";
+import {getBackgroundColorByOrderInfo} from "@/6_shared/lib/getBackgroundColorByOrderInfo.ts";
 import {useNavigate} from "react-router-dom";
 import {getTime} from "@/6_shared/lib/getTime.ts";
+import {getBorderBackgroundWithHover} from "@/6_shared/lib/getBorderBackgroundWithHover.ts";
 
 
 export const OrderCard = (childRecord: OrderCardModel) => {
@@ -11,11 +12,19 @@ export const OrderCard = (childRecord: OrderCardModel) => {
         navigate(`/orders/${id}`)
     }
 
+    const orderCardBg = getBackgroundColorByOrderInfo(childRecord.is_finished, childRecord.remain_time);
+    const orderCardBgHover = getBorderBackgroundWithHover(childRecord.is_finished, childRecord.remain_time)
+
     return (
         <div
-            className={`bg-${getOrderColor(childRecord.is_finished, childRecord.remain_time)}  
-            text-white w-80 2xl:w-3/12 h-40 lg:h-60 rounded-2xl m-2 p-5 flex flex-col items-center justify-between 
-            cursor-pointer hover:drop-shadow-2xl transition ease-in-out duration-500 hover:bg-gray-600`}
+            className={`${orderCardBg}  
+            text-white cursor-pointer 
+            w-80 2xl:w-3/12 h-40 lg:h-60 m-2 p-5 
+            border-2 border-transparent rounded-2xl
+            flex flex-col items-center justify-between 
+            transition ease-in-out duration-500 
+            hover:bg-transparent hover:text-black hover:border-2 hover:shadow-2xl hover:bg-gray-100
+            ${orderCardBgHover}`}
             onClick={() => {
                 cardClickHandler(childRecord.id)
             }}
