@@ -1,10 +1,19 @@
 import ReactDOM from 'react-dom/client'
 import App from "./App.tsx";
 import './main.css'
-import {BrowserRouter} from "react-router-dom";
+import MainProvider from "@/1_app/MainProvider.tsx";
+import kc from "@/1_app/kc-config.ts";
+import KeycloakContext from "@/1_app/KeycloakContext.ts";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>
-);
+
+kc
+    .init({onLoad: "login-required", checkLoginIframe: false, flow: "standard"})
+    .then(() => {
+        ReactDOM.createRoot(document.getElementById('root')!).render(
+            <KeycloakContext.Provider value={kc}>
+                <MainProvider>
+                    <App/>
+                </MainProvider>
+            </KeycloakContext.Provider>
+        );
+    });
