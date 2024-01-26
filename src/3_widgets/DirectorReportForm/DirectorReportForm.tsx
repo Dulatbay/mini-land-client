@@ -1,15 +1,46 @@
 import {DateRange} from "@/6_shared/BaseComponents/DateRange/DateRange.tsx";
 import {ReportInfo} from "@/4_features/ReportInfo/ReportInfo.tsx";
-import {ButtonDownloadReport} from "@/4_features/ButtonDownloadReport/ButtonDownloadReport.tsx";
+import {ChooseEmployeeReport} from "@/4_features/ChooseEmployee/ChooseEmployeeReport.tsx";
+import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
+import {selectReportByParams, setReportRequest, useLazyReportByParamQuery} from "@/5_entities/report";
+import {useAppDispatch, useAppSelector} from "@/1_app/hooks@deprecated.ts";
+import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
+import {toast} from "react-toastify";
 
 export const DirectorReportForm = () => {
+
+    const report = useAppSelector(selectReportByParams)
+    const dispatch = useAppDispatch()
+    const [fetchReport, result] = useLazyReportByParamQuery()
+
+    const dateChangeTrigger = (startDate: Date, endDate: Date) => {
+        const request = {
+            start_date: startDate.toLocaleDateString(),
+            end_date: endDate.toLocaleDateString(),
+            username: report?.request?.username
+        }
+        dispatch(setReportRequest(request))
+        fetchReport(request)
+    }
+
+    if (result.isLoading)
+        return <Spinner/>
+
+    if (result.isError) {
+        // @ts-ignore
+        toast.error(`Ошибка ${result.error.status}`)
+    }
+
     return (
-        <form className={`w-5/6 md:w-4/6 2xl:w-1/3 p-6 sm:p-16 mt-14 sm:mt-28 m-auto text-[14px] sm:text-[20px] text-white rounded-3xl bg-[#3D3D3D]`}>
-            <p>Диапазон</p>
-            <DateRange/>
-            <p className={`pt-8`}>↓ Все сотрудники</p>
+        <form
+            className={`w-5/6 md:w-2/4 2xl:w-1/3 p-6 sm:p-14 sm:pt-12 sm:pb-12 mt-14 sm:mt-28 m-auto 
+            flex flex-col gap-10
+            text-[14px] sm:text-[20px] text-white 
+            rounded-3xl bg-gray-700`}>
+            <DateRange onChange={dateChangeTrigger}/>
+            <ChooseEmployeeReport/>
             <ReportInfo/>
-            <ButtonDownloadReport/>
+            <Button content={'СКАЧАТЬ ОТЧЕТ'} backgroundColor={'bg-purple-600'}/>
         </form>
     );
 };

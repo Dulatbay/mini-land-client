@@ -1,11 +1,14 @@
-import {useNavigate} from "react-router-dom";
+import React from "react";
 
-export const ButtonBack = () => {
-    const navigate = useNavigate()
+interface Props {
+    clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void
+}
+
+export const ButtonBack = ({clickHandler}: Props) => {
     return (
         <div className={`w-3/12 flex justify-center items-center pt-10`}>
             <button className={`font-medium text-xl md:text-2xl`}
-                    onClick={() => navigate('/')}
+                    onClick={clickHandler}
             >← Back
             </button>
         </div>

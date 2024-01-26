@@ -35,16 +35,3 @@ interface ResponseSaleModel {
     full_price: number;
     enabled: boolean;
 }
-
-export interface EmployeeRow {
-    username: string;
-    orders_count: number;
-    profit: number;
-    serve_time: number;
-}
-
-export interface DirectorMainReportModel {
-    orders_count: number;
-    employee: EmployeeRow[];
-}
-

@@ -1,10 +1,17 @@
+import {getTime} from "@/6_shared/lib/getTime.ts";
 
-export const PriceCardInfo = () => {
+
+interface Props {
+    fullTime: number,
+    fullPrice: number
+}
+
+export const PriceCardInfo = ({fullPrice, fullTime} : Props) => {
 
     return (
         <div className={`px-5 flex flex-col justify-center`}>
-            <p>Минут: 30</p>
-            <p>Цена: 1500000тг</p>
+            <p>Время: {getTime(fullTime)}</p>
+            <p>Цена: {fullPrice}</p>
         </div>
     );
 };

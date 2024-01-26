@@ -1,4 +1,4 @@
-import {EmployeeRow} from "@/5_entities/order/model/types.ts";
+import {EmployeeRow} from "@/5_entities/report";
 
 interface Props {
     employees: EmployeeRow[]
@@ -22,12 +22,12 @@ export const DirectorTable = ({employees}: Props) => {
                 <tbody>
                 {
                     employees.map((e, i) =>
-                        <tr className={`h-10`}>
-                            <td className={`border border-black`}>{i + 1}</td>
-                            <td className={`border border-black`}>{e.username}</td>
-                            <td className={`border border-black`}>{e.orders_count}</td>
-                            <td className={`border border-black`}>{e.profit}</td>
-                            <td className={`border border-black`}>{e.serve_time}</td>
+                        <tr className={`h-10 ${i % 2 ? "" : "bg-gray-400"}`} key={i}>
+                            <td className={`border border-black p-2`}>{i + 1}</td>
+                            <td className={`border border-black p-2`}>{e.username}</td>
+                            <td className={`border border-black p-2`}>{e.orders_count}</td>
+                            <td className={`border border-black p-2`}>{e.profit}</td>
+                            <td className={`border border-black p-2`}>{e.serve_time}</td>
                         </tr>
                     )
                 }

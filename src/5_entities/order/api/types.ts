@@ -47,14 +47,3 @@ export interface RequestCreateOrderDto {
     is_paid?: boolean;
 }
 
-interface ResponseEmployeeDto {
-    username: string;
-    orders_count: number;
-    profit: number;
-    serve_time: number;
-}
-
-export interface ResponseDirectorMainReportDto {
-    orders_count: number;
-    employee: ResponseEmployeeDto[];
-}

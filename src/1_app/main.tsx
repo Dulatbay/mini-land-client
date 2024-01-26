@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client'
-import App from "./App.tsx";
 import './main.css'
 import MainProvider from "@/1_app/MainProvider.tsx";
 import kc from "@/1_app/kc-config.ts";
 import KeycloakContext from "@/1_app/KeycloakContext.ts";
-
+import App from "@/1_app/App.tsx";
+import 'react-toastify/dist/ReactToastify.css';
 
 kc
     .init({onLoad: "login-required", checkLoginIframe: true, flow: 'standard'})

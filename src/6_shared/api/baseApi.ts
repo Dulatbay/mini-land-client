@@ -6,5 +6,5 @@ export const baseApi = createApi({
     tagTypes: [ORDER_TAG, SALE_TAG,PRICE_TAG, ORDERS_TAG],
     reducerPath: 'api',
     baseQuery: baseQuery,
-    endpoints: () => ({})
+    endpoints: () => ({}),
 })
