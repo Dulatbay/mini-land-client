@@ -6,7 +6,7 @@ const initOptions = {
     clientId: 'miniland',
 }
 
-const kc = Keycloak(initOptions);
+const kc = new Keycloak(initOptions);
 
 
 export default kc

@@ -29,7 +29,7 @@ function App() {
         else {
             localStorage.setItem('token', keycloak.token!)
         }
-    }, [])
+    }, [keycloak])
 
     const isAdmin = keycloak.hasRealmRole("admin")
 
