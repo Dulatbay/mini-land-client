@@ -3,7 +3,8 @@ import {PriceCard} from "@/4_features/PriceCard/PriceCard.tsx";
 
 
 function PriceCardList() {
-    const {data, isLoading, isError, error} = useAllPricesQuery(true)
+    const {data, isLoading, isError, error} =
+        useAllPricesQuery()
 
     if (isLoading)
         return "loading"

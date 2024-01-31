@@ -64,7 +64,7 @@ export const OrderFormCreate = () => {
     const [createOrder] = useCreateOrderMutation()
     const navigate= useNavigate()
 
-    useAllPricesQuery(true)
+    useAllPricesQuery()
 
 
     const isPaidCheckBoxHandler = (event: MouseEvent<HTMLInputElement>) => {
