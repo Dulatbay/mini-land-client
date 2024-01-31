@@ -4,7 +4,7 @@ import InfoParentDetail from "@/4_features/InfoParentDetail/InfoParentDetail.tsx
 import InfoChildDetail from "@/4_features/InfoChildDetail/InfoChildDetail.tsx";
 import TimeWithSaleLabel from "@/4_features/TimeWithSaleLabel/TimeWithSaleLabel.tsx";
 import {getBackgroundColorByOrderInfo} from "@/6_shared/lib/getBackgroundColorByOrderInfo.ts";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useFinishOrderByIdMutation, useLazyGetOrderByIdQuery} from "@/5_entities/order";
 import {getBorderColorByOrderInfo} from "@/6_shared/lib/getBorderColorByOrderInfo.ts";
 
@@ -38,8 +38,8 @@ export const OrderDetailInfo = () => {
         return "error,check console"
     }
 
-    const isPaidCheckBoxHandler = (event: React.MouseEvent<HTMLInputElement>) => {
-        setIsPaid(event.currentTarget.checked)
+    const isPaidCheckBoxHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsPaid(event.target.checked)
     }
 
     const endButtonHandler = () => {
@@ -67,7 +67,7 @@ export const OrderDetailInfo = () => {
                 <span className={"ml-1"}>
                     Заказ оплачен:
                 </span>
-                <input type="checkbox" onClick={isPaidCheckBoxHandler} checked={isPaid}/>
+                <input type="checkbox" onChange={isPaidCheckBoxHandler} defaultChecked={data.is_paid} disabled={data.is_paid}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6`}>
                 {

@@ -1,5 +1,10 @@
+import {EmployeeRow} from "@/5_entities/report";
 
-export const DirectorTable = () => {
+interface Props {
+    employees: EmployeeRow[]
+}
+
+export const DirectorTable = ({employees}: Props) => {
     return (
 
         <div className={`w-11/12 sm:w-10/12 m-auto pt-20`}>
@@ -15,20 +20,17 @@ export const DirectorTable = () => {
                 </thead>
 
                 <tbody>
-                <tr className={`h-10`}>
-                    <td className={`border border-black`}>1</td>
-                    <td className={`border border-black`}>Новое значение 2</td>
-                    <td className={`border border-black`}>Новое значение 3</td>
-                    <td className={`border border-black`}>Новое значение 4</td>
-                    <td className={`border border-black`}>Новое значение 5</td>
-                </tr>
-                <tr className={`h-10`}>
-                    <td className={`border border-black`}>2</td>
-                    <td className={`border border-black`}>Новое значение 2</td>
-                    <td className={`border border-black`}>Новое значение 3</td>
-                    <td className={`border border-black`}>Новое значение 4</td>
-                    <td className={`border border-black`}>Новое значение 5</td>
-                </tr>
+                {
+                    employees.map((e, i) =>
+                        <tr className={`h-10 ${i % 2 ? "" : "bg-gray-400"}`} key={i}>
+                            <td className={`border border-black p-2`}>{i + 1}</td>
+                            <td className={`border border-black p-2`}>{e.username}</td>
+                            <td className={`border border-black p-2`}>{e.orders_count}</td>
+                            <td className={`border border-black p-2`}>{e.profit}</td>
+                            <td className={`border border-black p-2`}>{e.serve_time}</td>
+                        </tr>
+                    )
+                }
                 </tbody>
             </table>
         </div>

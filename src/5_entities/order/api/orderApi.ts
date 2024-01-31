@@ -1,5 +1,9 @@
 import {baseApi} from "@/6_shared/api/baseApi.ts";
-import {DetailOrderDto, OrderCardDto, RequestCreateOrderDto} from "./types.ts";
+import {
+    DetailOrderDto,
+    OrderCardDto,
+    RequestCreateOrderDto
+} from "./types.ts";
 import {mapOrder} from "../lib/mapOrder.ts";
 import {DetailOrderModel, OrderCardModel} from "../model/types.ts";
 import {ORDER_TAG, ORDERS_TAG} from "@/6_shared/api/tags.ts";
@@ -35,7 +39,8 @@ export const orderApi = baseApi.injectEndpoints({
                 body: requestCreateOrderDto
             }),
             invalidatesTags: [ORDER_TAG, ORDERS_TAG]
-        })
+        }),
+
     })
 })
 
