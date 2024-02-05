@@ -8,4 +8,5 @@ export interface ResponsePriceDto {
 export interface RequestCreatePriceDto {
     full_time: number;
     full_price: number;
+    days: number[]
 }

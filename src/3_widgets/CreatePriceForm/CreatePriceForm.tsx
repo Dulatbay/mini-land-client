@@ -16,7 +16,8 @@ export const CreatePriceForm = () => {
     const createButtonClickHandler = () => {
         const request = {
             full_time: fullTime * 60,
-            full_price: fullPrice
+            full_price: fullPrice,
+            days: []
         }
         setLoading(true)
         createPrice(request)
@@ -48,6 +49,9 @@ export const CreatePriceForm = () => {
                    type={'number'}
                    onChange={event => setFullPrice(+event.target.value)}
             ></input>
+        </div>
+        <div>
+            <p>В какие дни действует цена?</p>
         </div>
         <div className={`w-full sm:flex justify-between gap-20`}>
             <Button content={"ОЧИСТИТЬ"} backgroundColor={"bg-red-500"}/>
