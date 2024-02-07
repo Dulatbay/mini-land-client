@@ -1,5 +1,6 @@
 import {useAllPricesQuery} from "@/5_entities/price";
 import {PriceCard} from "@/4_features/PriceCard/PriceCard.tsx";
+import {toast} from "react-toastify";
 
 
 function PriceCardList() {
@@ -11,7 +12,9 @@ function PriceCardList() {
 
     if (isError) {
         console.log(error)
-        return "error"
+
+        // @ts-ignore
+        toast.error(`Ошибка ${error.status}`)
     }
     return (
         <div className={`w-[95%] pt-10 m-auto flex flex-wrap flex-col gap-4`}>

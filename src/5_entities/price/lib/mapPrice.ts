@@ -7,5 +7,6 @@ export const mapPrice = (dto: ResponsePriceDto): PriceModel => {
         enabled: dto.enabled,
         full_price: dto.full_price,
         full_time: dto.full_time,
+        days: dto.days
     }
 }
