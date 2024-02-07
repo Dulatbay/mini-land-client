@@ -3,8 +3,6 @@ import {PriceModel} from "@/5_entities/price";
 export const getFullPrice = (extra_time_seconds: number, prices: PriceModel[]) => {
     if (extra_time_seconds < 60) return 0
     if (!prices?.length) return 0
-    console.log(prices)
-    return 0;
     let resultFullPrice = 0
     prices?.map(price => {
         while (price.full_time <= extra_time_seconds) {

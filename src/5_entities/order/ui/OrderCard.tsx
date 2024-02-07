@@ -42,8 +42,8 @@ export const OrderCard = (childRecord: OrderCardModel) => {
             </div>
             <div className={`w-full flex flex-col justify-start items-start`}>
                 <p>Родитель: {childRecord.parent_name}</p>
-                <p>Зашел: {childRecord.entered_time}</p>
-                <p>Возраст ребенка: {childRecord.age}</p>
+                <p>Время вхождения: {childRecord.entered_time}</p>
+                <p>Возраст ребенка: {childRecord.age}г.</p>
             </div>
         </div>
     );

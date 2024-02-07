@@ -51,7 +51,7 @@ export const PieChartContainer = () => {
 
     return <>
         <div
-            className={'mt-10 border-2 rounded-xl p-5 bg-gray-700 text-white flex flex-col justify-around h-fit gap-4'}>
+            className={'mt-10 border-2 rounded-xl bg-gray-700 text-white flex flex-col justify-around h-fit gap-4 pt-10 pb-10 pr-7 pl-7'}>
             <PieChart series={[result.data?.income ?? 0, result.data?.expense ?? 0]}/>
             <DateRange onChange={dateChangeHandler}/>
             <div className={'flex flex-col gap-4 mt-3 border-t-2 pt-3 border-gray-500'}>

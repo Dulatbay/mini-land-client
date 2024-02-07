@@ -1,1 +1,0 @@
-export {ButtonAll} from './ui/ButtonAll.tsx'

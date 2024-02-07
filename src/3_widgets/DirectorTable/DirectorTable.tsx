@@ -14,8 +14,8 @@ export const DirectorTable = ({employees}: Props) => {
                     <th className={`border border-black`}>#</th>
                     <th className={`border border-black`}>ФИО работника</th>
                     <th className={`border border-black`}>Заказов на сегодня</th>
-                    <th className={`border border-black`}>Прибыль за сегодня</th>
-                    <th className={`border border-black`}>Общее время присмотра</th>
+                    <th className={`border border-black hidden sm:table-cell`}>Прибыль за сегодня</th>
+                    <th className={`border border-black hidden sm:table-cell`}>Общее время присмотра</th>
                 </tr>
                 </thead>
 
@@ -26,8 +26,8 @@ export const DirectorTable = ({employees}: Props) => {
                             <td className={`border border-black p-2`}>{i + 1}</td>
                             <td className={`border border-black p-2`}>{e.username}</td>
                             <td className={`border border-black p-2`}>{e.orders_count}</td>
-                            <td className={`border border-black p-2`}>{e.profit}</td>
-                            <td className={`border border-black p-2`}>{e.serve_time}</td>
+                            <td className={`border border-black p-2 hidden sm:table-cell`}>{e.profit}</td>
+                            <td className={`border border-black p-2 hidden sm:table-cell`}>{e.serve_time}</td>
                         </tr>
                     )
                 }

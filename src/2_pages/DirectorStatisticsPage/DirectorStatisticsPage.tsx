@@ -3,9 +3,9 @@ import {PlotChartContainer} from "@/3_widgets/PlotChartContainer/PlotChartContai
 
 export const DirectorStatisticsPage = () => {
     return <>
-        <div className={'w-[95%] m-auto flex flex-row justify-start flex-wrap gap-4'}>
-            <PieChartContainer />
-            <PlotChartContainer />
+        <div className={'w-[95%] m-auto flex flex-row justify-center gap-4'}>
+            <PieChartContainer/>
+            <PlotChartContainer/>
         </div>
     </>
 }

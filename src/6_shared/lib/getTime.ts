@@ -11,5 +11,5 @@ export const getTime = (seconds: number) => {
         if (h != 0) result += " "
         result += `${m}м. `
     }
-    return result.length ? result : "0";
+    return result.length ? result : `${seconds}c.`;
 }

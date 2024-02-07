@@ -29,6 +29,9 @@ const PrivateRoute = ({children}: { children: ReactNode }) => {
         : <Login/>;
 };
 
+
+
+
 const Root = () => {
     return <PrivateRoute>
         <NavBar/>
@@ -92,7 +95,7 @@ export const appRouter = () => {
             {
                 path: '/',
                 element: <Root/>,
-                errorElement: "error",
+                errorElement: <ErrorPage/>,
                 children: [
                     {
                         index: true,
@@ -105,7 +108,7 @@ export const appRouter = () => {
                     {
                         path: '/create-order',
                         element: <CreateOrderPage/>
-                    }
+                    },
                 ]
             }
         ])
