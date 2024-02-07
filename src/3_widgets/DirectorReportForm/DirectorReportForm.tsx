@@ -6,6 +6,7 @@ import {selectReportByParams, setReportRequest, useLazyReportByParamQuery} from 
 import {useAppDispatch, useAppSelector} from "@/1_app/hooks@deprecated.ts";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 import {toast} from "react-toastify";
+import {greenBg} from "@/6_shared/lib/colors.ts";
 
 export const DirectorReportForm = () => {
 
@@ -27,20 +28,22 @@ export const DirectorReportForm = () => {
         return <Spinner/>
 
     if (result.isError) {
+        console.log(result.error)
         // @ts-ignore
         toast.error(`Ошибка ${result.error.status}`)
     }
 
     return (
         <form
-            className={`w-5/6 md:w-2/4 2xl:w-1/3 p-6 sm:p-14 sm:pt-12 sm:pb-12 mt-14 sm:mt-28 m-auto 
+            className={`w-5/6 md:w-2/4 2xl:w-1/3 p-6 sm:p-14 sm:pt-12 sm:pb-12 mt-14 sm:mt-28 
+            m-auto 
             flex flex-col gap-10
-            text-[14px] sm:text-[20px] text-white 
-            rounded-3xl bg-gray-700`}>
+            text-[14px] sm:text-[20px]  
+            rounded-3xl bg-white border-2`}>
             <DateRange onChange={dateChangeTrigger}/>
             <ChooseEmployeeReport/>
             <ReportInfo/>
-            <Button content={'СКАЧАТЬ ОТЧЕТ'} backgroundColor={'bg-purple-600'}/>
+            <Button content={'СКАЧАТЬ ОТЧЕТ'} backgroundColor={greenBg}/>
         </form>
     );
 };

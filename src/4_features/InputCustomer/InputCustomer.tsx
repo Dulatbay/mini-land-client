@@ -7,7 +7,8 @@ interface Props {
     type: "tel" | "age";
     requestOrder: RequestOrder | undefined,
 }
-const styles = "w-full 2xl:m-0 m-1 p-3 rounded-lg ";
+
+const styles = "w-full 2xl:m-0 p-3 rounded-lg border-2 focus:outline-gray-300";
 
 export const InputCustomer = ({customer, type, requestOrder}: Props) => {
     const dispatch = useDispatch();
@@ -21,10 +22,9 @@ export const InputCustomer = ({customer, type, requestOrder}: Props) => {
     };
 
     return (
-        <div className={`2xl:h-32 h-full md:flex border border-gray-500 rounded-lg p-3 mt-3`}>
-            <p className={`w-full md:w-2/6 lg:w-3/6 2xl:w-2/6 md:text-left text-center text-white`}>{customer}</p>
-
-            <div className={`w-full 2xl:w-4/6 h-full flex flex-col justify-between items-start`}>
+        <div className={`h-full md:flex border border-gray-500 rounded-lg p-3 mt-3`}>
+            <p className={`w-full md:w-2/6 lg:w-3/6 2xl:w-2/6 md:text-left text-center`}>{customer}</p>
+            <div className={`w-full 2xl:w-4/6 h-full pb-2 flex flex-col justify-center items-start gap-2`}>
                 <input
                     className={styles}
                     placeholder="ФИО"

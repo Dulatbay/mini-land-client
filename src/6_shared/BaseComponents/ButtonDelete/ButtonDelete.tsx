@@ -10,8 +10,7 @@ export const ButtonDelete = ({showIcon, clickHandler}: props) => {
     return (
         <>
             {showIcon ? (
-                <div className={`flex justify-center sm:justify-end py-6 pr-6`}>
-
+                <div className={`flex justify-center sm:justify-end w-[50px] h-[50px]`}>
                     <button className={`py-3 px-4 border border-[#FF3333] rounded hover:bg-[#666666]`}
                             onClick={clickHandler}>
                         <svg width="24" height="24" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">

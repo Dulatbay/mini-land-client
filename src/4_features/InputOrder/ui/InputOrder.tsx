@@ -36,13 +36,13 @@ export const InputOrder = ({requestOrder}: { requestOrder: RequestOrder | undefi
     }
 
     return (
-        <div className={`h-full 2xl:h-32 md:flex border border-gray-500 rounded-lg p-3 mt-3`}>
-            <p className={`w-full md:w-2/6 lg:w-3/6 2xl:w-2/6 text-center md:text-left text-white`}>Заказ</p>
+        <div className={`h-full md:flex border border-gray-500 rounded-lg p-3 mt-3`}>
+            <p className={`w-full md:w-2/6 lg:w-3/6 2xl:w-2/6 text-center md:text-left`}>Заказ</p>
             <div className={`w-full 2xl:w-4/6 h-full flex flex-col justify-between items-start`}>
                 {
                     data && data.length ?
                         <>
-                            <select className={`w-full p-3 rounded-lg`} onChange={selectSaleHandler}
+                            <select className={`w-full p-3 rounded-lg mt-4`} onChange={selectSaleHandler}
                                     defaultValue={"none"}>
                                 <option value="none" disabled hidden>Выберите акцию</option>
                                 {
@@ -58,7 +58,7 @@ export const InputOrder = ({requestOrder}: { requestOrder: RequestOrder | undefi
 
                 }
 
-                <div className={`h-full pt-2 flex flex-col items-start`}>
+                <div className={`h-full flex flex-col items-start`}>
                     <Clicker time={'Часов'} type={"hour"} requestOrder={requestOrder}/>
                     <Clicker time={'Минут'} type={"minute"} requestOrder={requestOrder}/>
                 </div>

@@ -1,4 +1,3 @@
-
 interface Props {
     selected: string,
     setSelected: (arg: string) => void
@@ -15,8 +14,8 @@ export const RateTypeSelector = ({setSelected, selected}: Props) => {
             {
                 types.map((type, index) => {
                     return <div onClick={() => setSelected(type)} key={index}
-                                className={`${selected == type ? 'bg-blue-800' : 'bg-gray-800'} flex-1 text-center p-2
-                                    border-gray-700 hover:brightness-125
+                                className={`${selected == type ? (type == 'Доход' ? 'bg-green-700 text-white' : 'bg-red-700 text-white') : ''} 
+                                flex-1 text-center p-2 border-2
                                    ${index % 2 ? "rounded-br-lg rounded-tr-lg border-l" : "rounded-bl-lg rounded-tl-lg border-r"}
                                 `}>{type}</div>
                 })

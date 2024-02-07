@@ -5,7 +5,7 @@ import {getTime} from "@/6_shared/lib/getTime.ts";
 export const ReportInfo = () => {
     const report = useAppSelector(selectReportByParams)
     return (
-        <div className={`text-[12px] sm:text-[20px] p-6 border border-white rounded-2xl`}>
+        <div className={`text-[12px] sm:text-[20px] p-6 border-2 rounded-2xl`}>
             <p>Заказов: {report?.response.ordersCount}</p>
             <p>Прибыль: {report?.response.profit}</p>
             <p>Общее время: {getTime(report?.response.totalTime)}</p>

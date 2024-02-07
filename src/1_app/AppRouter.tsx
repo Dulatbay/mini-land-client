@@ -30,13 +30,13 @@ const PrivateRoute = ({children}: { children: ReactNode }) => {
 };
 
 
-
-
 const Root = () => {
-    return <PrivateRoute>
-        <NavBar/>
-        <Outlet/>
-    </PrivateRoute>
+    return <div className={'bg-[#F2F2F2] h-screen'}>
+        <PrivateRoute>
+            <NavBar/>
+            <Outlet/>
+        </PrivateRoute>
+    </div>
 }
 
 export const appRouter = () => {

@@ -29,20 +29,21 @@ export const DateRange = ({onChange}: Props) => {
     return (
         <div>
             <p className={"mb-1"}>Диапазон</p>
-            <div className={`w-full sm:w-4/6 flex items-center gap-5`}>
+            <div className={`w-full sm:w-4/6 flex items-center`}>
                 <DatePicker
-                    className={`w-20 sm:w-32 p-1 text-center rounded-[5px] bg-[#737373]`}
+                    popperPlacement={'left-start'}
+                    className={`w-20 sm:w-32 p-1 text-center rounded-[5px] border-2`}
                     selected={startDate}
                     onChange={handleStartDateChange}
                     selectsStart
                     dateFormat="dd.MM.yyyy"
                 />
 
-                <span className={`text-[16px] whitespace-nowrap`}>{"->"}</span>
+                <span className={`text-[16px] whitespace-nowrap ml-5 mr-5`}>{"->"}</span>
 
                 <DatePicker
                     popperPlacement={'left-start'}
-                    className={`w-20 sm:w-32 p-1 text-center rounded-[5px] bg-[#737373]`}
+                    className={`w-20 sm:w-32 p-1 text-center rounded-[5px] border-2`}
                     selected={endDate}
                     onChange={handleEndDateChange}
                     selectsEnd

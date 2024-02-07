@@ -35,7 +35,7 @@ export const Clicker = ({time, type, requestOrder}: props) => {
 
     return (
         <div className={`w-full flex justify-between items-center`}>
-            <p className={`text-white mr-3`}>{time}:</p>
+            <p className={`mr-3`}>{time}:</p>
             <div className={`flex items-center justify-center`}>
                 <button
                     type={"button"}
@@ -46,7 +46,7 @@ export const Clicker = ({time, type, requestOrder}: props) => {
                     -
                 </button>
 
-                <span className={`text-xs text-white w-5 text-center mr-3`}>{count}</span>
+                <span className={`text-xs  w-5 text-center mr-3`}>{count}</span>
 
                 <button
                     type={"button"}

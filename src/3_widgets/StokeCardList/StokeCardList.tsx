@@ -1,5 +1,6 @@
 import {StockCard} from "@/4_features/StockCard/StockCard.tsx";
 import {useAllSalesQuery} from "@/5_entities/sale";
+import {toast} from "react-toastify";
 
 
 function StokeCardList() {
@@ -10,7 +11,12 @@ function StokeCardList() {
 
     if (isError) {
         console.log(error)
-        return "error"
+        // @ts-ignore
+        toast.error(`Ошибка ${error.status}`)
+    }
+
+    if(!data?.length){
+        return <div className={`w-[95%] m-auto text-gray-600`}>Акции пока нет... </div>
     }
 
     return (

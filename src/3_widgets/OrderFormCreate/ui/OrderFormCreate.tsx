@@ -9,6 +9,7 @@ import {MouseEvent} from "react";
 import {RequestCreateOrderDto, useCreateOrderMutation} from "@/5_entities/order";
 import {getFullTime} from "@/6_shared/lib/getFullTime.ts";
 import {useNavigate} from "react-router-dom";
+import {greenBg} from "@/6_shared/lib/colors.ts";
 
 const customer = "Клиент";
 const child = 'Ребенок';
@@ -95,17 +96,17 @@ export const OrderFormCreate = () => {
 
 
     return (
-        <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-8 m-auto rounded-3xl bg-gray-700`}>
-            <div className={`w-full md:w-9/12 pb-3 flex flex-col md:flex-row md:justify-between items-center`}>
+        <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
+            <div className={`w-full pb-3 flex flex-col md:justify-between items-center`}>
                 <img src={'/icons/Logo.svg'} className={`w-32 object-contain`} style={{backgroundPosition: "center"}}
                      alt={''}/>
-                <p className={`text-white pt-3`}>Создать заказ</p>
+                <p className={`pt-3 font-medium`}>Создать заказ</p>
             </div>
             <InputCustomer customer={customer} type={type1} requestOrder={requestOrder}/>
             <InputCustomer customer={child} type={type2} requestOrder={requestOrder}/>
             <InputOrder requestOrder={requestOrder}/>
             <OrderInfoCreate requestOrder={requestOrder} prices={prices}/>
-            <label className={"text-white"}>
+            <label className={""}>
                 <span className={"mr-1"}>
                     Товар оплачен:
                 </span>
@@ -113,9 +114,8 @@ export const OrderFormCreate = () => {
                        onClick={isPaidCheckBoxHandler}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
-            <Button content={"ОЧИСТИТЬ"} backgroundColor={"bg-red-500"}/>
                 <Button disabled={!isAvailableToSend(requestOrder)}
-                        backgroundColor={"bg-purple-700"}
+                        backgroundColor={greenBg}
                         content={"ОТПРАВИТЬ"}
                         onClick={sendButtonHandler}
                 />

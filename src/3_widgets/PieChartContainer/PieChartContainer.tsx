@@ -51,7 +51,7 @@ export const PieChartContainer = () => {
 
     return <>
         <div
-            className={'mt-10 border-2 rounded-xl bg-gray-700 text-white flex flex-col justify-around h-fit gap-4 pt-10 pb-10 pr-7 pl-7'}>
+            className={'mt-10 border-2 rounded-xl bg-white flex flex-col justify-around h-fit gap-4 pt-10 pb-10 pr-7 pl-7'}>
             <PieChart series={[result.data?.income ?? 0, result.data?.expense ?? 0]}/>
             <DateRange onChange={dateChangeHandler}/>
             <div className={'flex flex-col gap-4 mt-3 border-t-2 pt-3 border-gray-500'}>
@@ -59,11 +59,11 @@ export const PieChartContainer = () => {
                     <p className={'text-center mb-1'}>Записать новые значения</p>
                     <RateTypeSelector selected={selected} setSelected={setSelected}/>
                 </div>
-                <input className={"w-full 2xl:m-0 m-1 p-3 rounded-lg text-black"}
+                <input className={"w-full 2xl:m-0 m-1 p-3 rounded-lg text-black border-2 focus:outline-gray-300"}
                        placeholder={"Сумма"}
                        type={'number'}
                        onChange={e => setValueProfit(+e.target.value)}/>
-                <input className={"w-full 2xl:m-0 m-1 p-3 rounded-lg text-black"}
+                <input className={"w-full 2xl:m-0 m-1 p-3 rounded-lg text-black border-2 focus:outline-gray-300"}
                        placeholder={"Причина"}
                        onChange={e => setReasonProfit(e.target.value)}/>
                 <Button content={"Добавить"} backgroundColor={selected == 'Доход' ? greenBg : redBg}

@@ -35,12 +35,12 @@ export const ChooseEmployeeReport = () => {
 
 
     return <div>
-        <label htmlFor="employees" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Выберите
+        <label htmlFor="employees" className="block mb-1 text-sm font-medium text-gray-900">Выберите
             сотрудника</label>
         <select id="employees"
                 defaultValue={"all"}
                 onChange={selectEmployeeHandler}
-                className="bg-gray-600 text-white border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                className="border-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
             <option value={"all"}>Все сотрудники</option>
             {
                 data?.map((username, i) =>
