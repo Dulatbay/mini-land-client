@@ -1,4 +1,6 @@
 import {Bounce, ToastContainer} from "react-toastify";
+import {useContext, useEffect} from "react";
+import KeycloakContext from "@/1_app/KeycloakContext.ts";
 
 
 function App() {
