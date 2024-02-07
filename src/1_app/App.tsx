@@ -2,6 +2,15 @@ import {Bounce, ToastContainer} from "react-toastify";
 
 
 function App() {
+    const keycloak = useContext(KeycloakContext);
+
+    useEffect(() => {
+        if (keycloak.isTokenExpired() || !keycloak.authenticated)
+            localStorage.removeItem('token')
+        else {
+            localStorage.setItem('token', keycloak.token!)
+        }
+    }, [keycloak])
 
 
     return (
