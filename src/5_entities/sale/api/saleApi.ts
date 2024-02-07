@@ -8,7 +8,7 @@ export const saleApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         allSales: build.query<SaleModel[], boolean>({
             query: (isEnabled) =>  ({
-                url: `/sales/get-all?enabled${isEnabled}`
+                url: `/sales?enabled${isEnabled}`
             }),
             transformResponse: (response: ResponseSaleDto[]) => response.map(mapSale),
             providesTags: [SALE_TAG]

@@ -17,13 +17,13 @@ export const reportApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         reportTable: build.query<TableReportModel, void>({
             query: () => ({
-                url: '/reports/get-table-report'
+                url: '/reports/table-report'
             }),
             transformResponse: (response: ResponseDirectorMainReportDto) => mapToMainReport(response)
         }),
         reportByParam: build.query<ReportByParamsModel, RequestReportByParamsDto>({
             query: (request) => ({
-                url: '/reports/get-report',
+                url: '/reports/report',
                 params: {
                     "start_date": request.start_date,
                     "end_date": request.end_date,
@@ -39,14 +39,14 @@ export const reportApi = baseApi.injectEndpoints({
         }),
         createProfit: build.mutation<void, RequestCreateProfitDto>({
             query: (requestBody) => ({
-                url: '/reports/profits/create',
+                url: '/reports/profits',
                 method: "POST",
                 body: requestBody
             })
         }),
         reportProfitsByParams: build.query<ResponseProfitsReportDto, RequestProfitsReportParams>({
             query: (request) => ({
-                url: '/reports/profits/get-by-params',
+                url: '/reports/profits',
                 params: {
                     "start_date": request.start_date,
                     "end_date": request.end_date

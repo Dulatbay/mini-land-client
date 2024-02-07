@@ -6,9 +6,9 @@ import {mapPrice} from "../lib/mapPrice.ts";
 
 export const priceApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        allPrices: build.query<PriceModel[], boolean>({
-            query: (isEnabled) => ({
-                url: `/prices/get-all?enabled${isEnabled}`
+        allPrices: build.query<PriceModel[], void>({
+            query: () => ({
+                url: `/prices/`
             }),
             transformResponse: (response: ResponsePriceDto[]) => response.map(mapPrice),
             providesTags: [PRICE_TAG]

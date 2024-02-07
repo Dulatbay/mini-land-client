@@ -13,7 +13,7 @@ export const orderApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         allOrders: build.query<OrderCardModel[], void>({
             query: () => ({
-                url: '/orders/all-cards'
+                url: '/orders'
             }),
             transformResponse: (response: OrderCardDto[]) => response.map(mapOrder),
             providesTags: [ORDERS_TAG]
@@ -34,7 +34,7 @@ export const orderApi = baseApi.injectEndpoints({
         }),
         createOrder: build.mutation<void, RequestCreateOrderDto>({
             query: (requestCreateOrderDto) => ({
-                url: '/orders/create',
+                url: '/orders',
                 method: 'POST',
                 body: requestCreateOrderDto
             }),
