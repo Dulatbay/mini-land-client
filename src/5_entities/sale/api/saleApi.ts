@@ -22,7 +22,7 @@ export const saleApi = baseApi.injectEndpoints({
         }),
         createSale: build.mutation<void, RequestCreateSaleDto>({
             query: (requestBody) => ({
-                url: '/sales/create',
+                url: '/sales',
                 method: "POST",
                 body: requestBody
             })

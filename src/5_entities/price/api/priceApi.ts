@@ -8,7 +8,7 @@ export const priceApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         allPrices: build.query<PriceModel[], void>({
             query: () => ({
-                url: `/prices/`
+                url: `/prices`
             }),
             transformResponse: (response: ResponsePriceDto[]) => response.map(mapPrice),
             providesTags: [PRICE_TAG]
@@ -22,7 +22,7 @@ export const priceApi = baseApi.injectEndpoints({
         }),
         createPrice: build.mutation<void, RequestCreatePriceDto>({
             query: (requestBody) => ({
-                url: '/prices/create',
+                url: '/prices',
                 method: "POST",
                 body: requestBody
             })
