@@ -3,8 +3,7 @@ import {useEffect, useState} from "react";
 import {useCreatePriceMutation} from "@/5_entities/price";
 import {useNavigate} from "react-router-dom";
 import {greenBg} from "@/6_shared/lib/colors.ts";
-import {toast} from "react-toastify";
-import {isAppErrorData, isCommonErrorData} from "@/6_shared/api/apiHelper.ts";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
 
 const daysOfWeek = [
@@ -31,10 +30,8 @@ export const CreatePriceForm = () => {
 
     useEffect(() => {
         if (isError) {
-            if (isAppErrorData(error))
-                toast.error(error.data.message)
-            else if (isCommonErrorData(error))
-                toast.error(error.data.error)
+            getToastMessage(error)
+            console.log(error)
         }
     }, [isError, error]);
 
