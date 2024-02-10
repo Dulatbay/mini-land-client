@@ -48,13 +48,7 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
         return false;
     }
 
-    if(((saleTime + extraTime) < 30)){
-        return false
-    }
-
-
-
-    return true
+    return ((saleTime + extraTime) >= 30);
 };
 
 
@@ -96,11 +90,11 @@ export const OrderFormCreate = () => {
 
 
     return (
-        <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
+        <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-7 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
             <div className={`w-full pb-3 flex flex-col md:justify-between items-center`}>
                 <img src={'/icons/Logo.svg'} className={`w-32 object-contain`} style={{backgroundPosition: "center"}}
                      alt={''}/>
-                <p className={`pt-3 font-medium`}>Создать заказ</p>
+                <p className={`font-medium`}>Создать заказ</p>
             </div>
             <InputCustomer customer={customer} type={type1} requestOrder={requestOrder}/>
             <InputCustomer customer={child} type={type2} requestOrder={requestOrder}/>

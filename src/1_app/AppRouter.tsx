@@ -1,4 +1,4 @@
-import {createBrowserRouter, Outlet} from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import {DirectorMainPage} from "@/2_pages/DirectorMainPage/DirectorMainPage.tsx";
 import {DirectorReportPage} from "@/2_pages/DirectorReportPage/DirectorReportPage.tsx";
 import {DirectorSalesPage} from "@/2_pages/DirectorSalesPage/DirectorSalesPage.tsx";
@@ -9,37 +9,13 @@ import {CreateSalePage} from "@/2_pages/CreateSalePage/CreateSalePage.tsx";
 import {ManagerMainPage} from "@/2_pages/ManagerMainPage/ManagerMainPage.tsx";
 import DetailCardPage from "@/2_pages/DetailCardPage/DetailCardPage.tsx";
 import {CreateOrderPage} from "@/2_pages/CreateOrderPage/CreateOrderPage.tsx";
-import {ReactNode, useContext, useEffect} from "react";
+import {useContext, useEffect} from "react";
 import KeycloakContext from "@/1_app/KeycloakContext.ts";
-import {NavBar} from "@/3_widgets/NavBar";
 import {ErrorPage} from "@/2_pages/ErrorPage/ErrorPage.tsx";
-
-const PrivateRoute = ({children}: { children: ReactNode }) => {
-    const keycloak = useContext(KeycloakContext);
-
-    const Login = () => {
-        return <button type="button" onClick={() => {
-            localStorage.removeItem("token")
-            keycloak.login();
-        }}>LOGIN</button>
-    };
-
-    return keycloak.authenticated ?
-        children
-        : <Login/>;
-};
+import {Root} from "@/1_app/Root.tsx";
 
 
-const Root = () => {
-    return <div className={'bg-[#F2F2F2] h-screen'}>
-        <PrivateRoute>
-            <NavBar/>
-            <Outlet/>
-        </PrivateRoute>
-    </div>
-}
-
-export const appRouter = () => {
+export const AppRouter = () => {
     const keycloak = useContext(KeycloakContext);
 
     useEffect(() => {
@@ -48,7 +24,7 @@ export const appRouter = () => {
         else {
             localStorage.setItem('token', keycloak.token!)
         }
-    }, [])
+    }, [keycloak])
 
     const isAdmin = keycloak.hasResourceRole("admin")
 
