@@ -1,9 +1,9 @@
 import {useContext} from "react";
-import KeycloakContext from "@/1_app/KeycloakContext.ts";
+import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
 
 export const DirectorLinks = () => {
     const keycloak = useContext(KeycloakContext)
-    
+
     return <>
         <a href="/" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Главная</a>
         <a href="/report" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Отчет</a>

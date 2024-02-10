@@ -3,7 +3,7 @@ import {selectAllPrices, useAllPricesQuery} from "@/5_entities/price";
 import {InputCustomer} from "@/4_features/InputCustomer/InputCustomer.tsx";
 import {InputOrder} from "@/4_features/InputOrder/ui/InputOrder.tsx";
 import {OrderInfoCreate} from "@/4_features/OrderInfo/ui/OrderInfoCreate.tsx";
-import {useAppDispatch, useAppSelector} from "@/1_app/hooks@deprecated.ts";
+import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
 import {RequestOrder, selectRequestOrder, setRequestOrder} from "@/5_entities/orderForm";
 import {MouseEvent} from "react";
 import {RequestCreateOrderDto, useCreateOrderMutation} from "@/5_entities/order";

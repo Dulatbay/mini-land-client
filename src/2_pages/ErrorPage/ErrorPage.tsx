@@ -5,7 +5,7 @@ export const ErrorPage = () => {
     const error = useRouteError() as ApiAppError
     console.log(error.message, error.statusCode, error.title, error.name)
     return <div className="flex items-center justify-center h-screen">
-        <div className="bg-white w-1/2">
+        <div className="w-1/2">
             <div className="flex flex-col items-center">
                 <h1 className="font-bold text-3xl text-blue-600 lg:text-6xl">
                     {error.statusCode}

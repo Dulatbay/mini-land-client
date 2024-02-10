@@ -7,7 +7,11 @@ import {DirectorStatisticsPage} from "@/2_pages/Director/DirectorStatisticsPage/
 import {DirectorPricesPage} from "@/2_pages/Director/DirectorPricesPage/DirectorPricesPage.tsx";
 import {CreatePricePage} from "@/2_pages/Director/CreatePricePage/CreatePricePage.tsx";
 import {CreateSalePage} from "@/2_pages/Director/CreateSalePage/CreateSalePage.tsx";
-import {Root} from "@/1_app/Root.tsx";
+import {Root} from "@/1_app/router/Root.tsx";
+import {DirectorMasterClassesPage} from "@/2_pages/Director/DirectorMasterClassesPage/DirectorMasterClassesPage.tsx";
+import {DirectorRoomTariffsPage} from "@/2_pages/Director/DirectorRoomTariffsPage/DirectorRoomTariffsPage.tsx";
+import {CreateRoomTariffPage} from "@/2_pages/Director/CreateRoomTariffPage/CreateRoomTariffPage.tsx";
+import {CreateMasterClassPage} from "@/2_pages/Director/CreateMasterClassPage/CreateMasterClassPage.tsx";
 
 
 export const directorRouter = createBrowserRouter([
@@ -43,6 +47,22 @@ export const directorRouter = createBrowserRouter([
             {
                 path: '/create-sale',
                 element: <CreateSalePage/>
+            },
+            {
+                path: '/master-classes',
+                element: <DirectorMasterClassesPage/>
+            },
+            {
+                path: '/create-master-class',
+                element: <CreateMasterClassPage/>
+            },
+            {
+                path: '/room-tariffs',
+                element: <DirectorRoomTariffsPage/>
+            },
+            {
+                path: '/create-room-tariff',
+                element: <CreateRoomTariffPage/>
             }
         ]
     }

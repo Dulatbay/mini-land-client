@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import KeycloakContext from "@/1_app/KeycloakContext.ts";
+import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
 import {useNavigate} from "react-router-dom";
 import {ManagerLinks} from "@/3_widgets/NavBar/ui/ManagerLinks.tsx";
 import {DirectorLinks} from "@/3_widgets/NavBar/ui/DirectorLinks.tsx";

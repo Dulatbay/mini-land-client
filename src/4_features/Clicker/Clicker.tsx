@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {useAppDispatch} from "@/1_app/hooks@deprecated.ts";
+import {useAppDispatch} from "@/1_app/hooks.ts";
 import {
     RequestOrder,
     setRequestOrder

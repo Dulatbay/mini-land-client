@@ -1,5 +1,5 @@
 import {ReactNode, useContext} from "react";
-import KeycloakContext from "@/1_app/KeycloakContext.ts";
+import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
 
 export const PrivateRoute = ({children}: { children: ReactNode }) => {
     const keycloak = useContext(KeycloakContext);

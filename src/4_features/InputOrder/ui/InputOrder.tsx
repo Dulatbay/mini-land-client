@@ -1,7 +1,7 @@
 import {Clicker} from "@/4_features/Clicker/Clicker.tsx";
 import {useAllSalesQuery} from "@/5_entities/sale";
 import {getTime} from "@/6_shared/lib/getTime.ts";
-import {useAppDispatch} from "@/1_app/hooks@deprecated.ts";
+import {useAppDispatch} from "@/1_app/hooks.ts";
 import {ChangeEvent} from "react";
 import {
     RequestOrder, SaleOrder,

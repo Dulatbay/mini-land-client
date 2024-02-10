@@ -3,7 +3,7 @@ import {ReportInfo} from "@/4_features/ReportInfo/ReportInfo.tsx";
 import {ChooseEmployeeReport} from "@/4_features/ChooseEmployee/ChooseEmployeeReport.tsx";
 import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import {selectReportByParams, setReportRequest, useLazyReportByParamQuery} from "@/5_entities/report";
-import {useAppDispatch, useAppSelector} from "@/1_app/hooks@deprecated.ts";
+import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 import {toast} from "react-toastify";
 import {greenBg} from "@/6_shared/lib/colors.ts";

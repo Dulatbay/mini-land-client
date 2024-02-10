@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import KeycloakContext from "@/1_app/KeycloakContext.ts";
+import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
 import {directorRouter} from "@/1_app/router/directorRouter.tsx";
 import {managerRouter} from "@/1_app/router/managerRouter.tsx";
 
@@ -8,7 +8,7 @@ export const AppRouter = () => {
     const keycloak = useContext(KeycloakContext);
 
     useEffect(() => {
-        if (keycloak.isTokenExpired() || !keycloak.authenticated)
+        if (keycloak.isTokenExpired())
             localStorage.removeItem('token')
         else {
             localStorage.setItem('token', keycloak.token!)

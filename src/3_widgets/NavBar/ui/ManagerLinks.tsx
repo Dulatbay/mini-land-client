@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import KeycloakContext from "@/1_app/KeycloakContext.ts";
+import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
 
 export const ManagerLinks = () => {
     const keycloak = useContext(KeycloakContext)

@@ -5,7 +5,7 @@ import {
     useReportUsernamesQuery
 } from "@/5_entities/report";
 import {ChangeEvent} from "react";
-import {useAppDispatch, useAppSelector} from "@/1_app/hooks@deprecated.ts";
+import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
 
 export const ChooseEmployeeReport = () => {
     const {data, isLoading, isError, error} = useReportUsernamesQuery();

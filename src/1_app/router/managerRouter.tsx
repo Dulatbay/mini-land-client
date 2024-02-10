@@ -1,5 +1,5 @@
 import {createBrowserRouter} from "react-router-dom";
-import {Root} from "@/1_app/Root.tsx";
+import {Root} from "@/1_app/router/Root.tsx";
 import {ErrorPage} from "@/2_pages/ErrorPage/ErrorPage.tsx";
 import {ManagerMainPage} from "@/2_pages/Manager/ManagerMainPage/ManagerMainPage.tsx";
 import DetailCardPage from "@/2_pages/Manager/DetailCardPage/DetailCardPage.tsx";

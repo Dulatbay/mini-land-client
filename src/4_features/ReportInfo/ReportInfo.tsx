@@ -1,4 +1,4 @@
-import {useAppSelector} from "@/1_app/hooks@deprecated.ts";
+import {useAppSelector} from "@/1_app/hooks.ts";
 import {selectReportByParams} from "@/5_entities/report/model/slice.ts";
 import {getTime} from "@/6_shared/lib/getTime.ts";
 
