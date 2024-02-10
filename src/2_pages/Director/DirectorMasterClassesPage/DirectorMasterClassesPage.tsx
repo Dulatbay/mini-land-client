@@ -1,12 +1,14 @@
 import {ButtonAddItem} from "@/6_shared/BaseComponents/ButtonAddItem";
 import {useNavigate} from "react-router-dom";
-import {MasterClassCard} from "@/5_entities/masterClass/ui/MasterClassCard.tsx";
+import {MasterClassList} from "@/4_features/MasterClassList/MasterClassList.tsx";
+
 
 export const DirectorMasterClassesPage = () => {
     const navigate = useNavigate()
     const createClickHandler = () => {
         navigate("/create-master-class")
     }
+
 
     return <div className={'w-[95%] m-auto'}>
         <div className={`flex justify-between items-center pt-7`}>
@@ -15,11 +17,6 @@ export const DirectorMasterClassesPage = () => {
             </div>
             <ButtonAddItem text={"Создать мастер класс"} clickHandler={createClickHandler}/>
         </div>
-        <div className={'flex flex-wrap gap-4 mt-2'}>
-            <MasterClassCard/>
-            <MasterClassCard/>
-            <MasterClassCard/>
-            <MasterClassCard/>
-        </div>
+        <MasterClassList/>
     </div>
 }
