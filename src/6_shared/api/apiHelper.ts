@@ -23,22 +23,23 @@ export class ApiAppError extends Error {
     message: string
     statusCode: number
 
-    constructor(error : any) {
+    constructor(error: unknown) {
         super();
         this.name = "Api Error"
 
-        if(isCommonErrorData(error)){
+        if (isCommonErrorData(error)) {
             this.title = error.data.error
             this.message = error.data.path
             this.statusCode = error.status
-        }
-        else if(isAppErrorData(error)){
+        } else if (isAppErrorData(error)) {
             this.title = error.data.error
             this.message = error.data.message
             this.statusCode = error.status
-        }else{
+        } else {
             this.title = "Ошибка..."
             this.message = 'Что-то пошло не так...'
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             this.statusCode = error.status
         }
 
@@ -47,15 +48,31 @@ export class ApiAppError extends Error {
 
 }
 
+function basicError(error: unknown) {
+    return typeof error === 'object' && error != null && 'data' in error
+}
+
 export function isCommonErrorData(
-    error: any
+    error: unknown
 ): error is AppErrorType<CommonErrorData> {
-    return typeof error === 'object' && error != null && 'data' in error && error["data"]!.path != undefined
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    if (basicError(error) && error.data.status == 401) return false;
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    return basicError(error) && error["data"]!.path != undefined
 }
 
 export function isAppErrorData(
-    error: any
+    error: unknown
 ): error is AppErrorType<AppErrorData> {
-    return typeof error === 'object' && error != null && 'data' in error && error["data"]!.message != undefined
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    if (basicError(error) && error.status == 401) return false;
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    return basicError(error) && error["data"]!.message != undefined
 }
 

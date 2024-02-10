@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {SessionSettings} from "@/3_widgets/OrderFormCreate/ui/SessionSettings.tsx";
 import {DaysOfWeek} from "@/4_features/DaysOfWeek/DaysOfWeek.tsx";
 import {useState} from "react";
-
+import {TimePicker} from "@/4_features/TimePicker/TimePicker.tsx";
 
 export const CreateRoomTariffPage = () => {
     const navigate = useNavigate()
@@ -24,8 +24,17 @@ export const CreateRoomTariffPage = () => {
                     <div className={`w-full 2xl:w-4/6 h-full pb-2 flex flex-col justify-center items-start gap-2`}>
                         <div className={''}>
                             <p className={'text-gray-500 text-sm mb-1'}>В какие дни работает?</p>
-                            <DaysOfWeek setSelectedDays={setSelectedDays} selectedDays={selectedDays}
-                                        selectable={true}/>
+                            <DaysOfWeek setSelectedDays={setSelectedDays} selectedDays={selectedDays}/>
+                            <div className={'flex justify-between mt-2'}>
+                                <div>
+                                    <p>Начало сеанса</p>
+                                    <TimePicker />
+                                </div>
+                                <div>
+                                    <p>Конец сеанса</p>
+                                    <TimePicker/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

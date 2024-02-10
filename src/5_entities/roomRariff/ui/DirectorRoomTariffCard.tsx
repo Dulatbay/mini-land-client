@@ -1,5 +1,5 @@
-import {daysOfWeek} from "@/6_shared/lib/daysOfWeek.ts";
 import {ButtonDelete} from "@/6_shared/BaseComponents/ButtonDelete/ButtonDelete.tsx";
+import {DaysOfWeek} from "@/4_features/DaysOfWeek/DaysOfWeek.tsx";
 
 export const DirectorRoomTariffCard = () => {
     return <div className={`bg-white gap-12 rounded-2xl flex flex-col justify-between px-4 py-5 border-2`}>
@@ -12,19 +12,7 @@ export const DirectorRoomTariffCard = () => {
         </div>
         <div className={'w-full flex justify-between items-center'}>
             <div className={'flex flex-wrap gap-1'}>
-                {
-                    daysOfWeek.map((i, j) => <div
-                        key={j}
-                        className={`w-[35px] h-[35px] 
-                                            text-center font-medium
-                                            border rounded  
-                                            flex items-center justify-center  
-                                            cursor-pointer
-                                            transition-all duration-500 `}>
-                        {i}
-                    </div>)
-
-                }
+                <DaysOfWeek selectedDays={[false, true, false, true, false, true]}/>
             </div>
             <div className={'ml-8'}>
                 <ButtonDelete showIcon={true} clickHandler={() => {
