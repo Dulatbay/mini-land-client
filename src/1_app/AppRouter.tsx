@@ -26,7 +26,9 @@ export const AppRouter = () => {
         }
     }, [keycloak])
 
-    const isAdmin = keycloak.hasResourceRole("admin")
+    console.log(keycloak.hasResourceRole("ADMIN", "miniland"))
+
+    const isAdmin = keycloak.hasResourceRole("ADMIN")
 
     if (isAdmin)
         return createBrowserRouter([
