@@ -3,15 +3,18 @@ import {DirectorTable} from "@/3_widgets/DirectorTable/DirectorTable.tsx";
 import {useReportTableQuery} from "@/5_entities/report/api/reportApi.ts";
 import {toast} from "react-toastify";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
+import {useEffect} from "react";
 
 export const DirectorMainPage = () => {
     const {data, isError, error, isLoading} = useReportTableQuery()
 
-    if (isError) {
-        // @ts-ignore
-        toast.error(`Oшибка ${error.status}`)
-        console.log(error)
-    }
+    useEffect(() => {
+        if (isError) {
+            // @ts-ignore
+            toast.error(`Oшибка ${error.status}`)
+            console.log(error)
+        }
+    }, [isError, error]);
 
     if (isLoading)
         return <Spinner/>

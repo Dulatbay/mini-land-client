@@ -26,8 +26,6 @@ export const AppRouter = () => {
         }
     }, [keycloak])
 
-    console.log(keycloak.hasResourceRole("ADMIN", "miniland"))
-
     const isAdmin = keycloak.hasResourceRole("ADMIN")
 
     if (isAdmin)
