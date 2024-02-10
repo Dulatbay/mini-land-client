@@ -1,4 +1,4 @@
-import {RoomTariffCard} from "@/5_entities/roomRariff/ui/RoomTariffCard.tsx";
+import {RoomTariffCard} from "@/5_entities/roomTariff/ui/RoomTariffCard.tsx";
 
 export const RoomTariffCardList = () => {
     return <div className={'flex flex-wrap mt-2'}>
