@@ -4,11 +4,9 @@ import {useCreatePriceMutation} from "@/5_entities/price";
 import {useNavigate} from "react-router-dom";
 import {greenBg} from "@/6_shared/lib/colors.ts";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
-import {daysOfWeek} from "@/6_shared/lib/daysOfWeek.ts";
+import {DaysOfWeek} from "@/4_features/DaysOfWeek/DaysOfWeek.tsx";
 
 
-const styleIfNonSelected = "bg-gray-50  border-gray-200 hover:bg-green-600 hover:text-white"
-const styleIfSelected = "bg-green-700 text-white"
 
 
 export const CreatePriceForm = () => {
@@ -34,13 +32,6 @@ export const CreatePriceForm = () => {
         }
         createPrice(request)
     }
-
-    const daysOfWeekSelectHandler = (index: number) => {
-        const copyOfArr = selectedDays.slice(0)
-        copyOfArr[index] = !selectedDays[index]
-        setSelectedDays(copyOfArr)
-    }
-
 
     if (isSuccess) {
         setTimeout(() => {
@@ -74,19 +65,7 @@ export const CreatePriceForm = () => {
         </div>
         <div className={'mb-8'}>
             <p className={'font-medium mb-2'}>В какие дни действует цена?</p>
-            <div className={'flex flex-wrap gap-1'}>
-                {
-                    daysOfWeek.map((i, j) => <div
-                        key={j}
-                        className={`flex items-center justify-center w-[35px] h-[35px] text-center rounded font-medium border 
-                        cursor-pointer transition-all duration-500 ${selectedDays[j] ? styleIfSelected : styleIfNonSelected}`}
-                        onClick={() => daysOfWeekSelectHandler(j)}
-                    >
-                        {i}
-                    </div>)
-
-                }
-            </div>
+            <DaysOfWeek setSelectedDays={setSelectedDays} selectedDays={selectedDays}/>
         </div>
         <div className={`w-full sm:flex justify-between gap-20`}>
             <Button
