@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material-tailwind/react": "^2.1.8",
+    "@material-tailwind/react": "^2.1.9",
     "@react-keycloak/web": "^3.4.0",
     "@reduxjs/toolkit": "^2.0.1",
     "keycloak-js": "^20.0.5",
