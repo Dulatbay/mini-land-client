@@ -10,6 +10,7 @@ export const ButtonDelete = ({showIcon, clickHandler}: props) => {
     return (
         <>
             {showIcon ? (
+                // todo: hover icon animation
                 <div className={`flex justify-center sm:justify-end w-[50px] h-[50px]`}>
                     <button className={`py-3 px-4 border border-[#FF3333] rounded hover:bg-[#666666]`}
                             onClick={clickHandler}>

@@ -2,6 +2,7 @@ import {ButtonDelete} from "@/6_shared/BaseComponents/ButtonDelete/ButtonDelete.
 import {StockCardInfo} from "@/4_features/StockCardInfo/StockCardInfo.tsx";
 import {useDisableSaleMutation} from "@/5_entities/sale";
 import {useNavigate} from "react-router-dom";
+import {getTime} from "@/6_shared/lib/getTime.ts";
 
 interface props {
     id: number,
@@ -20,12 +21,16 @@ export const StockCard = ({title, fullPrice, fullTime, id}: props) => {
 
     return (
         <div
-            className={`w-[450px] px-6 gap-10 pt-10 pb-10 flex flex-col bg-slate-700 rounded-xl shadow-md`}>
+            className={`w-[450px] p-7 gap-10  flex bg-white rounded-xl shadow-md justify-between items-end`}>
             <div>
-                <h1 className={`text-white text-[30px] md:text-[36px] lg:text-[40px] font-semibold mb-2`}>{title}</h1>
-                <StockCardInfo fullTime={fullTime} fullPrice={fullPrice}/>
+                <h1 className={`text-4xl font-semibold mb-2`}>{title}</h1>
+                <div className={`text-xl opacity-75`}>
+                    <p>Стоимость: {fullPrice}тг</p>
+                    <p>Общее время: {getTime(fullTime)}</p>
+                    {/*<p>Использование: 5 раз</p>*/}
+                </div>
             </div>
-            <ButtonDelete showIcon={false} clickHandler={deleteButtonClickHandler}/>
+            <ButtonDelete showIcon={true} clickHandler={deleteButtonClickHandler}/>
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useCreateSaleMutation} from "@/5_entities/sale";
 import {greenBg} from "@/6_shared/lib/colors.ts";
-import {toast} from "react-toastify";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
 const inputStyle = "w-full 2xl:m-0 m-1 p-3 rounded-lg focus:outline-gray-300 border-2";
 
@@ -12,8 +12,13 @@ const CreateSaleForm = () => {
     const [fullPrice, setFullPrice] = useState(0)
     const [title, setTitle] = useState("")
     const navigate = useNavigate()
+    const [createSale, {isLoading, isError, error, isSuccess}] = useCreateSaleMutation()
 
-    const [createSale] = useCreateSaleMutation()
+    useEffect(() => {
+        if (isError) {
+            getToastMessage(error)
+        }
+    }, [isError, error]);
 
     const createButtonClickHandler = () => {
         const request = {
@@ -21,18 +26,12 @@ const CreateSaleForm = () => {
             full_price: fullPrice,
             title: title
         }
-        createSale(request)
-            .catch(e => {
-                console.log(e)
-                toast.error(`Error ${e.status}`)
-            })
-            .finally(() => {
-                setTimeout(() => {
-                    window.location.reload()
-                }, 50)
-                navigate('/sales')
-            })
+        createSale(request);
     }
+
+    if(isSuccess)
+        navigate('/sales')
+
     return (
         <form
             className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
@@ -58,6 +57,7 @@ const CreateSaleForm = () => {
                 <Button
                     backgroundColor={greenBg}
                     content={"ОТПРАВИТЬ"}
+                    isLoading={isLoading}
                     onClick={createButtonClickHandler}
                 />
             </div>
