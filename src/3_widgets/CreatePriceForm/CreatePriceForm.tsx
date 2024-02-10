@@ -1,9 +1,10 @@
 import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useCreatePriceMutation} from "@/5_entities/price";
 import {useNavigate} from "react-router-dom";
-import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 import {greenBg} from "@/6_shared/lib/colors.ts";
+import {toast} from "react-toastify";
+import {isAppErrorData, isCommonErrorData} from "@/6_shared/api/apiHelper.ts";
 
 
 const daysOfWeek = [
@@ -17,16 +18,25 @@ const daysOfWeek = [
 ]
 
 const styleIfNonSelected = "bg-gray-50  border-gray-200 hover:bg-green-600 hover:text-white"
-const styleIfSelected = "bg-black text-white hover:text-red-700"
+const styleIfSelected = "bg-green-700 text-white"
 
 
 export const CreatePriceForm = () => {
     const [fullTime, setFullTime] = useState(0)
     const [fullPrice, setFullPrice] = useState(0)
-    const [loading, setLoading] = useState(false)
-    const [createPrice] = useCreatePriceMutation()
+    const [createPrice, {isLoading, isError, error, isSuccess}] = useCreatePriceMutation()
     const navigate = useNavigate()
     const [selectedDays, setSelectedDays] = useState<boolean[]>([false, false, false, false, false, false, false])
+
+
+    useEffect(() => {
+        if (isError) {
+            if (isAppErrorData(error))
+                toast.error(error.data.message)
+            else if (isCommonErrorData(error))
+                toast.error(error.data.error)
+        }
+    }, [isError, error]);
 
     const createButtonClickHandler = () => {
         const request = {
@@ -34,15 +44,7 @@ export const CreatePriceForm = () => {
             full_price: fullPrice,
             days: [1, 2, 3, 4, 5, 6, 7].filter(i => selectedDays[i - 1])
         }
-        setLoading(true)
         createPrice(request)
-            .finally(() => {
-                setLoading(false)
-                setTimeout(() => {
-                    window.location.reload()
-                }, 10)
-                navigate('/prices')
-            })
     }
 
     const daysOfWeekSelectHandler = (index: number) => {
@@ -52,11 +54,17 @@ export const CreatePriceForm = () => {
     }
 
 
-    if (loading)
-        return <Spinner/>
+    if (isSuccess) {
+        setTimeout(() => {
+            window.location.reload()
+        }, 100)
+        navigate('/prices')
+    }
+
 
     return <form
-        className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
+        className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-10 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}
+        method={"POST"}>
         <div className={`w-full pb-3 flex flex-col md:justify-between items-center`}>
             <img src={'/icons/Logo.svg'} className={`w-32 object-contain`} style={{backgroundPosition: "center"}}
                  alt={''}/>
@@ -96,6 +104,7 @@ export const CreatePriceForm = () => {
             <Button
                 backgroundColor={greenBg}
                 content={"ОТПРАВИТЬ"}
+                isLoading={isLoading}
                 onClick={createButtonClickHandler}
             />
         </div>

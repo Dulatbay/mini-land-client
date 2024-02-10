@@ -5,6 +5,8 @@ import {PrivateRoute} from "@/1_app/PrivateRoute.tsx";
 export const Root = () => {
     return <PrivateRoute>
         <NavBar/>
-        <Outlet/>
+        <div className={'mb-10'}>
+            <Outlet/>
+        </div>
     </PrivateRoute>
 }
