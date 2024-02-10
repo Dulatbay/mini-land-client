@@ -1,5 +1,5 @@
 import {OrderCardList} from "@/4_features/OrderCardList";
-import {ButtonAddItem} from "6_shared/BaseComponents/ButtonAddItem";
+import {ButtonAddItem} from "@/6_shared/BaseComponents/ButtonAddItem";
 import {useNavigate} from "react-router-dom";
 
 

@@ -1,6 +1,8 @@
 import {useContext, useState} from "react";
 import KeycloakContext from "@/1_app/KeycloakContext.ts";
 import {useNavigate} from "react-router-dom";
+import {ManagerLinks} from "@/3_widgets/NavBar/ui/ManagerLinks.tsx";
+import {DirectorLinks} from "@/3_widgets/NavBar/ui/DirectorLinks.tsx";
 
 
 export const NavBar = () => {
@@ -40,23 +42,9 @@ export const NavBar = () => {
                 <div
                     className={`${isMenuOpen ? 'block' : 'hidden'} md:flex md:items-stretch md:w-auto md:flex-row md:flex-no-wrap pr-0 md:pr-10 gap-10`}>
                     {!isDirector ? (
-                        <>
-                            <a href="/" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Управление</a>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`} onClick={() => {
-                                keycloak.logout()
-                            }}>Выйти</a>
-                        </>
+                        <ManagerLinks/>
                     ) : (
-                        <>
-                            <a href="/" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Главная</a>
-                            <a href="/report" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Отчет</a>
-                            <a href="/statistics" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Статистика</a>
-                            <a href="/prices" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Цены</a>
-                            <a href="/sales" className={`text-white p-2 block lg:inline-block lg:mt-0`}>Акции</a>
-                            <a href="#" className={`text-white p-2 block lg:inline-block lg:mt-0`} onClick={() => {
-                                keycloak.logout()
-                            }}>Выйти</a>
-                        </>
+                        <DirectorLinks/>
                     )}
                 </div>
             </div>
