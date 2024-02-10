@@ -13,7 +13,8 @@ function PriceCardList() {
     if (isError) {
         console.log(error)
 
-        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         toast.error(`Ошибка ${error.status}`)
     }
 

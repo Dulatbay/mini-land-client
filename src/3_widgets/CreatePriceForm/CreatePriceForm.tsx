@@ -4,17 +4,8 @@ import {useCreatePriceMutation} from "@/5_entities/price";
 import {useNavigate} from "react-router-dom";
 import {greenBg} from "@/6_shared/lib/colors.ts";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {daysOfWeek} from "@/6_shared/lib/daysOfWeek.ts";
 
-
-const daysOfWeek = [
-    "ПН",
-    "ВТ",
-    "СР",
-    "ЧТ",
-    "ПТ",
-    "СБ",
-    "ВС",
-]
 
 const styleIfNonSelected = "bg-gray-50  border-gray-200 hover:bg-green-600 hover:text-white"
 const styleIfSelected = "bg-green-700 text-white"
