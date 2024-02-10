@@ -8,7 +8,7 @@ export const NavBar = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const keycloak = useContext(KeycloakContext)
 
-    const isDirector = keycloak.hasResourceRole("admin")
+    const isDirector = keycloak.hasResourceRole("ADMIN")
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
