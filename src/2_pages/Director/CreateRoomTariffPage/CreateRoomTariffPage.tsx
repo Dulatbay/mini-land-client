@@ -4,6 +4,8 @@ import {SessionSettings} from "@/3_widgets/OrderFormCreate/ui/SessionSettings.ts
 import {DaysOfWeek} from "@/4_features/DaysOfWeek/DaysOfWeek.tsx";
 import {useState} from "react";
 import {TimePicker} from "@/4_features/TimePicker/TimePicker.tsx";
+import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
+import {greenBg} from "@/6_shared/lib/colors.ts";
 
 export const CreateRoomTariffPage = () => {
     const navigate = useNavigate()
@@ -28,7 +30,7 @@ export const CreateRoomTariffPage = () => {
                             <div className={'flex justify-between mt-2'}>
                                 <div>
                                     <p>Начало сеанса</p>
-                                    <TimePicker />
+                                    <TimePicker/>
                                 </div>
                                 <div>
                                     <p>Конец сеанса</p>
@@ -39,6 +41,13 @@ export const CreateRoomTariffPage = () => {
                     </div>
                 </div>
                 <SessionSettings/>
+                <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
+                    <Button
+                        backgroundColor={greenBg}
+                        content={"ОТПРАВИТЬ"}
+
+                    />
+                </div>
             </form>
         </div>
     </>
