@@ -25,7 +25,7 @@ export const ButtonDelete = ({showIcon, clickHandler}: props) => {
             ) : (
                 <button
                     onClick={clickHandler}
-                    className={`py-2 px-7 lg:py-3 lg:px-10 text-[#FF3333] text-[20px] border border-[#FF3333] rounded hover:bg-[#666666]`}>Удалить</button>
+                    className={`py-2 px-7 text-[#FF3333] text-[20px] border border-[#FF3333] rounded hover:bg-[#666666] w-full`}>Удалить</button>
             )}
         </>
     );
