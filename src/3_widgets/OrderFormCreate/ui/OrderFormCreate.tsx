@@ -5,18 +5,18 @@ import {InputOrder} from "@/4_features/InputOrder/ui/InputOrder.tsx";
 import {OrderInfoCreate} from "@/4_features/OrderInfo/ui/OrderInfoCreate.tsx";
 import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
 import {RequestOrder, selectRequestOrder, setRequestOrder} from "@/5_entities/orderForm";
-import {MouseEvent} from "react";
+import {MouseEvent, useEffect} from "react";
 import {RequestCreateOrderDto, useCreateOrderMutation} from "@/5_entities/order";
 import {getFullTime} from "@/6_shared/lib/getFullTime.ts";
 import {useNavigate} from "react-router-dom";
 import {greenBg} from "@/6_shared/lib/colors.ts";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
 const customer = "Клиент";
 const child = 'Ребенок';
 const type1 = "tel"
 const type2 = "age"
 
-// todo: connect with toatisfy react
 
 const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
     if (!order) {
@@ -24,7 +24,6 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
     }
 
     const neededProperties: (keyof RequestOrder)[] = ['child_age', 'child_name', 'parent_name'];
-
 
 
     const result = neededProperties.every(prop => {
@@ -36,17 +35,13 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
     const extraTime = ((order?.extra_time_minute ?? 0) * 60) + ((order?.extra_time_hour ?? 0) * 3600)
 
 
-    if(!result) {
+    if (!result) {
         return false;
     }
 
-
-    if(order["child_age"]! < 1 || order["child_age"]! > 15){
+    if (order["child_age"]! < 1 || order["child_age"]! > 15) {
         return false;
     }
-
-    if("parent_phone_number" in order && order["parent_phone_number"]?.includes("_"))
-        return false
 
     return ((saleTime + extraTime) >= 30);
 };
@@ -56,9 +51,8 @@ export const OrderFormCreate = () => {
     const requestOrder = useAppSelector(selectRequestOrder)
     const prices = useAppSelector(selectAllPrices)
     const dispatch = useAppDispatch()
-    const [createOrder] = useCreateOrderMutation()
-    const navigate= useNavigate()
-
+    const [createOrder, {isLoading, isError, error, isSuccess}] = useCreateOrderMutation()
+    const navigate = useNavigate()
     useAllPricesQuery()
 
 
@@ -69,11 +63,11 @@ export const OrderFormCreate = () => {
     }
 
     const sendButtonHandler = () => {
-        if(!requestOrder) {
+        if (!requestOrder) {
             console.log('error, request order is null')
             return;
         }
-        const body : RequestCreateOrderDto = {
+        const body: RequestCreateOrderDto = {
             child_age: requestOrder.child_age!,
             child_name: requestOrder.child_name!,
             parent_name: requestOrder.parent_name!,
@@ -83,11 +77,20 @@ export const OrderFormCreate = () => {
             sale_id: requestOrder.sale?.id,
         }
 
-        createOrder(body).then(()=>{
-            navigate('/')
-        })
+        createOrder(body)
     }
+    useEffect(() => {
+        if (isError)
+            getToastMessage(error)
+    }, [isError, error]);
 
+
+    if (isSuccess) {
+        setTimeout(() => {
+            window.location.reload()
+        }, 100)
+        navigate('/')
+    }
 
     return (
         <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-7 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
@@ -108,7 +111,7 @@ export const OrderFormCreate = () => {
                        onClick={isPaidCheckBoxHandler}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
-                <Button disabled={!isAvailableToSend(requestOrder)}
+                <Button disabled={!isAvailableToSend(requestOrder) || isLoading}
                         backgroundColor={greenBg}
                         content={"ОТПРАВИТЬ"}
                         onClick={sendButtonHandler}

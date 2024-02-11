@@ -2,36 +2,38 @@ import {Clicker} from "@/4_features/Clicker/Clicker.tsx";
 import {useAllSalesQuery} from "@/5_entities/sale";
 import {getTime} from "@/6_shared/lib/getTime.ts";
 import {useAppDispatch} from "@/1_app/hooks.ts";
-import {ChangeEvent} from "react";
-import {
-    RequestOrder, SaleOrder,
-    setRequestOrder
-} from "@/5_entities/orderForm";
+import {ChangeEvent, useEffect} from "react";
+import {RequestOrder, setRequestOrder} from "@/5_entities/orderForm";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 
 export const InputOrder = ({requestOrder}: { requestOrder: RequestOrder | undefined }) => {
     const {data, isLoading, isError, error} = useAllSalesQuery(true)
     const dispatch = useAppDispatch()
 
+    useEffect(() => {
+        if (isError)
+            getToastMessage(error)
+    }, [isError, error]);
 
-    if (isLoading) {
-        return "is_loading"
-    }
+    if (isLoading)
+        return <Spinner/>
 
-    if (isError) {
-        console.log(error)
-        return "error, check console"
-    }
+    if (isError)
+        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
+
+
+
 
 
     const selectSaleHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         const request = {...requestOrder} ?? {} as RequestOrder
         const sale = data![+event.target.value]
-        const saleOrder: SaleOrder = {
+        request.sale = {
             id: sale.id,
             full_price: sale.full_price,
             full_time: sale.full_time
         }
-        request.sale = saleOrder
         dispatch(setRequestOrder(request as RequestOrder))
     }
 
@@ -42,7 +44,7 @@ export const InputOrder = ({requestOrder}: { requestOrder: RequestOrder | undefi
                 {
                     data && data.length ?
                         <>
-                            <select className={`w-full p-3 rounded-lg mt-4`} onChange={selectSaleHandler}
+                            <select className={`w-full p-3 rounded-lg border-2`} onChange={selectSaleHandler}
                                     defaultValue={"none"}>
                                 <option value="none" disabled hidden>Выберите акцию</option>
                                 {
@@ -58,7 +60,7 @@ export const InputOrder = ({requestOrder}: { requestOrder: RequestOrder | undefi
 
                 }
 
-                <div className={`h-full flex flex-col items-start`}>
+                <div className={`h-full flex flex-col items-start mt-2`}>
                     <Clicker time={'Часов'} type={"hour"} requestOrder={requestOrder}/>
                     <Clicker time={'Минут'} type={"minute"} requestOrder={requestOrder}/>
                 </div>
