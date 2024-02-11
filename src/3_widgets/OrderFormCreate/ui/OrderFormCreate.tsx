@@ -11,6 +11,7 @@ import {getFullTime} from "@/6_shared/lib/getFullTime.ts";
 import {useNavigate} from "react-router-dom";
 import {greenBg} from "@/6_shared/lib/colors.ts";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {toast} from "react-toastify";
 
 const customer = "Клиент";
 const child = 'Ребенок';
@@ -64,7 +65,7 @@ export const OrderFormCreate = () => {
 
     const sendButtonHandler = () => {
         if (!requestOrder) {
-            console.log('error, request order is null')
+            toast.error("Заполните данные!")
             return;
         }
         const body: RequestCreateOrderDto = {
