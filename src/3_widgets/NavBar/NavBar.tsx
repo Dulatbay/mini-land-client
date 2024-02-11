@@ -1,121 +1,72 @@
-import {
-    Navbar,
-    MobileNav,
-    Typography,
-    Button,
-    IconButton,
-} from "@material-tailwind/react";
-import React, {useContext} from "react";
-import {directorLinks, managerLinks} from "@/3_widgets/NavBar/links.ts";
+import {useContext, useState} from "react";
 import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
+import {directorLinks, managerLinks} from "@/3_widgets/NavBar/links.ts";
 
 export const NavBar = () => {
-    const [openNav, setOpenNav] = React.useState(false);
     const keycloak = useContext(KeycloakContext)
 
-    const isDirector = keycloak.hasResourceRole("ADMIN")
-
-    const getCurrentNav = () => isDirector ? directorLinks : managerLinks
-
-    React.useEffect(() => {
-        window.addEventListener(
-            "resize",
-            () => window.innerWidth >= 960 && setOpenNav(false),
-        );
-    }, []);
+    const getLinks = () => keycloak.hasResourceRole("ADMIN") ? directorLinks : managerLinks
 
     const logoutHandler = () => keycloak.logout()
 
-    const navList = (
-        <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-            {
-                getCurrentNav().map((i, j) =>
-                    <Typography
-                        as="li"
-                        variant="small"
-                        color="blue-gray"
-                        className="p-1 text-sm font-sans"
-                        key={j}
-                    >
-                        <a href={i[0]} className="flex items-center">
-                            {i[1]}
-                        </a>
-                    </Typography>
-                )
-            }
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-        </ul>
-    );
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
-        <Navbar
-            className="h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-slate-900 border-none"
-            placeholder={""}>
-            <div className="flex items-center justify-between text-blue-gray-900">
-                <Typography
-                    as="a"
-                    href="/"
-                    className="mr-4 cursor-pointer py-1.5 font-medium"
-                >
-                    MiniLand
-                </Typography>
-                <div className="flex items-center gap-4">
-                    <div className="hidden lg:block">{navList}</div>
-                    <Button
-                        placeholder={"AAA"}
-                        variant="gradient"
-                        size="sm"
-                        className="hidden lg:inline-block text-sm font-normal"
-                        onClick={logoutHandler}
-                    >
-                        <span>Выйти</span>
-                    </Button>
-                    <IconButton
-                        placeholder={""}
-                        variant="text"
-                        className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-                        ripple={false}
-                        onClick={() => setOpenNav(!openNav)}
-                    >
-                        {openNav ? (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                className="h-6 w-6"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
+        <header>
+            <nav className="border-gray-200 px-4 lg:px-6 py-2.5 bg-gray-800">
+                <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+                    <a href="https://flowbite.com" className="flex items-center">
+                        <img src="/icons/Logo.svg" className="mr-3 h-6 sm:h-9"
+                             alt="Miniland Logo"/>
+                    </a>
+                    <div className="flex items-center lg:order-2">
+                        <button
+                            onClick={logoutHandler}
+                            className="text-white focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-gray-700 focus:outline-none focus:ring-gray-800">
+                            Выйти
+                        </button>
+                        <button
+                            onClick={toggleMobileMenu}
+                            className="inline-flex items-center p-2 ml-1 text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+                            aria-controls="mobile-menu-2"
+                            aria-expanded={isMobileMenuOpen ? "true" : "false"}
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd"
+                                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                      clipRule="evenodd"></path>
                             </svg>
-                        ) : (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
+                            <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd"
+                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                      clipRule="evenodd"></path>
                             </svg>
-                        )}
-                    </IconButton>
+                        </button>
+                    </div>
+                    <div
+                        className={`justify-between items-center w-full lg:flex lg:w-auto lg:order-1 ${isMobileMenuOpen ? '' : 'hidden'}`}
+                        id="mobile-menu-2">
+                        <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                            {
+                                getLinks().map((i, j) =>
+                                    <li key={j}>
+                                        <a href={i[0]}
+                                           className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0"
+                                           aria-current="page">{i[1]}</a>
+                                    </li>
+                                )
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <MobileNav open={openNav}>
-                {navList}
-                <Button fullWidth variant="text" size="sm" className="" placeholder={""}
-                        onClick={logoutHandler}>
-                    <span>Выйти</span>
-                </Button>
-            </MobileNav>
-        </Navbar>
+            </nav>
+        </header>
     )
 }
