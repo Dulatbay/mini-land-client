@@ -18,7 +18,8 @@ export const OrderCardList = () => {
     if (isError)
         return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
 
-
+    if(!data!.length)
+        return <div className={`w-[95%] m-auto text-gray-600`}>Активных заказов пока нет... </div>
 
     return (
         <div className={`w-full lg:w-10/12 m-auto pt-10 flex flex-wrap justify-center items-center`}>
