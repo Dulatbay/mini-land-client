@@ -49,7 +49,7 @@ export class ApiAppError extends Error {
 }
 
 function basicError(error: unknown) {
-    return typeof error === 'object' && error != null && 'data' in error
+    return typeof error === 'object' && error != null && 'data' in error && error['data'] != null && "status" in error && error["status"] != 401
 }
 
 export function isCommonErrorData(
@@ -75,4 +75,6 @@ export function isAppErrorData(
     // @ts-expect-error
     return basicError(error) && error["data"]!.message != undefined
 }
+
+
 
