@@ -11,9 +11,9 @@ import {mapDetailOrder} from "@/5_entities/order/lib/mapDetailOrder.ts";
 
 export const orderApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-        allOrders: build.query<OrderCardModel[], void>({
+        allOrdersToday: build.query<OrderCardModel[], void>({
             query: () => ({
-                url: '/orders'
+                url: '/orders/today'
             }),
             transformResponse: (response: OrderCardDto[]) => response.map(mapOrder),
             providesTags: [ORDERS_TAG]
@@ -44,4 +44,4 @@ export const orderApi = baseApi.injectEndpoints({
     })
 })
 
-export const {useAllOrdersQuery, useCreateOrderMutation, useLazyGetOrderByIdQuery, useFinishOrderByIdMutation} = orderApi
+export const {useAllOrdersTodayQuery, useCreateOrderMutation, useLazyGetOrderByIdQuery, useFinishOrderByIdMutation} = orderApi

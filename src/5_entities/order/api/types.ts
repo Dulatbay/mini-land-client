@@ -9,7 +9,9 @@ export interface OrderCardDto {
     is_finished: boolean;
     remain_time: number;
     is_paid: boolean;
+    author_name: string;
 }
+
 
 export interface DetailOrderDto {
     id: number;

@@ -12,6 +12,7 @@ export function mapOrder(dto: OrderCardDto): OrderCardModel {
         is_paid: dto.is_paid,
         is_finished: dto.is_finished,
         entered_time: dto.entered_time,
-        remain_time: dto.remain_time
+        remain_time: dto.remain_time,
+        author_name: dto.author_name
     }
 }
