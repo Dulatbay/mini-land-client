@@ -23,7 +23,7 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
         return false;
     }
 
-    const neededProperties: (keyof RequestOrder)[] = ['child_age', 'child_name', 'parent_name', 'parent_phone_number'];
+    const neededProperties: (keyof RequestOrder)[] = ['child_age', 'child_name', 'parent_name'];
 
 
 
@@ -40,13 +40,13 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
         return false;
     }
 
-    if(order["parent_phone_number"]?.includes("_")){
-        return false
-    }
 
     if(order["child_age"]! < 1 || order["child_age"]! > 15){
         return false;
     }
+
+    if("parent_phone_number" in order && order["parent_phone_number"]?.includes("_"))
+        return false
 
     return ((saleTime + extraTime) >= 30);
 };
