@@ -11,9 +11,11 @@ export const ManagerMainPage = () => {
 
     return (
         <div>
-            <div className={`w-full flex justify-between items-center md:pr-24 md:pl-24 pt-7 flex-wrap pl-4 pr-4`}>
-                {/*<OrdersFilter/>*/}
-                <ButtonAddItem text={"Создать заказ"} clickHandler={createOrderClickHandler}/>
+            <div className={`w-[95%] flex justify-between items-center m-auto pt-7`}>
+                <div className={`text-[24px] md:text-[30px]`}>
+                    Ваши заказы
+                </div>
+                <ButtonAddItem text={"Создать цену"} clickHandler={createOrderClickHandler}/>
             </div>
             <OrderCardList/>
         </div>
