@@ -1,13 +1,15 @@
 import {PieChart} from "@/4_features/PieChart/PieChart.tsx";
 import {DateRange} from "@/6_shared/BaseComponents/DateRange/DateRange.tsx";
 import {RateTypeSelector} from "@/3_widgets/RateTypeSelector/RateTypeSelector.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import {greenBg, redBg} from "@/6_shared/lib/colors.ts";
 import {
     useCreateProfitMutation,
     useLazyReportProfitsByParamsQuery
 } from "@/5_entities/report";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 
 const expense = "Расход"
 const income = "Доход"
@@ -40,14 +42,17 @@ export const PieChartContainer = () => {
     }
 
 
-    if (result.isError) {
-        console.log(result.error)
-        return "error"
-    }
+    useEffect(() => {
+        if (result.isError)
+            getToastMessage(result.error)
+    }, [result]);
 
     if (result.isLoading) {
-        return "loading"
+        return <Spinner/>
     }
+
+    if (result.isError)
+        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
 
     return <>
         <div

@@ -5,8 +5,9 @@ import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import {selectReportByParams, setReportRequest, useLazyReportByParamQuery} from "@/5_entities/report";
 import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
-import {toast} from "react-toastify";
 import {greenBg} from "@/6_shared/lib/colors.ts";
+import {useEffect} from "react";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
 export const DirectorReportForm = () => {
 
@@ -24,21 +25,23 @@ export const DirectorReportForm = () => {
         fetchReport(request)
     }
 
+    useEffect(() => {
+        if (result.isError)
+            getToastMessage(result.error)
+    }, [result]);
+
     if (result.isLoading)
         return <Spinner/>
 
-    if (result.isError) {
-        console.log(result.error)
-        // @ts-ignore
-        toast.error(`Ошибка ${result.error.status}`)
-    }
+    if(result.isError)
+        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
 
     return (
         <form
             className={`w-5/6 md:w-2/4 2xl:w-1/3 p-6 sm:p-14 sm:pt-12 sm:pb-12 mt-14 sm:mt-28 
             m-auto 
             flex flex-col gap-10
-            text-[14px] sm:text-[20px]  
+            text-[14px] sm:text-[20px]      
             rounded-3xl bg-white border-2`}>
             <DateRange onChange={dateChangeTrigger}/>
             <ChooseEmployeeReport/>

@@ -18,6 +18,9 @@ export const DirectorMainPage = () => {
     if (isLoading)
         return <Spinner/>
 
+    if (isError)
+        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
+
     return (
         <div>
             <OrderCount ordersCount={data?.orders_count ?? 0}/>

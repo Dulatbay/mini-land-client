@@ -4,8 +4,9 @@ import {
     useLazyReportByParamQuery,
     useReportUsernamesQuery
 } from "@/5_entities/report";
-import {ChangeEvent} from "react";
+import {ChangeEvent, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
 export const ChooseEmployeeReport = () => {
     const {data, isLoading, isError, error} = useReportUsernamesQuery();
@@ -13,15 +14,17 @@ export const ChooseEmployeeReport = () => {
     const reportRequest = useAppSelector(selectReportByParams)?.request
     const dispatch = useAppDispatch();
 
+    useEffect(() => {
+        if (isError)
+            getToastMessage(error)
+    }, [error, isError]);
+
 
     if (isLoading)
         return "loading"
 
-    if (isError) {
-        console.log(error)
-        return "error"
-    }
-
+    if(isError)
+        return <p>Что-то пошло не так</p>
 
     const selectEmployeeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         const request = {

@@ -7,6 +7,7 @@ import {getBackgroundColorByOrderInfo} from "@/6_shared/lib/getBackgroundColorBy
 import React, {useEffect, useState} from "react";
 import {useFinishOrderByIdMutation, useLazyGetOrderByIdQuery} from "@/5_entities/order";
 import {getBorderColorByOrderInfo} from "@/6_shared/lib/getBorderColorByOrderInfo.ts";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
 
 export const OrderDetailInfo = () => {
@@ -17,6 +18,16 @@ export const OrderDetailInfo = () => {
     const [updateOrder] = useFinishOrderByIdMutation()
     const navigate = useNavigate()
 
+    useEffect(() => {
+        setIsPaid(data?.is_paid ?? false)
+    }, [data])
+
+    useEffect(() => {
+        if (isError)
+            getToastMessage(error)
+    }, [isError, error]);
+
+
 
     if (id && !isNaN(+id) && !isLoading && result.status === 'uninitialized') {
         trigger(+id)
@@ -24,19 +35,15 @@ export const OrderDetailInfo = () => {
         return "Not Found"
     }
 
-    useEffect(() => {
-        setIsPaid(data?.is_paid ?? false)
-    }, [data])
 
 
     if (isLoading) {
         return "loading"
     }
 
-    if (isError) {
-        console.log(error)
-        return "error,check console"
-    }
+    if (isError)
+        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
+
 
     const isPaidCheckBoxHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsPaid(event.target.checked)

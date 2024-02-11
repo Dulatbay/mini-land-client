@@ -1,28 +1,23 @@
 import {OrderCard, useAllOrdersQuery} from "@/5_entities/order";
+import {useEffect} from "react";
+import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 
-// const exampleRecord: OrderCardModel = {
-//     id: 1,
-//     child_name: "Alice Doe",
-//     parent_name: "John Doe",
-//     entered_time: "02:50",
-//     full_time: 3600,
-//     full_price: 2500.0,
-//     age: 5,
-//     is_finished: false,
-//     remain_time: -6043,
-//     is_paid: false
-// };
 export const OrderCardList = () => {
     const {data, isLoading, isError, error} = useAllOrdersQuery()
+
+    useEffect(() => {
+        if (isError)
+            getToastMessage(error)
+    }, [isError, error]);
+
 
     if(isLoading){
         return "Loading"
     }
 
-    if(isError){
-        console.log(error)
-        return "error, check console"
-    }
+    if (isError)
+        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
+
 
 
     return (
