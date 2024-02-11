@@ -3,7 +3,6 @@ import {ApiAppError} from "@/6_shared/api/apiHelper.ts";
 
 export const ErrorPage = () => {
     const error = useRouteError() as ApiAppError
-    console.log(error.message, error.statusCode, error.title, error.name)
     return <div className="flex items-center justify-center h-screen">
         <div className="w-1/2">
             <div className="flex flex-col items-center">
@@ -16,15 +15,16 @@ export const ErrorPage = () => {
                     {error.statusCode != 404 ? error.message : 'Страница, на которую вы пытаетесь обратиться, не существует.'}
                 </h6>
 
-                <p className="mb-4 text-center text-gray-500 md:text-lg">
+                <p className="mb-4 text-center md:text-lg">
                     Попробуйте попытку позже
+                    <p className={'text-gray-500 '}>Возможно вы переавторизовались, обновите страничку кнопкой снизу</p>
                 </p>
 
                 <Link
                     to="/"
                     className="px-5 py-2 rounded-md text-blue-100 bg-blue-600 hover:bg-blue-700"
                 >
-                    Go home
+                    Назад домой
                 </Link>
             </div>
         </div>
