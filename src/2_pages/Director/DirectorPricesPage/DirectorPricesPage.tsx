@@ -1,4 +1,4 @@
-import PriceCardList from "@/3_widgets/PriceCardList/PriceCardList.tsx";
+import PriceCardList from "@/4_features/PriceCardList/PriceCardList.tsx";
 import DirectorPricesHeader from "@/3_widgets/DirectorPricesHeader/DirectorPricesHeader.tsx";
 
 

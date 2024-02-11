@@ -15,7 +15,10 @@ export const ManagerMainPage = () => {
                 <div className={`text-[24px] md:text-[30px]`}>
                     Ваши заказы
                 </div>
-                <ButtonAddItem text={"Создать цену"} clickHandler={createOrderClickHandler}/>
+                <div>
+
+                    <ButtonAddItem text={"Создать цену"} clickHandler={createOrderClickHandler}/>
+                </div>
             </div>
             <OrderCardList/>
         </div>
