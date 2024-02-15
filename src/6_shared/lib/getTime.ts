@@ -1,5 +1,4 @@
 export const getTime = (seconds: number) => {
-
     let result = ""
     const h = Math.floor(seconds / 3600)
     if (h != 0) {
