@@ -106,7 +106,7 @@ export const OrderFormCreate = () => {
             <OrderInfoCreate requestOrder={requestOrder} prices={prices}/>
             <label className={""}>
                 <span className={"mr-1"}>
-                    Товар оплачен:
+                    Заказ оплачен:
                 </span>
                 <input type="checkbox"
                        onClick={isPaidCheckBoxHandler}/>

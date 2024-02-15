@@ -2,9 +2,9 @@ import {useAllMasterClassesQuery} from "@/5_entities/masterClass/api/masterClass
 import {useEffect} from "react";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
-import {MasterClassCard} from "@/5_entities/masterClass/ui/MasterClassCard.tsx";
+import {DirectorMasterClassCard} from "@/5_entities/masterClass/ui/DirectorMasterClassCard.tsx";
 
-export const MasterClassList = () => {
+export const DirectorMasterClassList = () => {
     const {data, isSuccess, isError, isLoading, error} = useAllMasterClassesQuery(true)
     useEffect(() => {
         if (isError)
@@ -15,10 +15,10 @@ export const MasterClassList = () => {
     if (isLoading)
         return <Spinner/>
 
-    return <div className={'w-[95%] m-auto flex flex-wrap gap-2'}>
+    return <div className={'flex flex-wrap gap-2'}>
         {
             isSuccess ?
-                data!.length ? data!.map(i => <MasterClassCard isAbleToAdd={true} {...i} key={i.id}/>) :
+                data!.length ? data!.map(i => <DirectorMasterClassCard {...i} key={i.id}/>) :
                     <p className={'text-gray-800'}>Создай первый мастер класс</p>
                 : <p>Не удалось получить данные</p>
         }

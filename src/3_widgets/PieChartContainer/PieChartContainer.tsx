@@ -17,8 +17,15 @@ export const PieChartContainer = () => {
     const [selected, setSelected] = useState(income)
     const [reasonProfit, setReasonProfit] = useState("")
     const [valueProfit, setValueProfit] = useState(0)
-    const [createProfit] = useCreateProfitMutation()
+    const [createProfit, createProfitResult] = useCreateProfitMutation()
     const [fetchProfitsProfit, result] = useLazyReportProfitsByParamsQuery()
+
+    useEffect(() => {
+        if (createProfitResult.isError)
+            getToastMessage(createProfitResult.error)
+        if (result.isSuccess)
+            window.location.reload()
+    }, [createProfitResult]);
 
     const createButtonClickHandler = () => {
         const requestBody = {
@@ -26,11 +33,7 @@ export const PieChartContainer = () => {
             profit: valueProfit,
             is_expense: selected == expense
         }
-        createProfit(requestBody).finally(() =>
-            setTimeout(() => {
-                window.location.reload()
-            }, 50)
-        )
+        createProfit(requestBody)
     }
 
     const dateChangeHandler = (start_date: Date, end_date: Date) => {

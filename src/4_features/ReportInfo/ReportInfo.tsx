@@ -1,14 +1,17 @@
-import {useAppSelector} from "@/1_app/hooks.ts";
-import {selectReportByParams} from "@/5_entities/report/model/slice.ts";
 import {getTime} from "@/6_shared/lib/getTime.ts";
 
-export const ReportInfo = () => {
-    const report = useAppSelector(selectReportByParams)
+interface Props {
+    ordersCount: number,
+    totalTime: number,
+    profit: number,
+}
+
+export const ReportInfo = (response: Props) => {
     return (
         <div className={`text-[12px] sm:text-[20px] p-6 border-2 rounded-2xl`}>
-            <p>Заказов: {report?.response.ordersCount}</p>
-            <p>Прибыль: {report?.response.profit}</p>
-            <p>Общее время: {getTime(report?.response.totalTime)}</p>
+            <p>Заказов: {response.ordersCount}</p>
+            <p>Прибыль: {response.profit}</p>
+            <p>Общее время: {getTime(response.totalTime)}</p>
         </div>
     );
 };

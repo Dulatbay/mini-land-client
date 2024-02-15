@@ -28,6 +28,17 @@ export const masterClassApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: requestBody
             })
+        }),
+        addToOrder: build.mutation<void, { masterClassId: number, orderId: number }>({
+            query: ({masterClassId, orderId}) => ({
+                url: `/master-classes/${masterClassId}/add-to-order/${orderId}`,
+                method: "POST"
+            })
+        }),
+        getMasterClassesByOrder: build.query<CardMasterClassDto[], number>({
+            query: (orderId) => ({
+                url: `/orders/${orderId}/master-classes`,
+            })
         })
     })
 })
@@ -36,6 +47,8 @@ export const masterClassApi = baseApi.injectEndpoints({
 export const {
     useAllMasterClassesQuery,
     useGetMasterClassByIdQuery,
+    useAddToOrderMutation,
     useDeleteMasterClassByIdMutation,
-    useCreateMasterClassMutation
+    useCreateMasterClassMutation,
+    useLazyGetMasterClassesByOrderQuery
 } = masterClassApi

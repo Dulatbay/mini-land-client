@@ -30,7 +30,9 @@ export const OrderCardList = () => {
         let inProcess = false
 
         if (requestParams.inProcess)
-            inProcess = order.remain_time >= 0
+            inProcess = order.remain_time >= 0 && !order.is_finished
+
+
 
 
         return (order.is_paid == requestParams.paid

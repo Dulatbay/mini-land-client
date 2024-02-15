@@ -9,5 +9,6 @@ export const directorLinks = [
 ]
 export const managerLinks = [
     ["/", "Заказ"],
-    ["/room-reservation", "Бронь комнаты"],
+    ["/room-tariffs", "Бронь комнаты"],
+    ['/room-orders', "Активные комнаты"]
 ]

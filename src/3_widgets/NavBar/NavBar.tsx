@@ -7,7 +7,10 @@ export const NavBar = () => {
 
     const getLinks = () => keycloak.hasResourceRole("ADMIN") ? directorLinks : managerLinks
 
-    const logoutHandler = () => keycloak.logout()
+    const logoutHandler = () => {
+        localStorage.removeItem('token')
+        keycloak.logout()
+    }
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 

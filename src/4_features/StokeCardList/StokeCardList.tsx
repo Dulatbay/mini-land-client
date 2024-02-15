@@ -28,7 +28,11 @@ function StokeCardList() {
         <div className={`w-[95%] flex gap-20 m-auto`}>
             {
                 data!.map(sale =>
-                    <StockCard title={sale.title} fullTime={sale.full_time} fullPrice={sale.full_price} id={sale.id}/>
+                    <StockCard title={sale.title}
+                               fullTime={sale.full_time}
+                               fullPrice={sale.full_price}
+                               id={sale.id}
+                               key={sale.id}/>
                 )
             }
         </div>

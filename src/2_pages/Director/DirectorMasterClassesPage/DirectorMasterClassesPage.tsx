@@ -1,6 +1,6 @@
 import {ButtonAddItem} from "@/6_shared/BaseComponents/ButtonAddItem";
 import {useNavigate} from "react-router-dom";
-import {MasterClassList} from "@/4_features/MasterClassList/MasterClassList.tsx";
+import {DirectorMasterClassList} from "@/4_features/DirectorMasterClassList/DirectorMasterClassList.tsx";
 
 
 export const DirectorMasterClassesPage = () => {
@@ -17,6 +17,6 @@ export const DirectorMasterClassesPage = () => {
             </div>
             <ButtonAddItem text={"Создать мастер класс"} clickHandler={createClickHandler}/>
         </div>
-        <MasterClassList/>
+        <DirectorMasterClassList/>
     </div>
 }

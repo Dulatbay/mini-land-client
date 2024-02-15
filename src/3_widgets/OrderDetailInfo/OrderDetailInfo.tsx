@@ -8,6 +8,7 @@ import React, {useEffect, useState} from "react";
 import {useFinishOrderByIdMutation, useLazyGetOrderByIdQuery} from "@/5_entities/order";
 import {getBorderColorByOrderInfo} from "@/6_shared/lib/getBorderColorByOrderInfo.ts";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 
 
 export const OrderDetailInfo = () => {
@@ -23,10 +24,11 @@ export const OrderDetailInfo = () => {
     }, [data])
 
     useEffect(() => {
-        if (isError)
+        if (isError) {
             getToastMessage(error)
+            navigate('/orders')
+        }
     }, [isError, error]);
-
 
 
     if (id && !isNaN(+id) && !isLoading && result.status === 'uninitialized') {
@@ -36,13 +38,9 @@ export const OrderDetailInfo = () => {
     }
 
 
-
     if (isLoading) {
-        return "loading"
+        return <Spinner/>
     }
-
-    if (isError)
-        return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
 
 
     const isPaidCheckBoxHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +52,7 @@ export const OrderDetailInfo = () => {
     }
 
     if (!data) {
-        return "Не удалось найти"
+        return <p className={'text-gray-700'}>Не удалось найти</p>
     }
 
     return (
@@ -65,6 +63,19 @@ export const OrderDetailInfo = () => {
                      alt={''}/>
                 <p className={`text-white pt-3`}>Информация о заказе</p>
             </div>
+            <Button content={"Добавить мастер класс ->"}
+                    backgroundColor={"bg-green-700"}
+                    onClick={() => {
+                        navigate(`/master-classes/${id}`)
+                    }}
+            />
+            <Button content={"Посмотреть добавленные ->"}
+                    color={"text-gray-700"}
+                    border={"border rounded mt-2"}
+                    onClick={() => {
+                        navigate(`/orders/${id}/master-classes`)
+                    }}
+            />
             <InfoParentDetail parentName={data.parent_name} parentPhoneNumber={data.parent_phone_number}/>
             <InfoChildDetail childName={data.child_name} childAge={data.child_age}/>
             <TimeWithSaleLabel extraTime={data.extra_time} sale={data.sale} fullTime={data.full_time}
@@ -74,7 +85,8 @@ export const OrderDetailInfo = () => {
                 <span className={"ml-1"}>
                     Заказ оплачен:
                 </span>
-                <input type="checkbox" onChange={isPaidCheckBoxHandler} defaultChecked={data.is_paid} disabled={data.is_paid}/>
+                <input type="checkbox" onChange={isPaidCheckBoxHandler} defaultChecked={data.is_paid}
+                       disabled={data.is_paid}/>
             </label>
             <div className={`w-full sm:flex justify-between pt-6`}>
                 {

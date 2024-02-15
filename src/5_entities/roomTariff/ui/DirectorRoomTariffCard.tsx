@@ -43,7 +43,7 @@ export const DirectorRoomTariffCard = ({id, started_time, ended_time, first_pric
         <div className={'w-full flex  justify-between'}>
             <p className={'text-xl'}>{started_time}-{ended_time}</p>
             <div className={`text-right`}>
-                <p className={'text-xl leading-none'}>{first_price}</p>
+                <p className={'text-xl leading-none'}>{first_price} тг</p>
                 <p>Цена до {max_child} детей</p>
             </div>
         </div>

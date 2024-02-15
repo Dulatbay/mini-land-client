@@ -11,7 +11,6 @@ export const DirectorMainPage = () => {
     useEffect(() => {
         if (isError) {
             getToastMessage(error)
-            console.log(error)
         }
     }, [isError, error]);
 

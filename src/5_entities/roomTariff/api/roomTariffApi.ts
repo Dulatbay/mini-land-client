@@ -1,5 +1,9 @@
 import {baseApi} from "@/6_shared/api/baseApi.ts";
-import {CardRoomTariffDto, RequestCreateTariffDto} from "@/5_entities/roomTariff/model/types.ts";
+import {
+    CardRoomTariffDto,
+    DetailRoomTariffDto,
+    RequestCreateTariffDto
+} from "@/5_entities/roomTariff/model/types.ts";
 
 export const roomTariffApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -11,7 +15,7 @@ export const roomTariffApi = baseApi.injectEndpoints({
                 ]
             })
         }),
-        getRoomTariffById: build.query<CardRoomTariffDto, number>({
+        getRoomTariffById: build.query<DetailRoomTariffDto, number>({
             query: (id) => ({
                 url: `/room-tariffs/${id}`
             })
@@ -28,14 +32,14 @@ export const roomTariffApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: reqBody
             })
-        }),
+        })
     })
 })
 
 
 export const {
     useAllRoomTariffsQuery,
-    useGetRoomTariffByIdQuery,
+    useLazyGetRoomTariffByIdQuery,
     useCreateRoomTariffMutation,
-    useDeleteRoomTariffByIdMutation
+    useDeleteRoomTariffByIdMutation,
 } = roomTariffApi

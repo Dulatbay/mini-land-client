@@ -49,7 +49,7 @@ function TimeWithSaleLabel({sale, extraTime, enteredTime, remainTime, fullTime, 
                         <span className={`text-white`}> Прошло времени: {getTime(remainTime * -1)}</span>
                 }
                 <span className={`text-white`}>Общее время: {getTime(fullTime)}</span>
-                <span className={'text-white'}>Общая стоимость: {fullPrice}</span>
+                <span className={'text-white'}>Общая стоимость: {fullPrice} тг</span>
                 <span className={'text-white'}>Заказ принял: {authorName}</span>
             </div>
         </div>

@@ -40,7 +40,7 @@ export const PriceCard = (price: Props) => {
         <div className={`flex px-7 py-7 justify-between rounded-xl bg-white border-2`}>
             <div className={`flex flex-col justify-center`}>
                 <p>Время: {getTime(price.fullTime)}</p>
-                <p>Цена: {price.fullTime}</p>
+                <p>Цена: {price.fullPrice} тг</p>
                 <div className={'mt-7'}>
                     <p className={'mb-1 text-sm text-gray-700'}>В какие дни действует цена?</p>
                     <div className={'flex flex-wrap gap-1'}>
