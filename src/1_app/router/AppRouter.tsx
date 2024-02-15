@@ -8,11 +8,7 @@ export const AppRouter = () => {
     const keycloak = useContext(KeycloakContext);
 
     useEffect(() => {
-        if (keycloak.isTokenExpired())
-            localStorage.removeItem('token')
-        else {
-            localStorage.setItem('token', keycloak.token!)
-        }
+        localStorage.setItem('token', keycloak.token!)
     }, [keycloak])
 
     const isAdmin = keycloak.hasResourceRole("ADMIN")
