@@ -1,19 +1,20 @@
 import {DateRange} from "@/6_shared/BaseComponents/DateRange/DateRange.tsx";
 import {ReportInfo} from "@/4_features/ReportInfo/ReportInfo.tsx";
 import {ChooseEmployeeReport} from "@/4_features/ChooseEmployee/ChooseEmployeeReport.tsx";
-import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import {selectReportByParams, setReportRequest, useLazyReportByParamQuery} from "@/5_entities/report";
 import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
-import {greenBg} from "@/6_shared/lib/colors.ts";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {greenBg} from "@/6_shared/lib/colors.ts";
 
 export const DirectorReportForm = () => {
 
     const report = useAppSelector(selectReportByParams)
     const dispatch = useAppDispatch()
     const [fetchReport, result] = useLazyReportByParamQuery()
+    const [curStartDate, setCurStartDate] = useState(new Date())
+    const [curEndDate, setCurEndDate] = useState(new Date())
 
     const dateChangeTrigger = (startDate: Date, endDate: Date) => {
         const request = {
@@ -23,6 +24,9 @@ export const DirectorReportForm = () => {
         }
         dispatch(setReportRequest(request))
         fetchReport(request)
+        setCurStartDate(startDate)
+        setCurEndDate(endDate)
+
     }
 
     useEffect(() => {
@@ -33,7 +37,7 @@ export const DirectorReportForm = () => {
     if (result.isLoading)
         return <Spinner/>
 
-    if(result.isError)
+    if (result.isError)
         return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
 
     return (
@@ -44,9 +48,11 @@ export const DirectorReportForm = () => {
             text-[14px] sm:text-[20px]      
             rounded-3xl bg-white border-2`}>
             <DateRange onChange={dateChangeTrigger}/>
-            <ChooseEmployeeReport/>
-            <ReportInfo/>
-            <Button content={'СКАЧАТЬ ОТЧЕТ'} backgroundColor={greenBg}/>
+            <ChooseEmployeeReport {...report.request}/>
+            <ReportInfo {...report.response}/>
+            <a className={`${greenBg} w-full text-center p-2 rounded-lg text-white disabled:opacity-60`}
+               href={`${import.meta.env.VITE_API_URL}/reports/excel?start_date=${curStartDate.toLocaleDateString()}&end_date=${curEndDate.toLocaleDateString()}`}
+               download="proposed_file_name">СКАЧАТЬ ОТЧЕТ</a>
         </form>
     );
 };

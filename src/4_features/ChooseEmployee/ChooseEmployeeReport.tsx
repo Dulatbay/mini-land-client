@@ -1,17 +1,22 @@
 import {
-    selectReportByParams,
     setReportRequest,
     useLazyReportByParamQuery,
     useReportUsernamesQuery
 } from "@/5_entities/report";
 import {ChangeEvent, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
+import {useAppDispatch} from "@/1_app/hooks.ts";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
+import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 
-export const ChooseEmployeeReport = () => {
+interface Props {
+    username?: string,
+    start_date?: string,
+    end_date?: string
+}
+
+export const ChooseEmployeeReport = (reportRequest: Props) => {
     const {data, isLoading, isError, error} = useReportUsernamesQuery();
     const [getReport] = useLazyReportByParamQuery()
-    const reportRequest = useAppSelector(selectReportByParams)?.request
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -21,15 +26,15 @@ export const ChooseEmployeeReport = () => {
 
 
     if (isLoading)
-        return "loading"
+        return <Spinner/>
 
-    if(isError)
+    if (isError)
         return <p>Что-то пошло не так</p>
 
     const selectEmployeeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         const request = {
-            start_date: reportRequest?.start_date!,
-            end_date: reportRequest?.end_date!,
+            start_date: reportRequest!.start_date!,
+            end_date: reportRequest!.end_date!,
             username: data![+event.target.value]
         }
         dispatch(setReportRequest(request))
