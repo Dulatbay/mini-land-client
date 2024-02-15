@@ -1,8 +1,4 @@
-import {
-    setReportRequest,
-    useLazyReportByParamQuery,
-    useReportUsernamesQuery
-} from "@/5_entities/report";
+import {setReportRequest, useLazyReportByParamQuery, useReportUsernamesQuery} from "@/5_entities/report";
 import {ChangeEvent, useEffect} from "react";
 import {useAppDispatch} from "@/1_app/hooks.ts";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";

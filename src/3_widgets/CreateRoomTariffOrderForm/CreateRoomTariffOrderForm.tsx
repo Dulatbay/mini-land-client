@@ -3,9 +3,7 @@ import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {MouseEvent, useEffect, useState} from "react";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
-import {
-    useLazyGetRoomTariffByIdQuery
-} from "@/5_entities/roomTariff/api/roomTariffApi.ts";
+import {useLazyGetRoomTariffByIdQuery} from "@/5_entities/roomTariff/api/roomTariffApi.ts";
 import {RoomTariffCard} from "@/5_entities/roomTariff/ui/RoomTariffCard.tsx";
 import {CommonInput} from "@/6_shared/BaseComponents/CommonInput/CommonInput.tsx";
 import InputMask from "react-input-mask";

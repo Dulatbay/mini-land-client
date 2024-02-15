@@ -1,7 +1,6 @@
 import {Bounce, ToastContainer} from "react-toastify";
 
 
-
 function App() {
     return (
         <>

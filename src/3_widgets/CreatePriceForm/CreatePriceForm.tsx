@@ -7,8 +7,6 @@ import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 import {DaysOfWeek} from "@/4_features/DaysOfWeek/DaysOfWeek.tsx";
 
 
-
-
 export const CreatePriceForm = () => {
     const [fullTime, setFullTime] = useState(0)
     const [fullPrice, setFullPrice] = useState(0)

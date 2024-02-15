@@ -1,5 +1,4 @@
 import {ButtonDelete} from "@/6_shared/BaseComponents/ButtonDelete/ButtonDelete.tsx";
-import {StockCardInfo} from "@/4_features/StockCardInfo/StockCardInfo.tsx";
 import {useDisableSaleMutation} from "@/5_entities/sale";
 import {useNavigate} from "react-router-dom";
 import {getTime} from "@/6_shared/lib/getTime.ts";

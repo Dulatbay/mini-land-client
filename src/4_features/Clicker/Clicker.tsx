@@ -1,9 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useAppDispatch} from "@/1_app/hooks.ts";
-import {
-    RequestOrder,
-    setRequestOrder
-} from "@/5_entities/orderForm";
+import {RequestOrder, setRequestOrder} from "@/5_entities/orderForm";
 
 interface props {
     time: string,

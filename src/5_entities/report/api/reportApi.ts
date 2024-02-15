@@ -1,14 +1,12 @@
 import {baseApi} from "@/6_shared/api/baseApi.ts";
 import {mapToMainReport} from "@/5_entities/report/lib/mapToMainReport.ts";
-import {
-    TableReportModel,
-    ReportByParamsModel
-} from "@/5_entities/report/model/types.ts";
+import {ReportByParamsModel, TableReportModel} from "@/5_entities/report/model/types.ts";
 import {
     RequestCreateProfitDto,
     RequestProfitsReportParams,
     RequestReportByParamsDto,
-    ResponseDirectorMainReportDto, ResponseProfitsReportDto,
+    ResponseDirectorMainReportDto,
+    ResponseProfitsReportDto,
     ResponseReportByParamsDto
 } from "@/5_entities/report/api/types.ts";
 import {mapToReportByParams} from "@/5_entities/report/lib/mapToReportByParams.ts";

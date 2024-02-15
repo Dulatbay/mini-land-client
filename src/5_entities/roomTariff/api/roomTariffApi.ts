@@ -1,9 +1,5 @@
 import {baseApi} from "@/6_shared/api/baseApi.ts";
-import {
-    CardRoomTariffDto,
-    DetailRoomTariffDto,
-    RequestCreateTariffDto
-} from "@/5_entities/roomTariff/model/types.ts";
+import {CardRoomTariffDto, DetailRoomTariffDto, RequestCreateTariffDto} from "@/5_entities/roomTariff/model/types.ts";
 
 export const roomTariffApi = baseApi.injectEndpoints({
     endpoints: (build) => ({

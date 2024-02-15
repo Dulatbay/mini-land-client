@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
+import {configureStore} from '@reduxjs/toolkit'
+import {setupListeners} from '@reduxjs/toolkit/query'
 import {baseApi} from "@/6_shared/api/baseApi.ts";
 import {rootReducer} from "@/1_app/rootReducer.ts";
 

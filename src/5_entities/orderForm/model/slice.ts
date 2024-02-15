@@ -2,7 +2,6 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {OrderFormSliceState, RequestOrder} from "@/5_entities/orderForm/model/types.ts";
 
 
-
 const initialState: OrderFormSliceState = {
     requestOrder: undefined
 }

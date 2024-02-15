@@ -4,10 +4,7 @@ import {RateTypeSelector} from "@/3_widgets/RateTypeSelector/RateTypeSelector.ts
 import {useEffect, useState} from "react";
 import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
 import {greenBg, redBg} from "@/6_shared/lib/colors.ts";
-import {
-    useCreateProfitMutation,
-    useLazyReportProfitsByParamsQuery
-} from "@/5_entities/report";
+import {useCreateProfitMutation, useLazyReportProfitsByParamsQuery} from "@/5_entities/report";
 import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
 import {Spinner} from "@/6_shared/BaseComponents/Spinner/Spinner.tsx";
 
