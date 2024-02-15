@@ -40,4 +40,9 @@ export const orderApi = baseApi.injectEndpoints({
     })
 })
 
-export const {useAllOrdersTodayQuery, useCreateOrderMutation, useLazyGetOrderByIdQuery, useFinishOrderByIdMutation} = orderApi
+export const {
+    useAllOrdersTodayQuery,
+    useCreateOrderMutation,
+    useLazyGetOrderByIdQuery,
+    useFinishOrderByIdMutation
+} = orderApi

@@ -3,7 +3,9 @@ import {PriceModel} from "@/5_entities/price";
 import {priceApi} from "@/5_entities/price/api/priceApi.ts";
 import {RootState} from "@/1_app/appStore.ts";
 
-interface InitialStateType {items: PriceModel[]}
+interface InitialStateType {
+    items: PriceModel[]
+}
 
 const initialState: InitialStateType = {
     items: []
@@ -22,4 +24,4 @@ export const priceSlice = createSlice({
     }
 })
 
-export const    selectAllPrices = (state: RootState) => state.price?.items
+export const selectAllPrices = (state: RootState) => state.price?.items

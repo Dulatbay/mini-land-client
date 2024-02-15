@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 const DirectorPricesHeader = () => {
     const navigate = useNavigate()
-    const createPriceClickHandler = () =>{
+    const createPriceClickHandler = () => {
         navigate('/create-price')
     }
 

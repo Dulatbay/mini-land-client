@@ -14,7 +14,7 @@ export const TimePicker = ({onChange}: Props) => {
 
 
     useEffect(() => {
-        const formatNumber = (num : number) => {
+        const formatNumber = (num: number) => {
             return num < 10 ? `0${num}` : num;
         };
 

@@ -16,6 +16,6 @@ export const DirectorRoomTariffsPage = () => {
             </div>
             <ButtonAddItem text={"Создать тариф"} clickHandler={createClickHandler}/>
         </div>
-        <DirectorRoomTariffCardList />
+        <DirectorRoomTariffCardList/>
     </div>
 }

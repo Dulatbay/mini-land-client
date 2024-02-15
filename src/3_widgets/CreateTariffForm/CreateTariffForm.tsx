@@ -55,8 +55,8 @@ export const CreateTariffForm = () => {
         createRoomTariff(reqBody)
     }
 
-    if(isSuccess){
-        setTimeout(()=>{
+    if (isSuccess) {
+        setTimeout(() => {
             window.location.reload()
         }, 50)
         navigate('/room-tariffs')

@@ -7,7 +7,7 @@ export interface ResponseSaleDto {
 }
 
 
-export interface RequestCreateSaleDto{
+export interface RequestCreateSaleDto {
     title: string,
     full_time: number,
     full_price: number

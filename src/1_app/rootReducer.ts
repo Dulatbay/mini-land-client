@@ -6,9 +6,9 @@ import {reportSlice} from "@/5_entities/report/model/slice.ts";
 import {orderSlice} from "@/5_entities/order/model/slice.ts";
 
 export const rootReducer = combineReducers({
-  [orderFormSlice.name]: orderFormSlice.reducer,
-  [priceSlice.name]: priceSlice.reducer,
-  [reportSlice.name]: reportSlice.reducer,
-  [baseApi.reducerPath]: baseApi.reducer,
-  [orderSlice.name]: orderSlice.reducer,
+    [orderFormSlice.name]: orderFormSlice.reducer,
+    [priceSlice.name]: priceSlice.reducer,
+    [reportSlice.name]: reportSlice.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
+    [orderSlice.name]: orderSlice.reducer,
 })

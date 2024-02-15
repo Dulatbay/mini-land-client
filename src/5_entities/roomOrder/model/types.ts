@@ -1,4 +1,3 @@
-
 export interface BookedDayDto {
     date: string;
     started_time: string;

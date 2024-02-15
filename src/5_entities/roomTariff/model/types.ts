@@ -6,6 +6,7 @@ export interface CardRoomTariffDto {
     max_child: number;
     week_days: number[];
 }
+
 export interface DetailRoomTariffDto {
     id: number;
     started_time: string;
@@ -17,7 +18,6 @@ export interface DetailRoomTariffDto {
     penalty_per_hour: number;
     penalty_per_half_hour: number;
 }
-
 
 
 export interface RequestCreateTariffDto {

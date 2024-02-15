@@ -5,15 +5,15 @@ import {rootReducer} from "@/1_app/rootReducer.ts";
 
 
 export function makeStore() {
-  const store = configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(baseApi.middleware),
-  })
+    const store = configureStore({
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware().concat(baseApi.middleware),
+    })
 
-  setupListeners(store.dispatch)
+    setupListeners(store.dispatch)
 
-  return store
+    return store
 }
 
 export const appStore = makeStore()

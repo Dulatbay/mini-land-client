@@ -9,6 +9,6 @@ export const ViewMasterClassesByOrderPage = () => {
 
     return <>
         <ButtonBack clickHandler={backHandler}/>
-        <MasterClassesListByOrder />
+        <MasterClassesListByOrder/>
     </>
 }

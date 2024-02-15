@@ -1,4 +1,3 @@
-
 export const daysOfWeek = [
     "ПН",
     "ВТ",

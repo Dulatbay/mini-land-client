@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 export const CreatePricePage = () => {
     const navigate = useNavigate()
     return <>
-        <ButtonBack clickHandler={()=>navigate('/prices')}/>
+        <ButtonBack clickHandler={() => navigate('/prices')}/>
         <CreatePriceForm/>
     </>
 }

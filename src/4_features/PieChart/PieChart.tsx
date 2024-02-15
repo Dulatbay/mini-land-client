@@ -31,7 +31,7 @@ interface Props {
 
 export const PieChart = ({series}: Props) => {
 
-    if(!series.length)
+    if (!series.length)
         return "Данных нет"
 
     return <div>

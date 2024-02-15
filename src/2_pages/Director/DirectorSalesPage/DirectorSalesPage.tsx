@@ -6,7 +6,7 @@ export const DirectorSalesPage = () => {
 
     return (
         <div>
-            <DirectorSalesHeader />
+            <DirectorSalesHeader/>
             <StokeCardList/>
         </div>
     );

@@ -6,7 +6,7 @@ const DetailCardPage = () => {
     const navigate = useNavigate()
     return (
         <div>
-            <ButtonBack clickHandler={()=>navigate('/')}/>
+            <ButtonBack clickHandler={() => navigate('/')}/>
             <OrderDetailInfo/>
         </div>
     );

@@ -23,9 +23,6 @@ export const InputOrder = ({requestOrder}: { requestOrder: RequestOrder | undefi
         return <p className={'m-6 text-gray-700'}>Что-то пошло не так</p>
 
 
-
-
-
     const selectSaleHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         const request = {...requestOrder} ?? {} as RequestOrder
         const sale = data![+event.target.value]

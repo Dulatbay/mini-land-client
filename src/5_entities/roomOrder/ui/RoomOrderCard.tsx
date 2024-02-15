@@ -57,15 +57,15 @@ export const RoomOrderCard = ({
             getToastMessage(finishOrderResult.error)
         if (deleteOrderResult.isError)
             getToastMessage(deleteOrderResult.error)
-        if (finishOrderResult.isSuccess){
+        if (finishOrderResult.isSuccess) {
             window.location.reload()
-            setTimeout(()=>{
+            setTimeout(() => {
                 toast.success("Вы успешно завершили бронь")
             }, 1000)
         }
-        if (deleteOrderResult.isSuccess){
+        if (deleteOrderResult.isSuccess) {
             window.location.reload()
-            setTimeout(()=>{
+            setTimeout(() => {
                 toast.success("Вы успешно удалили бронь")
             }, 1000)
         }

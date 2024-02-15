@@ -7,7 +7,7 @@ import {mapSale} from "@/5_entities/sale/lib/mapSale.ts";
 export const saleApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         allSales: build.query<SaleModel[], boolean>({
-            query: (isEnabled) =>  ({
+            query: (isEnabled) => ({
                 url: `/sales?enabled=${isEnabled}`
             }),
             transformResponse: (response: ResponseSaleDto[]) => response.map(mapSale),

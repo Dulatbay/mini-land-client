@@ -1,4 +1,3 @@
-
 interface ResponseEmployeeDto {
     username: string;
     orders_count: number;
@@ -23,16 +22,17 @@ export interface ResponseReportByParamsDto {
     profit: number;
 }
 
-export interface ResponseProfitsReportDto{
+export interface ResponseProfitsReportDto {
     income: number;
     expense: number
 }
 
-export interface RequestProfitsReportParams{
+export interface RequestProfitsReportParams {
     start_date: string,
     end_date: string
 }
-export interface RequestCreateProfitDto{
+
+export interface RequestCreateProfitDto {
     reason: string,
     profit: number,
     is_expense: boolean

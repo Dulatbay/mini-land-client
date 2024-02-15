@@ -55,4 +55,10 @@ export const reportApi = baseApi.injectEndpoints({
 })
 
 
-export const {useLazyReportByParamQuery, useReportTableQuery, useReportUsernamesQuery, useLazyReportProfitsByParamsQuery, useCreateProfitMutation} = reportApi
+export const {
+    useLazyReportByParamQuery,
+    useReportTableQuery,
+    useReportUsernamesQuery,
+    useLazyReportProfitsByParamsQuery,
+    useCreateProfitMutation
+} = reportApi

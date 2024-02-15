@@ -7,6 +7,6 @@ export const SelectMasterClassPage = () => {
 
     return <>
         <ButtonBack clickHandler={() => navigate(-1)}/>
-        <MasterClassList />
+        <MasterClassList/>
     </>
 }

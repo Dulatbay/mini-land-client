@@ -29,8 +29,8 @@ const CreateSaleForm = () => {
         createSale(request);
     }
 
-    if(isSuccess){
-        setTimeout(()=>{
+    if (isSuccess) {
+        setTimeout(() => {
             window.location.reload()
         }, 100)
         navigate('/sales')

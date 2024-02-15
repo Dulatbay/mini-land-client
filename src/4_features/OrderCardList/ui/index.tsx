@@ -33,8 +33,6 @@ export const OrderCardList = () => {
             inProcess = order.remain_time >= 0 && !order.is_finished
 
 
-
-
         return (order.is_paid == requestParams.paid
             || order.is_finished === requestParams.finished
             || overdue

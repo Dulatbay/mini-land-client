@@ -22,14 +22,24 @@ export const orderSlice = createSlice({
     name: "order",
     initialState,
     reducers: {
-        setRequestParams: (state, {payload}: PayloadAction<{id: string, checked: boolean}>) => {
+        setRequestParams: (state, {payload}: PayloadAction<{ id: string, checked: boolean }>) => {
             const {id, checked} = payload
             switch (id) {
-                case "myOrders": state.requestParams.myOrders = checked; break;
-                case "finished": state.requestParams.finished = checked; break;
-                case "inProcess": state.requestParams.inProcess = checked; break;
-                case "overdue": state.requestParams.overdue = checked; break;
-                case "paid": state.requestParams.paid = checked; break;
+                case "myOrders":
+                    state.requestParams.myOrders = checked;
+                    break;
+                case "finished":
+                    state.requestParams.finished = checked;
+                    break;
+                case "inProcess":
+                    state.requestParams.inProcess = checked;
+                    break;
+                case "overdue":
+                    state.requestParams.overdue = checked;
+                    break;
+                case "paid":
+                    state.requestParams.paid = checked;
+                    break;
             }
         }
     }

@@ -25,7 +25,7 @@ export const Clicker = ({time, type, requestOrder}: props) => {
 
 
     const clickHandler = (payload: number) => {
-        if(payload + count < 0) return;
+        if (payload + count < 0) return;
         setCount(count + payload);
     };
 
