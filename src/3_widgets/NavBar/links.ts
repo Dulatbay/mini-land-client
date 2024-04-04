@@ -5,7 +5,8 @@ export const directorLinks = [
     ["/room-tariffs", "Тарифы комнат"],
     ["/master-classes", "Мастер классы"],
     ["/prices", "Цены"],
-    ["/sales", "Акции"],
+    ["/sales", "Акции с ценами"],
+    ["/promotion-with-percent", "Акции с процентами"],
 ]
 export const managerLinks = [
     ["/", "Заказ"],

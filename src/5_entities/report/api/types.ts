@@ -26,6 +26,11 @@ export interface ResponseProfitsReportDto {
     income: number;
     expense: number
 }
+export interface ResponseProfitsDetailReportDto {
+    is_income: boolean;
+    profit: number;
+    title: string;
+}
 
 export interface RequestProfitsReportParams {
     start_date: string,

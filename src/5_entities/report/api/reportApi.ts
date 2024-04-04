@@ -5,7 +5,7 @@ import {
     RequestCreateProfitDto,
     RequestProfitsReportParams,
     RequestReportByParamsDto,
-    ResponseDirectorMainReportDto,
+    ResponseDirectorMainReportDto, ResponseProfitsDetailReportDto,
     ResponseProfitsReportDto,
     ResponseReportByParamsDto
 } from "@/5_entities/report/api/types.ts";
@@ -50,6 +50,15 @@ export const reportApi = baseApi.injectEndpoints({
                     "end_date": request.end_date
                 }
             })
+        }),
+        reportProfitsDetailByParams: build.query<ResponseProfitsDetailReportDto, RequestProfitsReportParams>({
+            query: (request) => ({
+                url: '/reports/profits/details',
+                params: {
+                    "start_date": request.start_date,
+                    "end_date": request.end_date
+                }
+            })
         })
     })
 })
@@ -60,5 +69,6 @@ export const {
     useReportTableQuery,
     useReportUsernamesQuery,
     useLazyReportProfitsByParamsQuery,
-    useCreateProfitMutation
+    useCreateProfitMutation,
+    useLazyReportProfitsDetailByParamsQuery
 } = reportApi

@@ -20,7 +20,7 @@ export const PieChartContainer = () => {
     useEffect(() => {
         if (createProfitResult.isError)
             getToastMessage(createProfitResult.error)
-        if (result.isSuccess)
+        if (createProfitResult.isSuccess)
             window.location.reload()
     }, [createProfitResult]);
 

@@ -1,4 +1,5 @@
 import {EmployeeRow} from "@/5_entities/report";
+import {getTime} from "@/6_shared/lib/getTime.ts";
 
 interface Props {
     employees: EmployeeRow[]
@@ -27,7 +28,7 @@ export const DirectorTable = ({employees}: Props) => {
                             <td className={`border border-black p-2`}>{e.username}</td>
                             <td className={`border border-black p-2`}>{e.orders_count}</td>
                             <td className={`border border-black p-2 hidden sm:table-cell`}>{e.profit}</td>
-                            <td className={`border border-black p-2 hidden sm:table-cell`}>{e.serve_time}</td>
+                            <td className={`border border-black p-2 hidden sm:table-cell`}>{getTime(e.serve_time)}</td>
                         </tr>
                     )
                 }
