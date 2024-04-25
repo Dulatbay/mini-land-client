@@ -1,12 +1,12 @@
-import KeycloakContext from '@/1_app/keycloak/KeycloakContext';
+// import KeycloakContext from '@/1_app/keycloak/KeycloakContext';
 import { useAllBaseAbonementsQuery } from '@/5_entities/base-abonement/api/baseAbonementApi';
 import { BaseAbonementCard } from '@/5_entities/base-abonement/ui/BaseAbonementCard';
 import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export const AbonementCardList = () => {
-    const keycloak = useContext(KeycloakContext);
+    // const keycloak = useContext(KeycloakContext);
     const { data, isLoading, isError, error } = useAllBaseAbonementsQuery(true);
 
     useEffect(() => {
@@ -22,9 +22,7 @@ export const AbonementCardList = () => {
     }
 
     return (
-        <div
-            className={`w-[95%] m-auto flex flex-wrap justify-start items-center`}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
             {data?.length ? (
                 data?.map((abonement) => (
                     <BaseAbonementCard {...abonement} key={abonement.id} />

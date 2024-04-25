@@ -1,5 +1,5 @@
 import { InputCustomerPhone } from '@/4_features/InputCustomerPhone/InputCustomerPhone';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import subscriptions from './subsciptions';
 import { OrderDetailsCard } from '@/4_features/OrderDetailsCard/OrderDetailsCard';
 

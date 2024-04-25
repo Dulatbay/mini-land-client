@@ -1,35 +1,33 @@
 import { useNavigate } from 'react-router-dom';
-import { BaseAbonementCardModel } from '../model/types';
-import {ButtonAddItem} from "@/6_shared/BaseComponents/ButtonAddItem";
+import { BaseAbonementCardModelManager } from '../model/types';
+import { ButtonAddItem } from '@/6_shared/BaseComponents/ButtonAddItem';
 
-export const BaseAbonementCard = (props: BaseAbonementCardModel) => {
+export const BaseAbonementCard = (props: BaseAbonementCardModelManager) => {
     const navigate = useNavigate();
 
-    // const cardClickHandler = (id: number) => {
-    //     navigate(`/abonements/${id}`);
-    // };
+    const cardClickHandler = () => {
+        navigate(`/abonements`);
+    };
 
     return (
-
-        <div
-            className={`bg-white gap-12 rounded-2xl flex flex-col justify-between px-4 py-5 border-2`}
-        >
-            <div className={'w-full flex  justify-between'}>
-                <p>{props.id}</p>
-                <p className={'text-xl'}>{props.title}</p>
-                <div className={`text-right`}>
-                    <p>{props.description}</p>
-                </div>
+        <div className="bg-white rounded-2xl flex flex-col justify-between px-4 py-5 border-2">
+            <div className="w-full flex justify-center">
+                <p className="text-xl font-bold">{props.title}</p>
             </div>
-            <div className={'w-full flex justify-between items-center'}>
-                <div className={'flex flex-wrap gap-1'}>
-                    <p>{props.full_time}</p>
-                    <p>{props.full_price}</p>
+            <p className="text-gray-700">{props.description}</p>
+            <div className="w-full flex justify-between items-center mt-1">
+                <div className="flex flex-wrap gap-1">
+                    <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                        Цена: {props.full_price}тг
+                    </span>
+                    <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                        Время: {props.full_time} минут
+                    </span>
                 </div>
-                <div className={'ml-8'}>
+                <div className="ml-8">
                     <ButtonAddItem
                         text={''}
-                        clickHandler={() => navigate(`/abonements/${props.id}`)}
+                        clickHandler={cardClickHandler} // менеджердегі абонементті қосу бетіне өтуі керек бірақ пэйджды таппадым
                     />
                 </div>
             </div>
