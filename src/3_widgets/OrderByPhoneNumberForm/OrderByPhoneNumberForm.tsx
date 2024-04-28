@@ -1,87 +1,87 @@
-import { InputCustomerPhone } from '@/4_features/InputCustomerPhone/InputCustomerPhone';
-import { useState } from 'react';
-import subscriptions from './subsciptions';
-import { OrderDetailsCard } from '@/4_features/OrderDetailsCard/OrderDetailsCard';
+import React, { useState } from 'react';
+import { useGetAbonementByPhoneNumberQuery } from '@/5_entities/abonement/api/abonementApi';
+import { AbonementCard } from '@/5_entities/abonement/ui/AbonementCard';
+import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 
 export const OrderByPhoneNumberForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [subscription, setSubscription] = useState<{
-        phone: string;
-        name: string;
-        description: string;
-        price: string;
-        duration: string;
-        clientName: string;
-        visitsLeft: number;
-    } | null>(null);
-    const [error, setError] = useState('');
+    const {
+        data: abonements,
+        isLoading,
+        isError,
+        error,
+        refetch,
+    } = useGetAbonementByPhoneNumberQuery(phoneNumber, {
+        skip: phoneNumber.length === 0, // We only want to run the query when we have a phoneNumber
+    });
 
-    const handleSearch = () => {
-        const foundSubscription = subscriptions.find(
-            (sub) => sub.phone === phoneNumber
-        );
-        if (foundSubscription) {
-            setSubscription(foundSubscription);
-            setError(''); // Clear any previous errors
-        } else {
-            setSubscription(null); // Clear previous subscription details
-            setError(
-                'Subscription not found. Please try again later or check the phone number.'
-            );
-        }
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        refetch();
     };
 
+    if (isLoading) return <Spinner />;
+    if (isError) return <div>Error: {error?.toString()}</div>;
+
     return (
-        <div>
-            <form
-                className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-7 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}
-            >
-                <div
-                    className={`w-full pb-3 flex flex-col md:justify-between items-center`}
-                >
-                    <img
-                        src={'/icons/Logo.svg'}
-                        className={`w-32 object-contain`}
-                        style={{ backgroundPosition: 'center' }}
-                        alt={''}
-                    />
-                    <p className={`font-medium`}>Создать або по номеру</p>
-                </div>
-
-                <InputCustomerPhone
-                    value={phoneNumber}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setPhoneNumber(e.target.value)
-                    }
+        <div className="bg-white rounded-2xl overflow-hidden shadow-md p-6 max-w-6xl mx-auto">
+            <div className="flex flex-col">
+                <img
+                    className="w-24 h-auto mb-4"
+                    src="/icons/Logo.svg"
+                    alt="Logo"
                 />
-
-                <button
-                    className="all-unset absolute w-52 h-12 top-36 left-1/4 bg-green-500 rounded-md shadow-md text-white text-center py-2"
-                    onClick={handleSearch}
+                <h1 className="text-2xl font-medium mb-6">
+                    Создать або по номеру
+                </h1>
+                <form
+                    onSubmit={handleSubmit}
+                    className="grid grid-cols-2 gap-4 items-center w-full max-w-lg"
                 >
-                    ОТПРАВИТЬ
-                </button>
-                {error && (
-                    <div className="text-red-500 text-sm absolute top-56 left-10">
-                        {error}
-                    </div>
-                )}
-                {subscription && (
-                    <div className="flex gap-6 absolute top-60 left-9">
-                        <OrderDetailsCard
-                            orderDetails={{
-                                ...subscription,
-                                orderName: subscription.name,
-                                description: subscription.description,
-                                price: subscription.price,
-                                duration: subscription.duration,
-                                clientName: subscription.clientName,
-                                visitsLeft: subscription.visitsLeft,
-                            }}
-                        />
-                    </div>
-                )}
-            </form>
+                    <input
+                        type="text"
+                        placeholder="Номер телефона"
+                        className="border border-gray-300 rounded-lg p-2 w-full"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                    <button
+                        type="submit"
+                        className="bg-green-500 text-white rounded-lg px-4 py-2 w-full justify-self-center" // Button width is full, but it will only be as wide as its column
+                    >
+                        ОТПРАВИТЬ
+                    </button>
+                </form>
+            </div>
+            <div className="mt-8">
+                <h2 className="text-lg font-semibold">Найденный абонемент</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {Array.isArray(abonements) &&
+                        abonements.map((abonement) => (
+                            <AbonementCard
+                                key={abonement.id}
+                                id={abonement.id}
+                                client_name={abonement.client_name}
+                                base_abonement={{
+                                    title:
+                                        abonement.base_abonement?.title ??
+                                        'Default Title',
+                                    description:
+                                        abonement.base_abonement?.description ??
+                                        'Default Description',
+                                    full_time:
+                                        abonement.base_abonement?.full_time ??
+                                        0,
+                                    full_price:
+                                        abonement.base_abonement?.full_price ??
+                                        0,
+                                    quantity:
+                                        abonement.base_abonement?.quantity ?? 0,
+                                }}
+                            />
+                        ))}
+                </div>
+            </div>
         </div>
     );
 };
