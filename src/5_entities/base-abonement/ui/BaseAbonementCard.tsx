@@ -14,22 +14,22 @@ export const BaseAbonementCard = (props: BaseAbonementCardModelManager) => {
             <div className="w-full flex justify-center">
                 <p className="text-xl font-bold">{props.title}</p>
             </div>
-            <p className="text-gray-700">{props.description}</p>
-            <div className="w-full flex justify-between items-center mt-1">
-                <div className="flex flex-wrap gap-1">
-                    <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+            <div className="w-full flex justify-center text-justify">
+                <p className="text-gray-700">{props.description}</p>
+            </div>
+            <div className="w-full flex justify-between items-center">
+                <div className="flex flex-wrap flex-col">
+                    <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
                         Цена: {props.full_price}тг
                     </span>
-                    <span className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                    <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
                         Время: {props.full_time} минут
                     </span>
                 </div>
-                <div className="ml-8">
-                    <ButtonAddItem
-                        text={''}
-                        clickHandler={cardClickHandler} // менеджердегі абонементті қосу бетіне өтуі керек бірақ пэйджды таппадым
-                    />
-                </div>
+                <ButtonAddItem
+                    text={''}
+                    clickHandler={cardClickHandler} // менеджердегі абонементті қосу бетіне өтуі керек бірақ пэйджды таппадым
+                />
             </div>
         </div>
     );

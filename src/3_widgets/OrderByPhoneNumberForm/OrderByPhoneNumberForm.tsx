@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
-import { useGetAbonementByPhoneNumberQuery } from '@/5_entities/abonement/api/abonementApi';
+import React, { useEffect, useState } from 'react';
 import { AbonementCard } from '@/5_entities/abonement/ui/AbonementCard';
 import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
+import { useLazyGetAbonementByPhoneNumberQuery } from '@/5_entities/abonement/api/abonementApi';
+import { ResponseAbonementCardModel } from '@/5_entities/abonement/model/types';
 
 export const OrderByPhoneNumberForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
-    const {
-        data: abonements,
-        isLoading,
-        isError,
-        error,
-        refetch,
-    } = useGetAbonementByPhoneNumberQuery(phoneNumber, {
-        skip: phoneNumber.length === 0, // We only want to run the query when we have a phoneNumber
-    });
+    const [getAbonements, status] = useLazyGetAbonementByPhoneNumberQuery();
+    const [abonements, setAbonements] = useState<ResponseAbonementCardModel[]>(
+        []
+    );
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        refetch();
+        getAbonements(phoneNumber);
     };
 
-    if (isLoading) return <Spinner />;
-    if (isError) return <div>Error: {error?.toString()}</div>;
+    useEffect(() => {
+        if (status.isSuccess) {
+            setAbonements(status.data ?? []);
+        }
+    }, [status]);
+
+    if (status.isLoading) return <Spinner />;
+    if (status.isError) return <div>Error: {status.error?.toString()}</div>;
 
     return (
         <div className="bg-white rounded-2xl overflow-hidden shadow-md p-6 max-w-6xl mx-auto">
@@ -53,9 +55,9 @@ export const OrderByPhoneNumberForm = () => {
                     </button>
                 </form>
             </div>
-            <div className="mt-8">
-                <h2 className="text-lg font-semibold">Найденный абонемент</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mt-6">
+                <h2 className="text-sm">Найденный абонемент</h2>
+                <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {Array.isArray(abonements) &&
                         abonements.map((abonement) => (
                             <AbonementCard
@@ -64,19 +66,18 @@ export const OrderByPhoneNumberForm = () => {
                                 client_name={abonement.client_name}
                                 base_abonement={{
                                     title:
-                                        abonement.base_abonement?.title ??
+                                        abonement.client_name ??
                                         'Default Title',
-                                    description:
-                                        abonement.base_abonement?.description ??
-                                        'Default Description',
-                                    full_time:
-                                        abonement.base_abonement?.full_time ??
-                                        0,
-                                    full_price:
-                                        abonement.base_abonement?.full_price ??
-                                        0,
-                                    quantity:
-                                        abonement.base_abonement?.quantity ?? 0,
+                                    // description:
+                                    //     abonement.base_abonement?.description ??
+                                    //     'Default Description',
+                                    // full_time:
+                                    //     abonement.base_abonement?.full_time ??
+                                    //     0,
+                                    // full_price:
+                                    //     abonement.base_abonement?.full_price ??
+                                    //     0,
+                                    quantity: abonement.quantity ?? 0,
                                 }}
                             />
                         ))}

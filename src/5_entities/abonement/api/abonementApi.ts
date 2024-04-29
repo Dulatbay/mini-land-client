@@ -1,5 +1,5 @@
 import { baseApi } from '@/6_shared/api/baseApi';
-import { AbonementDto, RequestAbonementCardModel } from '../model/types';
+import { AbonementDto, ResponseAbonementCardModel } from '../model/types';
 
 export const abonementApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -22,7 +22,10 @@ export const abonementApi = baseApi.injectEndpoints({
                 body: requestBody,
             }),
         }),
-        getAbonementByPhoneNumber: build.query<RequestAbonementCardModel, string>({
+        getAbonementByPhoneNumber: build.query<
+            ResponseAbonementCardModel[],
+            string
+        >({
             query: (phoneNumber) => ({
                 url: `/abonement-orders/by-phone-number`,
                 params: { phone_number: phoneNumber },
@@ -35,5 +38,5 @@ export const {
     useAllAbonementsQuery,
     useDeleteAbonementByIdMutation,
     useCreateAbonementMutation,
-    useGetAbonementByPhoneNumberQuery,
+    useLazyGetAbonementByPhoneNumberQuery,
 } = abonementApi;

@@ -6,7 +6,6 @@ import { getToastMessage } from '@/6_shared/lib/getToastMessage';
 import { useEffect } from 'react';
 
 export const AbonementCardList = () => {
-    // const keycloak = useContext(KeycloakContext);
     const { data, isLoading, isError, error } = useAllBaseAbonementsQuery(true);
 
     useEffect(() => {

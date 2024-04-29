@@ -1,5 +1,3 @@
-import { BaseAbonementCardModel } from '@/5_entities/base-abonement/model/types';
-
 export interface AbonementDto {
     id: number;
     client_name: string;
@@ -8,10 +6,13 @@ export interface AbonementDto {
     abonement_price: number;
 }
 
-export interface RequestAbonementCardModel {
+export interface ResponseAbonementCardModel {
     id: number;
     client_name: string;
-    base_abonemnt?: BaseAbonementCardModel;
+    base_abonemnt_id?: number;
+    quantity?: number;
+    // base_abonemnt_name?: number;
+    // base_abonemnt_descriptrion?: number;
 }
 
 export interface AbonementCardModel {

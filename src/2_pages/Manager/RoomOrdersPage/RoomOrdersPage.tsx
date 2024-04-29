@@ -15,7 +15,6 @@ export const RoomOrdersPage = () => {
         navigate('/room-tariffs')
     }
 
-
     useEffect(() => {
         if (isError)
             getToastMessage(error)

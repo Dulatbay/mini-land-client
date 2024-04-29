@@ -1,17 +1,48 @@
-import {ReactNode, useContext} from "react";
-import KeycloakContext from "@/1_app/keycloak/KeycloakContext.ts";
+import { useState, useEffect, useContext, ReactNode } from 'react';
+import KeycloakContext from '@/1_app/keycloak/KeycloakContext.ts';
 
-export const PrivateRoute = ({children}: { children: ReactNode }) => {
+export const PrivateRoute = ({ children }: { children: ReactNode }) => {
     const keycloak = useContext(KeycloakContext);
+    const [isReady, setIsReady] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
-    const Login = () => {
-        return <button type="button" onClick={() => {
-            localStorage.removeItem("token")
-            keycloak.login();
-        }}>LOGIN</button>
-    };
+    useEffect(() => {
+        if (!keycloak.authenticated) {
+            keycloak
+                .init({ onLoad: 'check-sso' })
+                .then((authenticated) => {
+                    setIsReady(true);
+                    if (!authenticated) {
+                        keycloak.login();
+                    }
+                })
+                .catch(() => {
+                    setHasError(true);
+                    setIsReady(true);
+                });
+        } else {
+            setIsReady(true);
+        }
+    }, [keycloak]);
 
-    return keycloak.authenticated ?
-        children
-        : <Login/>;
+    const Login = () => (
+        <button
+            type="button"
+            onClick={() => {
+                keycloak.logout();
+            }}
+        >
+            LOGIN
+        </button>
+    );
+
+    if (!isReady) {
+        return <div>Loading...</div>;
+    }
+
+    if (hasError) {
+        return <div>Error: Unable to authenticate</div>;
+    }
+
+    return keycloak.authenticated ? children : <Login />;
 };
