@@ -12,6 +12,8 @@ import {DirectorMasterClassesPage} from "@/2_pages/Director/DirectorMasterClasse
 import {DirectorRoomTariffsPage} from "@/2_pages/Director/DirectorRoomTariffsPage/DirectorRoomTariffsPage.tsx";
 import {CreateRoomTariffPage} from "@/2_pages/Director/CreateRoomTariffPage/CreateRoomTariffPage.tsx";
 import {CreateMasterClassPage} from "@/2_pages/Director/CreateMasterClassPage/CreateMasterClassPage.tsx";
+import { CreateAbonementPage } from "@/2_pages/Director/CreateAbonementPage/CreateAbonementPage";
+import { DirectorManageAbonementsPage } from "@/2_pages/Director/DirectorManageAbonementsPage/DirectorManageAbonementsPage";
 
 
 export const directorRouter = createBrowserRouter([
@@ -63,6 +65,14 @@ export const directorRouter = createBrowserRouter([
             {
                 path: '/create-room-tariff',
                 element: <CreateRoomTariffPage/>
+            }, 
+            {
+                path: '/create-abonement',
+                element: <CreateAbonementPage/>
+            },
+            {
+                path: '/manage-abonements',
+                element: <DirectorManageAbonementsPage/>
             }
         ]
     }
