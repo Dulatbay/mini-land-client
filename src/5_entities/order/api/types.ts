@@ -12,7 +12,6 @@ export interface OrderCardDto {
     author_name: string;
 }
 
-
 export interface DetailOrderDto {
     id: number;
     parent_name: string;
@@ -28,6 +27,7 @@ export interface DetailOrderDto {
     is_paid: boolean;
     is_finished: boolean;
     author_name: string;
+    sale_with_percent: ResponseSaleWithPercentDto;
 }
 
 interface ResponseSaleDto {
@@ -38,6 +38,12 @@ interface ResponseSaleDto {
     enabled: boolean;
 }
 
+interface ResponseSaleWithPercentDto {
+    id: number;
+    title: string;
+    enabled: boolean;
+    percent: number;
+}
 
 export interface RequestCreateOrderDto {
     parent_name: string;
@@ -45,7 +51,7 @@ export interface RequestCreateOrderDto {
     child_name: string;
     child_age: number;
     sale_id?: number;
+    sale_with_percent_id?: number;
     extra_time?: number;
     is_paid?: boolean;
 }
-

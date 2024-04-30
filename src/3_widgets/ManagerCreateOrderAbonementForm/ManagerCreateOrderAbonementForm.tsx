@@ -1,45 +1,35 @@
-import { useCreateBaseAbonementMutation } from '@/5_entities/base-abonement/api/baseAbonementApi';
+import { useCreateAbonementMutation } from '@/5_entities/abonement/api/abonementApi';
 import { Button } from '@/6_shared/BaseComponents/Button/Button';
 import { CommonInput } from '@/6_shared/BaseComponents/CommonInput/CommonInput';
 import { greenBg } from '@/6_shared/lib/colors';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export const CreateAbonementForm = () => {
+export const ManagerCreateOrderAbonementForm = () => {
     const navigate = useNavigate();
-    const [titleRequest, setTitleRequest] = useState<undefined | string>();
-    const [descriptionRequest, setDescriptionRequest] = useState<
+    const { abonementId } = useParams();
+    const [clientName, setClientName] = useState<undefined | string>();
+    const [clientPhoneNumber, setClientPhoneNumber] = useState<
         undefined | string
     >();
-    const [priceRequest, setPriceRequest] = useState<undefined | number>();
-    const [durationRequest, setDurationRequest] = useState<
-        undefined | number
-    >();
-    const [quantityRequest, setQuantityRequest] = useState<
-        undefined | number
-    >();
+    const [childName, setChildName] = useState<undefined | string>();
+    const [childAge, setChildAge] = useState<undefined | number>();
 
-    const [createAbonement, {isLoading, isError, error, isSuccess }] =
-        useCreateBaseAbonementMutation();
+    const [createAbonement, { isLoading, isError, error, isSuccess }] =
+        useCreateAbonementMutation();
 
     const isAvailable = () => {
-        return !(
-            titleRequest &&
-            priceRequest &&
-            descriptionRequest &&
-            durationRequest &&
-            quantityRequest
-        );
+        return !(clientName && clientPhoneNumber && childName && childAge);
     };
 
     const createClickHandler = () => {
         const requestData = {
-            title: titleRequest!,
-            description: descriptionRequest!,
-            full_price: priceRequest!,
-            full_time: durationRequest!,
-            quantity: quantityRequest!,
+            client_name: clientName!,
+            phone_number: clientPhoneNumber!,
+            child_name: childName!,
+            child_age: childAge!,
+            base_abonement_id: Number.parseInt(abonementId!),
         };
 
         createAbonement(requestData);
@@ -53,7 +43,7 @@ export const CreateAbonementForm = () => {
         setTimeout(() => {
             window.location.reload();
         }, 10);
-        navigate('/manage-abonements');
+        navigate('/abonements');
     }
 
     return (
@@ -73,38 +63,38 @@ export const CreateAbonementForm = () => {
             </div>
             <form className={'mt-8 flex flex-col gap-4'} method="POST">
                 <CommonInput
-                    placeholder={'Название'}
+                    placeholder={'Имя клиента'}
                     onChange={(event) => {
-                        setTitleRequest(event.currentTarget.value);
+                        setClientName(event.currentTarget.value);
                     }}
                 />
                 <CommonInput
-                    placeholder={'Описание'}
+                    placeholder={'Номер телефона'}
                     onChange={(event) => {
-                        setDescriptionRequest(event.currentTarget.value);
+                        setClientPhoneNumber(event.currentTarget.value);
                     }}
                 />
                 <CommonInput
-                    placeholder={'Цена'}
+                    placeholder={'Имя ребенка'}
+                    onChange={(event) => {
+                        setChildName(event.currentTarget.value);
+                    }}
+                />
+                <CommonInput
+                    placeholder={'Возраст ребенка'}
                     type={'number'}
                     onChange={(event) => {
-                        setPriceRequest(+event.currentTarget.value);
+                        setChildAge(+event.currentTarget.value);
                     }}
                 />
-                <CommonInput
-                    placeholder={'Время(в минутах)'}
-                    type={'number'}
-                    onChange={(event) => {
-                        setDurationRequest(+event.currentTarget.value);
-                    }}
-                />
-                <CommonInput
-                    placeholder={'Кол-во посещений'}
-                    type={'number'}
-                    onChange={(event) => {
-                        setQuantityRequest(+event.currentTarget.value);
-                    }}
-                />
+                {/* <Select
+                    options={abonements.map((abonement) => ({
+                        label: abonement.title,
+                        value: abonement.id,
+                    }))
+                    }
+                    placeholder="Выбранный абонемент"
+                /> */}
                 <div className={`w-full mt-4`}>
                     <Button
                         backgroundColor={greenBg}

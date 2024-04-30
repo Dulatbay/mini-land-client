@@ -19,6 +19,7 @@ export interface DetailOrderModel {
     child_name: string;
     child_age: number;
     sale: ResponseSaleModel;
+    sale_with_percent: ResponseSaleWithPercentModel;
     extra_time: number;
     entered_time: string;
     remain_time: number;
@@ -35,4 +36,11 @@ interface ResponseSaleModel {
     full_time: number;
     full_price: number;
     enabled: boolean;
+}
+
+interface ResponseSaleWithPercentModel {
+    id: number;
+    title: string;
+    enabled: boolean;
+    percent: number;
 }

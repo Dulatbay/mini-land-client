@@ -6,13 +6,24 @@ export interface AbonementDto {
     abonement_price: number;
 }
 
+export interface RequestCreateAbonementDto {
+    client_name: string;
+    phone_number: string;
+    child_name: string;
+    child_age: number;
+    base_abonement_id: number;
+}
+
 export interface ResponseAbonementCardModel {
     id: number;
     client_name: string;
     base_abonemnt_id?: number;
     quantity?: number;
-    // base_abonemnt_name?: number;
-    // base_abonemnt_descriptrion?: number;
+    base_abonement_id?: number;
+    base_abonement_name?: string;
+    base_abonement_description?: string;
+    base_abonement_price?: number;
+    base_abonement_time?: number;
 }
 
 export interface AbonementCardModel {

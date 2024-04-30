@@ -16,6 +16,7 @@ export interface RequestCreateBaseAbonementDto {
 }
 
 export interface BaseAbonementCardModelManager {
+    id: number;
     title: string;
     description: string;
     full_time: number;
@@ -32,9 +33,9 @@ export interface BaseAbonementCardModel {
 }
 
 export interface BaseAbonementFormModel {
+    id: number;
     title: string;
     description: string;
     full_time: number;
     full_price: number;
-    quantity: number;
 }

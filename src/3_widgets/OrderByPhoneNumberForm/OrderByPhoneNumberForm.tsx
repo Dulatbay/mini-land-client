@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AbonementCard } from '@/5_entities/abonement/ui/AbonementCard';
 import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 import { useLazyGetAbonementByPhoneNumberQuery } from '@/5_entities/abonement/api/abonementApi';
@@ -6,24 +6,30 @@ import { ResponseAbonementCardModel } from '@/5_entities/abonement/model/types';
 
 export const OrderByPhoneNumberForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [getAbonements, status] = useLazyGetAbonementByPhoneNumberQuery();
+    const [getAbonements, { isLoading, isError, isSuccess, data, error }] =
+        useLazyGetAbonementByPhoneNumberQuery();
     const [abonements, setAbonements] = useState<ResponseAbonementCardModel[]>(
         []
     );
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleDeleteSuccess = (deletedId: number) => {
+        setAbonements((prevAbonements) =>
+            prevAbonements.filter((abonement) => abonement.id !== deletedId)
+        );
+    };
+
+    const handleSubmit = (e: any) => {
         e.preventDefault();
-        getAbonements(phoneNumber);
+        if (phoneNumber.trim()) {
+            getAbonements(phoneNumber);
+        }
     };
 
     useEffect(() => {
-        if (status.isSuccess) {
-            setAbonements(status.data ?? []);
+        if (isSuccess && data) {
+            setAbonements(data);
         }
-    }, [status]);
-
-    if (status.isLoading) return <Spinner />;
-    if (status.isError) return <div>Error: {status.error?.toString()}</div>;
+    }, [isSuccess, data]);
 
     return (
         <div className="bg-white rounded-2xl overflow-hidden shadow-md p-6 max-w-6xl mx-auto">
@@ -49,7 +55,7 @@ export const OrderByPhoneNumberForm = () => {
                     />
                     <button
                         type="submit"
-                        className="bg-green-500 text-white rounded-lg px-4 py-2 w-full justify-self-center" // Button width is full, but it will only be as wide as its column
+                        className="bg-green-500 text-white rounded-lg px-4 py-2 w-full justify-self-center"
                     >
                         ОТПРАВИТЬ
                     </button>
@@ -58,29 +64,43 @@ export const OrderByPhoneNumberForm = () => {
             <div className="mt-6">
                 <h2 className="text-sm">Найденный абонемент</h2>
                 <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {Array.isArray(abonements) &&
+                    {isLoading ? (
+                        <Spinner />
+                    ) : (
+                        Array.isArray(abonements) &&
                         abonements.map((abonement) => (
                             <AbonementCard
                                 key={abonement.id}
                                 id={abonement.id}
                                 client_name={abonement.client_name}
-                                base_abonement={{
-                                    title:
-                                        abonement.client_name ??
-                                        'Default Title',
-                                    // description:
-                                    //     abonement.base_abonement?.description ??
-                                    //     'Default Description',
-                                    // full_time:
-                                    //     abonement.base_abonement?.full_time ??
-                                    //     0,
-                                    // full_price:
-                                    //     abonement.base_abonement?.full_price ??
-                                    //     0,
-                                    quantity: abonement.quantity ?? 0,
-                                }}
+                                base_abonement_id={abonement.base_abonement_id}
+                                base_abonement_name={
+                                    abonement.base_abonement_name
+                                }
+                                base_abonement_description={
+                                    abonement.base_abonement_description
+                                }
+                                base_abonement_price={
+                                    abonement.base_abonement_price
+                                }
+                                base_abonement_time={
+                                    abonement.base_abonement_time
+                                }
+                                quantity={abonement.quantity}
+                                onDeleteSuccess={handleDeleteSuccess}
                             />
-                        ))}
+                        ))
+                    )}
+                    {isSuccess && abonements.length === 0 && (
+                        <div className="col-span-full text-gray-500">
+                            Абонементы не найдены.
+                        </div>
+                    )}
+                    {isError && (
+                        <div className={'w-[95%] m-auto text-gray-700'}>
+                            <p>Не удалось получить данные</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

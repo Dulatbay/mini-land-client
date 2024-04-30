@@ -1,71 +1,80 @@
-import {Button} from "@/6_shared/BaseComponents/Button/Button.tsx";
-import {selectAllPrices, useAllPricesQuery} from "@/5_entities/price";
-import {InputCustomer} from "@/4_features/InputCustomer/InputCustomer.tsx";
-import {InputOrder} from "@/4_features/InputOrder/ui/InputOrder.tsx";
-import {OrderInfoCreate} from "@/4_features/OrderInfo/ui/OrderInfoCreate.tsx";
-import {useAppDispatch, useAppSelector} from "@/1_app/hooks.ts";
-import {RequestOrder, selectRequestOrder, setRequestOrder} from "@/5_entities/orderForm";
-import {MouseEvent, useEffect} from "react";
-import {RequestCreateOrderDto, useCreateOrderMutation} from "@/5_entities/order";
-import {getFullTime} from "@/6_shared/lib/getFullTime.ts";
-import {useNavigate} from "react-router-dom";
-import {greenBg} from "@/6_shared/lib/colors.ts";
-import {getToastMessage} from "@/6_shared/lib/getToastMessage.ts";
-import {toast} from "react-toastify";
+import { Button } from '@/6_shared/BaseComponents/Button/Button.tsx';
+import { selectAllPrices, useAllPricesQuery } from '@/5_entities/price';
+import { InputCustomer } from '@/4_features/InputCustomer/InputCustomer.tsx';
+import { InputOrder } from '@/4_features/InputOrder/ui/InputOrder.tsx';
+import { OrderInfoCreate } from '@/4_features/OrderInfo/ui/OrderInfoCreate.tsx';
+import { useAppDispatch, useAppSelector } from '@/1_app/hooks.ts';
+import {
+    RequestOrder,
+    selectRequestOrder,
+    setRequestOrder,
+} from '@/5_entities/orderForm';
+import { MouseEvent, useEffect } from 'react';
+import {
+    RequestCreateOrderDto,
+    useCreateOrderMutation,
+} from '@/5_entities/order';
+import { getFullTime } from '@/6_shared/lib/getFullTime.ts';
+import { useNavigate } from 'react-router-dom';
+import { greenBg } from '@/6_shared/lib/colors.ts';
+import { getToastMessage } from '@/6_shared/lib/getToastMessage.ts';
+import { toast } from 'react-toastify';
 
-const customer = "Клиент";
+const customer = 'Клиент';
 const child = 'Ребенок';
-const type1 = "tel"
-const type2 = "age"
-
+const type1 = 'tel';
+const type2 = 'age';
 
 const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
     if (!order) {
         return false;
     }
 
-    const neededProperties: (keyof RequestOrder)[] = ['child_age', 'child_name', 'parent_name'];
+    const neededProperties: (keyof RequestOrder)[] = [
+        'child_age',
+        'child_name',
+        'parent_name',
+    ];
 
-
-    const result = neededProperties.every(prop => {
-        return order[prop] !== undefined
+    const result = neededProperties.every((prop) => {
+        return order[prop] !== undefined;
     });
 
-    const saleTime = order.sale?.full_time ?? 0
+    const saleTime = order.sale?.full_time ?? 0;
 
-    const extraTime = ((order?.extra_time_minute ?? 0) * 60) + ((order?.extra_time_hour ?? 0) * 3600)
-
+    const extraTime =
+        (order?.extra_time_minute ?? 0) * 60 +
+        (order?.extra_time_hour ?? 0) * 3600;
 
     if (!result) {
         return false;
     }
 
-    if (order["child_age"]! < 1 || order["child_age"]! > 15) {
+    if (order['child_age']! < 1 || order['child_age']! > 15) {
         return false;
     }
 
-    return ((saleTime + extraTime) >= 30);
+    return saleTime + extraTime >= 30;
 };
 
-
 export const OrderFormCreate = () => {
-    const requestOrder = useAppSelector(selectRequestOrder)
-    const prices = useAppSelector(selectAllPrices)
-    const dispatch = useAppDispatch()
-    const [createOrder, {isLoading, isError, error, isSuccess}] = useCreateOrderMutation()
-    const navigate = useNavigate()
-    useAllPricesQuery()
-
+    const requestOrder = useAppSelector(selectRequestOrder);
+    const prices = useAppSelector(selectAllPrices);
+    const dispatch = useAppDispatch();
+    const [createOrder, { isLoading, isError, error, isSuccess }] =
+        useCreateOrderMutation();
+    const navigate = useNavigate();
+    useAllPricesQuery();
 
     const isPaidCheckBoxHandler = (event: MouseEvent<HTMLInputElement>) => {
-        const request = {...requestOrder} ?? {} as RequestOrder
-        request.is_paid = event.currentTarget.checked
-        dispatch(setRequestOrder(request as RequestOrder))
-    }
+        const request = { ...requestOrder } ?? ({} as RequestOrder);
+        request.is_paid = event.currentTarget.checked;
+        dispatch(setRequestOrder(request as RequestOrder));
+    };
 
     const sendButtonHandler = () => {
         if (!requestOrder) {
-            toast.error("Заполните данные!")
+            toast.error('Заполните данные!');
             return;
         }
         const body: RequestCreateOrderDto = {
@@ -73,49 +82,65 @@ export const OrderFormCreate = () => {
             child_name: requestOrder.child_name!,
             parent_name: requestOrder.parent_name!,
             parent_phone_number: requestOrder.parent_phone_number!,
-            extra_time: getFullTime(requestOrder.extra_time_hour ?? 0, requestOrder.extra_time_minute ?? 0),
+            extra_time: getFullTime(
+                requestOrder.extra_time_hour ?? 0,
+                requestOrder.extra_time_minute ?? 0
+            ),
             is_paid: requestOrder.is_paid ?? false,
             sale_id: requestOrder.sale?.id,
-        }
+            sale_with_percent_id: requestOrder.sale_with_percent?.id,
+        };
 
-        createOrder(body)
-    }
+        createOrder(body);
+    };
     useEffect(() => {
-        if (isError)
-            getToastMessage(error)
+        if (isError) getToastMessage(error);
     }, [isError, error]);
-
 
     if (isSuccess) {
         setTimeout(() => {
-            window.location.reload()
-        }, 100)
-        navigate('/')
+            window.location.reload();
+        }, 100);
+        navigate('/');
     }
 
     return (
-        <form className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-7 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}>
-            <div className={`w-full pb-3 flex flex-col md:justify-between items-center`}>
-                <img src={'/icons/Logo.svg'} className={`w-32 object-contain`} style={{backgroundPosition: "center"}}
-                     alt={''}/>
+        <form
+            className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-7 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}
+        >
+            <div
+                className={`w-full pb-3 flex flex-col md:justify-between items-center`}
+            >
+                <img
+                    src={'/icons/Logo.svg'}
+                    className={`w-32 object-contain`}
+                    style={{ backgroundPosition: 'center' }}
+                    alt={''}
+                />
                 <p className={`font-medium`}>Создать заказ</p>
             </div>
-            <InputCustomer customer={customer} type={type1} requestOrder={requestOrder}/>
-            <InputCustomer customer={child} type={type2} requestOrder={requestOrder}/>
-            <InputOrder requestOrder={requestOrder}/>
-            <OrderInfoCreate requestOrder={requestOrder} prices={prices}/>
-            <label className={""}>
-                <span className={"mr-1"}>
-                    Заказ оплачен:
-                </span>
-                <input type="checkbox"
-                       onClick={isPaidCheckBoxHandler}/>
+            <InputCustomer
+                customer={customer}
+                type={type1}
+                requestOrder={requestOrder}
+            />
+            <InputCustomer
+                customer={child}
+                type={type2}
+                requestOrder={requestOrder}
+            />
+            <InputOrder requestOrder={requestOrder} />
+            <OrderInfoCreate requestOrder={requestOrder} prices={prices} />
+            <label className={''}>
+                <span className={'mr-1'}>Заказ оплачен:</span>
+                <input type="checkbox" onClick={isPaidCheckBoxHandler} />
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
-                <Button disabled={!isAvailableToSend(requestOrder) || isLoading}
-                        backgroundColor={greenBg}
-                        content={"ОТПРАВИТЬ"}
-                        onClick={sendButtonHandler}
+                <Button
+                    disabled={!isAvailableToSend(requestOrder) || isLoading}
+                    backgroundColor={greenBg}
+                    content={'ОТПРАВИТЬ'}
+                    onClick={sendButtonHandler}
                 />
             </div>
         </form>

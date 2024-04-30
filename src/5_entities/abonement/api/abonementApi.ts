@@ -1,5 +1,9 @@
 import { baseApi } from '@/6_shared/api/baseApi';
-import { AbonementDto, ResponseAbonementCardModel } from '../model/types';
+import {
+    AbonementDto,
+    RequestCreateAbonementDto,
+    ResponseAbonementCardModel,
+} from '../model/types';
 
 export const abonementApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
@@ -15,7 +19,7 @@ export const abonementApi = baseApi.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
-        createAbonement: build.mutation<void, FormData>({
+        createAbonement: build.mutation<void, RequestCreateAbonementDto>({
             query: (requestBody) => ({
                 url: '/abonement-orders',
                 method: 'POST',
