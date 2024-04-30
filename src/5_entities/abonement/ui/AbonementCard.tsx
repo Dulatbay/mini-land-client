@@ -7,19 +7,26 @@ import { ButtonDelete } from '@/6_shared/BaseComponents/ButtonDelete/ButtonDelet
 interface AbonementCardProps {
     id: number;
     client_name: string;
-    base_abonement?: {
-        title: string;
-        // description: string;
-        // full_price: number;
-        // full_time: number;
-        quantity: number;
-    };
+    base_abonemnt_id?: number;
+    quantity?: number;
+    base_abonement_id?: number;
+    base_abonement_name?: string;
+    base_abonement_description?: string;
+    base_abonement_price?: number;
+    base_abonement_time?: number;
+    onDeleteSuccess?: (id: number) => void;
 }
 
 export const AbonementCard = ({
     id,
     client_name,
-    base_abonement,
+    base_abonement_id,
+    base_abonement_name,
+    base_abonement_description,
+    base_abonement_price,
+    base_abonement_time,
+    quantity,
+    onDeleteSuccess,
 }: AbonementCardProps) => {
     const [deleteAbonement, { isError, error, isLoading, isSuccess }] =
         useDeleteAbonementByIdMutation();
@@ -28,41 +35,42 @@ export const AbonementCard = ({
         if (isError) getToastMessage(error);
     }, [isError, error]);
 
+    useEffect(() => {
+        if (isSuccess && onDeleteSuccess) {
+            onDeleteSuccess(id);
+        }
+    }, [isSuccess, id, onDeleteSuccess]);
+
     if (isLoading) return <Spinner />;
 
-    const deleteHandler = (abonementId: number) => {
-        deleteAbonement(abonementId);
+    const deleteHandler = () => {
+        deleteAbonement(id);
     };
-
-    if (isSuccess) {
-        window.location.reload();
-    }
 
     return (
         <div className="bg-white rounded-2xl flex flex-col justify-between px-4 py-5 border-2">
-            <div className="w-full flex justify-center">
-                <p className="text-xl font-bold">{base_abonement?.title}</p>
+            <div className="w-full flex">
+                <p className="text-xl font-bold">{base_abonement_name}</p>
             </div>
-            {/* <p className="text-gray-700">{base_abonement?.description}</p> */}
-            <div className="w-full flex justify-between items-center">
+            <div className="w-full flex justify-center text-justify">
+                <p className="text-gray-700">{base_abonement_description}</p>
+            </div>
+            <div className="w-full flex justify-between items-end">
                 <div className="flex flex-wrap flex-col">
-                    {/* <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
-                        Цена: {base_abonement?.full_price}тг
+                    <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
+                        Цена: {base_abonement_price}тг
                     </span>
                     <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
-                        Время: {base_abonement?.full_time} минут
-                    </span> */}
+                        Время: {base_abonement_time} минут
+                    </span>
                     <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
                         {client_name}
                     </span>
                     <span className="py-0.5 text-sm font-semibold text-gray-700 mr-2">
-                        Осталось посещений: {base_abonement?.quantity}
+                        Осталось посещений: {quantity}
                     </span>
                 </div>
-                <ButtonDelete
-                    showIcon={true}
-                    clickHandler={() => deleteHandler(id)}
-                />
+                <ButtonDelete showIcon={true} clickHandler={deleteHandler} />
             </div>
         </div>
     );

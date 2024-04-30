@@ -16,6 +16,7 @@ export function mapDetailOrder(dto: DetailOrderDto): DetailOrderModel {
         author_name: dto.author_name,
         extra_time: dto.extra_time,
         sale: dto.sale,
+        sale_with_percent: dto.sale_with_percent,
         parent_phone_number: dto.parent_phone_number
     }
 }

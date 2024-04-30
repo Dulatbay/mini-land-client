@@ -20,7 +20,7 @@ export const CreateAbonementForm = () => {
         undefined | number
     >();
 
-    const [createAbonement, { isLoading, isError, error, isSuccess }] =
+    const [createAbonement, {isLoading, isError, error, isSuccess }] =
         useCreateBaseAbonementMutation();
 
     const isAvailable = () => {

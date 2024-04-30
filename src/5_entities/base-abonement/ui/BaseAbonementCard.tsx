@@ -5,8 +5,8 @@ import { ButtonAddItem } from '@/6_shared/BaseComponents/ButtonAddItem';
 export const BaseAbonementCard = (props: BaseAbonementCardModelManager) => {
     const navigate = useNavigate();
 
-    const cardClickHandler = () => {
-        navigate(`/abonements`);
+    const createCardHandler = (abonementId: number) => {
+        navigate(`/abonement-orders/${abonementId}`);
     };
 
     return (
@@ -28,7 +28,7 @@ export const BaseAbonementCard = (props: BaseAbonementCardModelManager) => {
                 </div>
                 <ButtonAddItem
                     text={''}
-                    clickHandler={cardClickHandler} // менеджердегі абонементті қосу бетіне өтуі керек бірақ пэйджды таппадым
+                    clickHandler={() => createCardHandler(props.id)}
                 />
             </div>
         </div>

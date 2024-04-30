@@ -3,5 +3,5 @@ export interface PriceModel {
     full_time: number;
     full_price: number;
     enabled: boolean;
-    days: number[]
+    days: number[];
 }

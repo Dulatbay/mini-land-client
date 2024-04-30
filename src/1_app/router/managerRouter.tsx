@@ -11,6 +11,7 @@ import { SelectMasterClassPage } from '@/2_pages/Manager/SelectMasterClassPage/S
 import { ViewMasterClassesByOrderPage } from '@/2_pages/Manager/ViewMasterClassesByOrderPage/ViewMasterClassesByOrderPage.tsx';
 import { CreateOrderByPhoneNumberPage } from '@/2_pages/Manager/CreateOrderByPhoneNumberPage/CreateOrderByPhoneNumberPage.tsx';
 import { AbonementsPage } from '@/2_pages/Manager/AbonementsPage/AbonementsPage';
+import { ManagerCreateOrderAbonement } from '@/2_pages/Manager/ManagerCreateOrderAbonement/ManagerCreateOrderAbonement';
 
 export const managerRouter = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const managerRouter = createBrowserRouter([
             {
                 path: '/abonements',
                 element: <AbonementsPage />,
+            },
+            {
+                path: '/abonement-orders/:abonementId',
+                element: <ManagerCreateOrderAbonement />,
             },
         ],
     },
