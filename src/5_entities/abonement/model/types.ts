@@ -2,8 +2,9 @@ export interface AbonementDto {
     id: number;
     client_name: string;
     phone_number: string;
-    abonement_type: string;
-    abonement_price: number;
+    child_name: string;
+    child_age: number;
+    base_abonement_id: number;
 }
 
 export interface RequestCreateAbonementDto {

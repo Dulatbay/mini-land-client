@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage';
 import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 import { ButtonDelete } from '@/6_shared/BaseComponents/ButtonDelete/ButtonDelete';
+import { useNavigate } from 'react-router-dom';
 
 interface AbonementCardProps {
     id: number;
@@ -31,6 +32,8 @@ export const AbonementCard = ({
     const [deleteAbonement, { isError, error, isLoading, isSuccess }] =
         useDeleteAbonementByIdMutation();
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (isError) getToastMessage(error);
     }, [isError, error]);
@@ -47,9 +50,16 @@ export const AbonementCard = ({
         deleteAbonement(id);
     };
 
+    const createClickHandler = (id: number) => {
+        navigate(`/create-order/${id}`);
+    };
+
     return (
         <div className="bg-white rounded-2xl flex flex-col justify-between px-4 py-5 border-2">
-            <div className="w-full flex">
+            <div
+                className="w-full flex cursor-pointer"
+                onClick={() => createClickHandler(base_abonement_id!)}
+            >
                 <p className="text-xl font-bold">{base_abonement_name}</p>
             </div>
             <div className="w-full flex justify-center text-justify">

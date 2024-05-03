@@ -21,9 +21,7 @@ export const AbonementCardList = () => {
     }
 
     return (
-        <div
-            className={`w-[95%] m-auto flex flex-wrap justify-start items-center`}
-        >
+        <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-4 gap-4">
             {data?.length ? (
                 data?.map((abonement) => (
                     <BaseAbonementCard {...abonement} key={abonement.id} />

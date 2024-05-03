@@ -1,6 +1,8 @@
+import { AbonementTitle } from '@/4_features/AbonementTitle/AbonementTitle';
 import { useCreateAbonementMutation } from '@/5_entities/abonement/api/abonementApi';
 import { Button } from '@/6_shared/BaseComponents/Button/Button';
 import { CommonInput } from '@/6_shared/BaseComponents/CommonInput/CommonInput';
+import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 import { greenBg } from '@/6_shared/lib/colors';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage';
 import { useEffect, useState } from 'react';
@@ -46,6 +48,10 @@ export const ManagerCreateOrderAbonementForm = () => {
         navigate('/abonements');
     }
 
+    if (isLoading) {
+        return <Spinner />;
+    }
+
     return (
         <div
             className={`w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3 2xl:w-1/4 mt-10 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}
@@ -87,14 +93,7 @@ export const ManagerCreateOrderAbonementForm = () => {
                         setChildAge(+event.currentTarget.value);
                     }}
                 />
-                {/* <Select
-                    options={abonements.map((abonement) => ({
-                        label: abonement.title,
-                        value: abonement.id,
-                    }))
-                    }
-                    placeholder="Выбранный абонемент"
-                /> */}
+                <AbonementTitle id={Number.parseInt(abonementId!)} />
                 <div className={`w-full mt-4`}>
                     <Button
                         backgroundColor={greenBg}

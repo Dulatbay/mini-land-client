@@ -1,4 +1,3 @@
-import React, { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTime } from '@/6_shared/lib/getTime.ts';
 import { ResponseCardRoomOrderDto } from '@/5_entities/roomOrder/model/types.ts';
