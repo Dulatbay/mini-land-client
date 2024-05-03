@@ -63,6 +63,10 @@ export const managerRouter = createBrowserRouter([
                 path: '/abonement-orders/:abonementId',
                 element: <ManagerCreateOrderAbonement />,
             },
+            {
+                path: '/create-order/:abonementId',
+                element: <CreateOrderPage />,
+            },
         ],
     },
 ]);

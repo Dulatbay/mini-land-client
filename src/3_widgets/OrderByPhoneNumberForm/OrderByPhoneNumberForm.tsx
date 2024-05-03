@@ -3,6 +3,7 @@ import { AbonementCard } from '@/5_entities/abonement/ui/AbonementCard';
 import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 import { useLazyGetAbonementByPhoneNumberQuery } from '@/5_entities/abonement/api/abonementApi';
 import { ResponseAbonementCardModel } from '@/5_entities/abonement/model/types';
+import { getToastMessage } from '@/6_shared/lib/getToastMessage';
 
 export const OrderByPhoneNumberForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -30,6 +31,12 @@ export const OrderByPhoneNumberForm = () => {
             setAbonements(data);
         }
     }, [isSuccess, data]);
+
+    useEffect(() => {
+        if (isError) {
+            getToastMessage(error);
+        }
+    }, [isError, error]);
 
     return (
         <div className="bg-white rounded-2xl overflow-hidden shadow-md p-6 max-w-6xl mx-auto">
