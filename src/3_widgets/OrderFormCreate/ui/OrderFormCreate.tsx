@@ -15,10 +15,11 @@ import {
     useCreateOrderMutation,
 } from '@/5_entities/order';
 import { getFullTime } from '@/6_shared/lib/getFullTime.ts';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { greenBg } from '@/6_shared/lib/colors.ts';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage.ts';
 import { toast } from 'react-toastify';
+import { useAllAbonementsQuery } from '@/5_entities/abonement/api/abonementApi';
 
 const customer = 'Клиент';
 const child = 'Ребенок';
@@ -41,7 +42,6 @@ const isAvailableToSend = (order: RequestOrder | undefined): boolean => {
     });
 
     const saleTime = order.sale?.full_time ?? 0;
-
     const extraTime =
         (order?.extra_time_minute ?? 0) * 60 +
         (order?.extra_time_hour ?? 0) * 3600;
@@ -65,6 +65,28 @@ export const OrderFormCreate = () => {
         useCreateOrderMutation();
     const navigate = useNavigate();
     useAllPricesQuery();
+
+    const { abonementId } = useParams();
+    const { data } = useAllAbonementsQuery(true);
+
+    useEffect(() => {
+        const firstOrder =
+            data?.find((order) => order.id === Number(abonementId)) ??
+            (abonementId !== undefined
+                ? data?.[Number(abonementId)]
+                : undefined);
+
+        if (abonementId && firstOrder) {
+            dispatch(
+                setRequestOrder({
+                    child_age: firstOrder.child_age,
+                    child_name: firstOrder.child_name,
+                    parent_name: firstOrder.client_name,
+                    parent_phone_number: firstOrder.phone_number,
+                } as RequestOrder)
+            );
+        }
+    }, [data]);
 
     const isPaidCheckBoxHandler = (event: MouseEvent<HTMLInputElement>) => {
         const request = { ...requestOrder } ?? ({} as RequestOrder);
@@ -104,6 +126,8 @@ export const OrderFormCreate = () => {
         navigate('/');
     }
 
+    const canSendOrder = abonementId || isAvailableToSend(requestOrder);
+
     return (
         <form
             className={`w-5/6 md:w-4/6 lg:w-3/6 2xl:w-2/6 mt-7 md:mt-0 p-10 border-2 m-auto rounded-3xl bg-white`}
@@ -123,11 +147,15 @@ export const OrderFormCreate = () => {
                 customer={customer}
                 type={type1}
                 requestOrder={requestOrder}
+                displayField={'parent_name'}
+                readonly={!!abonementId}
             />
             <InputCustomer
                 customer={child}
                 type={type2}
                 requestOrder={requestOrder}
+                displayField={'child_name'}
+                readonly={!!abonementId}
             />
             <InputOrder requestOrder={requestOrder} />
             <OrderInfoCreate requestOrder={requestOrder} prices={prices} />
@@ -137,7 +165,7 @@ export const OrderFormCreate = () => {
             </label>
             <div className={`w-full sm:flex justify-between pt-6 gap-20`}>
                 <Button
-                    disabled={!isAvailableToSend(requestOrder) || isLoading}
+                    disabled={!canSendOrder || isLoading}
                     backgroundColor={greenBg}
                     content={'ОТПРАВИТЬ'}
                     onClick={sendButtonHandler}

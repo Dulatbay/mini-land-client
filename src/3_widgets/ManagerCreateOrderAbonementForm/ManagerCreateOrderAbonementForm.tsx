@@ -7,6 +7,7 @@ import { greenBg } from '@/6_shared/lib/colors';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 export const ManagerCreateOrderAbonementForm = () => {
     const navigate = useNavigate();
@@ -74,8 +75,12 @@ export const ManagerCreateOrderAbonementForm = () => {
                         setClientName(event.currentTarget.value);
                     }}
                 />
-                <CommonInput
-                    placeholder={'Номер телефона'}
+                <InputMask
+                    placeholder="+7 (___) ___-__-__"
+                    mask="+7 (999) 999-99-99"
+                    className={
+                        'w-full 2xl:m-0 p-3 rounded-lg border-2 focus:outline-gray-300'
+                    }
                     onChange={(event) => {
                         setClientPhoneNumber(event.currentTarget.value);
                     }}
