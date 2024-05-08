@@ -70,11 +70,9 @@ export const OrderFormCreate = () => {
     const { data } = useAllAbonementsQuery(true);
 
     useEffect(() => {
-        const firstOrder =
-            data?.find((order) => order.id === Number(abonementId)) ??
-            (abonementId !== undefined
-                ? data?.[Number(abonementId)]
-                : undefined);
+        const firstOrder = data?.find(
+            (abonement) => abonement.id === parseInt(abonementId ?? '-1', 10)
+        );
 
         if (abonementId && firstOrder) {
             dispatch(

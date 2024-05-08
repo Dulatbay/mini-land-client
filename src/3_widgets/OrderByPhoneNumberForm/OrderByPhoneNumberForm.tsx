@@ -84,7 +84,6 @@ export const OrderByPhoneNumberForm = () => {
                                 key={abonement.id}
                                 id={abonement.id}
                                 client_name={abonement.client_name}
-                                base_abonement_id={abonement.base_abonement_id}
                                 base_abonement_name={
                                     abonement.base_abonement_name
                                 }
