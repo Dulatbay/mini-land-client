@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 interface AbonementCardProps {
     id: number;
     client_name: string;
-    base_abonemnt_id?: number;
     quantity?: number;
     base_abonement_id?: number;
     base_abonement_name?: string;
@@ -21,7 +20,6 @@ interface AbonementCardProps {
 export const AbonementCard = ({
     id,
     client_name,
-    base_abonement_id,
     base_abonement_name,
     base_abonement_description,
     base_abonement_price,
@@ -58,7 +56,7 @@ export const AbonementCard = ({
         <div className="bg-white rounded-2xl flex flex-col justify-between px-4 py-5 border-2">
             <div
                 className="w-full flex cursor-pointer"
-                onClick={() => createClickHandler(base_abonement_id!)}
+                onClick={() => createClickHandler(id!)}
             >
                 <p className="text-xl font-bold">{base_abonement_name}</p>
             </div>

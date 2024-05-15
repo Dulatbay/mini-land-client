@@ -4,6 +4,7 @@ import { Spinner } from '@/6_shared/BaseComponents/Spinner/Spinner';
 import { useLazyGetAbonementByPhoneNumberQuery } from '@/5_entities/abonement/api/abonementApi';
 import { ResponseAbonementCardModel } from '@/5_entities/abonement/model/types';
 import { getToastMessage } from '@/6_shared/lib/getToastMessage';
+import InputMask from 'react-input-mask';
 
 export const OrderByPhoneNumberForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -53,13 +54,16 @@ export const OrderByPhoneNumberForm = () => {
                     onSubmit={handleSubmit}
                     className="grid grid-cols-2 gap-4 items-center w-full max-w-lg"
                 >
-                    <input
-                        type="text"
-                        placeholder="Номер телефона"
-                        className="border border-gray-300 rounded-lg p-2 w-full"
+                    <InputMask
+                        placeholder="+7 (___) ___-__-__"
+                        mask="+7 (999) 999-99-99"
+                        className={
+                            'w-full 2xl:m-0 p-3 rounded-lg border-2 focus:outline-gray-300'
+                        }
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                     />
+
                     <button
                         type="submit"
                         className="bg-green-500 text-white rounded-lg px-4 py-2 w-full justify-self-center"
@@ -80,7 +84,6 @@ export const OrderByPhoneNumberForm = () => {
                                 key={abonement.id}
                                 id={abonement.id}
                                 client_name={abonement.client_name}
-                                base_abonement_id={abonement.base_abonement_id}
                                 base_abonement_name={
                                     abonement.base_abonement_name
                                 }
